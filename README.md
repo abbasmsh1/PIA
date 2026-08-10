@@ -25,5 +25,16 @@ npm run build
 | `src/data.js` | Every string, fare and airport on the site |
 | `src/geo.js` | Equirectangular projection for the route map |
 | `src/PlaneScroll.jsx` | Scroll-scrubbed takeoff canvas + hero booking widget |
+| `public/takeoff/` | 240-frame PIA 777 takeoff sequence the hero canvas scrubs |
 | `src/BookingElements.jsx` | Booking widget, PNR lookup, fare tickets |
-| `src/Scenic.jsx` | Brand-gradient stand-in used everywhere a photo would go |
+| `src/Scenic.jsx` | Image frame: Unsplash photo per seed, brand-gradient fallback |
+
+The hero scrubs `public/takeoff/`, 240 frames of a PIA 777 rotating off the
+runway. It replaced a 64-frame 4K sequence of another carrier's A320 (still in
+git history), which is why the canvas grade is now a light brand wash instead of
+a duotone that hid the livery.
+
+Photography is from [Unsplash](https://unsplash.com), hotlinked off their CDN
+(`images.unsplash.com`) at the size each frame needs, up to 4K on the heroes.
+The seed-to-photo map lives at the top of `src/Scenic.jsx`; any seed missing from
+it renders the original brand-gradient wash instead.

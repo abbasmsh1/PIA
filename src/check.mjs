@@ -1,8 +1,9 @@
 // Self-checks for the two bits of non-obvious logic on this site: the route-map
 // projection and the fare currency conversion. Run with `npm run check`.
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { COORDS, HUB, W, H, MARGIN, px, py } from './geo.js'
-import { DESTINATIONS, FX_PKR_PER_UNIT } from './data.js'
+import { DESTINATIONS, FLEET, FX_PKR_PER_UNIT } from './data.js'
 import { money } from './money.js'
 
 // --- route map -------------------------------------------------------------
@@ -53,3 +54,25 @@ for (const cur of Object.keys(FX_PKR_PER_UNIT)) {
 assert.ok(money(20830, 'XXX').startsWith('PKR '), 'unknown currency should fall back to PKR')
 
 console.log(`fares ok  — ${Object.keys(FX_PKR_PER_UNIT).length} currencies convert, PKR 20,830 = ${usd}`)
+
+// --- photography -----------------------------------------------------------
+// Scenic.jsx is JSX, so the map is read as text rather than imported. The bug
+// this guards: adding an international city or an aircraft type and shipping a
+// gradient placeholder next to twenty real photographs. Offline on purpose —
+// it checks coverage and id shape, not that the CDN is up.
+const scenic = readFileSync(new URL('./Scenic.jsx', import.meta.url), 'utf8')
+const map = scenic.slice(scenic.indexOf('const PHOTOS = {'), scenic.indexOf('const WIDTHS'))
+const seeds = [...map.matchAll(/^\s*'?([\w .-]+?)'?:\s*'((?:premium_)?photo-[\w-]+)'/gm)].map((m) => m[1])
+assert.ok(seeds.length > 25, `only ${seeds.length} photo seeds parsed — did PHOTOS move?`)
+
+for (const seed of ['HERO', 'NETWORK', 'EXPERIENCE', 'FLEET', 'MANAGE', 'ABOUT', 'HAJJ', 'B777', 'EXE', 'AWARD']) {
+  assert.ok(seeds.includes(seed), `page/panel seed ${seed} has no photo`)
+}
+
+const noPhoto = DESTINATIONS.filter((d) => d.intl && !seeds.includes(d.code)).map((d) => d.code)
+assert.deepEqual(noPhoto, [], `international destinations with no photo: ${noPhoto.join(', ')}`)
+
+const noFleetPhoto = FLEET.filter((a) => !seeds.includes(a.type)).map((a) => a.type)
+assert.deepEqual(noFleetPhoto, [], `aircraft types with no photo: ${noFleetPhoto.join(', ')}`)
+
+console.log(`photos ok — ${seeds.length} seeds mapped, every international city and aircraft covered`)

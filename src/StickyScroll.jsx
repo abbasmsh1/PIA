@@ -60,7 +60,12 @@ export default function StickyScroll() {
                   active === i ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <Scenic seed={s.seed} label={s.seed} className="h-full w-full" />
+                <Scenic
+                  seed={s.seed}
+                  label={s.seed}
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="h-full w-full"
+                />
               </div>
             ))}
             <div className="absolute inset-x-0 bottom-0 p-6">
@@ -84,7 +89,7 @@ export default function StickyScroll() {
                 active === i ? 'opacity-100' : 'md:opacity-35'
               }`}
             >
-              <Scenic seed={s.seed} label={s.seed} className="mb-6 aspect-video w-full rounded-2xl border border-white/10 md:hidden" />
+              <Scenic seed={s.seed} label={s.seed} sizes="100vw" className="mb-6 aspect-video w-full rounded-2xl border border-white/10 md:hidden" />
               <span className="data text-xs tracking-[0.2em] text-[#cdd500] md:hidden">
                 0{i + 1} / 0{STEPS.length}
               </span>

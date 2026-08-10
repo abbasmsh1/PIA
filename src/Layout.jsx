@@ -190,8 +190,16 @@ export function DestCard({ city, code, fare, from = 'KHI' }) {
 export function PageHero({ eyebrow, title, subtitle, seed }) {
   return (
     <section className="snap-start snap-always relative flex min-h-screen flex-col justify-center overflow-hidden border-b border-white/10 px-6 pb-16 pt-40 md:px-10">
-      <Scenic seed={seed || title} className="pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#060912] via-[#060912]/80 to-[#060912]/20" />
+      {/* Scenic sets `relative` on itself, and Tailwind emits `.relative` after
+          `.absolute`, so the frame is positioned by a wrapper rather than by a
+          class handed to it — otherwise it collapses to zero height. */}
+      <div className="pointer-events-none absolute inset-0">
+        <Scenic seed={seed || title} sizes="100vw" eager className="h-full w-full" />
+      </div>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#060912]/95 via-[#060912]/45 to-transparent" />
+      {/* The header is transparent over the hero, so keep the top of the frame
+          dark enough for the nav to stay readable against a bright sky. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#060912]/85 to-transparent" />
       <div className="relative mx-auto w-full max-w-6xl">
         {eyebrow && <span className="data text-xs uppercase tracking-[0.3em] text-[#cdd500]">{eyebrow}</span>}
         <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-white/90 md:text-6xl">{title}</h1>

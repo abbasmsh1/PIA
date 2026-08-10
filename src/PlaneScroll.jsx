@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useScroll, useMotionValueEvent } from 'framer-motion'
 import { FlightSearch } from './BookingElements.jsx'
+import { photoUrl } from './Scenic.jsx'
 
 // Scroll-linked canvas playback of a takeoff sequence. useScroll gives progress
 // 0..1 and the canvas draws the matching preloaded frame; the text overlays
@@ -10,8 +11,11 @@ import { FlightSearch } from './BookingElements.jsx'
 // 19.2 throws a WAAPI animate() offset error that unmounts the tree. useScroll
 // and useMotionValueEvent are stable, so plain divs are driven from state.
 
-const FRAME_COUNT = 64
-const frameUrl = (i) => `/frames/ezgif-frame-${String(i + 1).padStart(3, '0')}.jpg`
+// 240 frames of a PIA 777 rotating off the runway, 1280x720 each (~4.9 MB for
+// the set). They replaced a 64-frame 4K sequence of another carrier's A320 at
+// night, which is why the brand duotone below is now only a light grade.
+const FRAME_COUNT = 240
+const frameUrl = (i) => `/takeoff/ezgif-frame-${String(i + 1).padStart(3, '0')}.jpg`
 
 // Story beats keyed to scroll progress. `pos` puts each block in the part of
 // the frame the aircraft is not occupying as it climbs.
@@ -85,13 +89,11 @@ export default function PlaneScroll() {
     }
   }, [])
 
-  // Cover-fit draw with devicePixelRatio scaling, then a duotone pass.
+  // Cover-fit draw with devicePixelRatio scaling, then a light grade.
   //
-  // The takeoff frames are stock footage of another carrier's aircraft, so they
-  // are pushed through a brand-coloured duotone: `color` keeps the luminosity
-  // of the photograph but takes hue and saturation from the fill, which turns
-  // the airframe into a graphic silhouette rather than a recognisable livery.
-  // See the note in README about replacing the sequence outright.
+  // The sequence is PIA's own livery now, so it is left recognisable: no
+  // hue-replacing duotone, just a soft green-to-yellow wash off the brand ramp
+  // and a bottom vignette to keep the overlay type legible.
   const ZOOM = 1.18
 
   function draw(index) {
@@ -115,21 +117,22 @@ export default function PlaneScroll() {
     ctx.globalCompositeOperation = 'source-over'
     ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh)
 
-    // Brand duotone: hue/saturation from the fill, luminosity from the frame.
-    ctx.globalCompositeOperation = 'color'
-    ctx.fillStyle = '#0a5f78'
-    ctx.fillRect(0, 0, cw, ch)
-
-    // Lift the greens back in so it reads as the PIA ramp rather than flat teal.
+    // Brand wash off the PIA ramp, gentle enough to leave the livery readable.
     ctx.globalCompositeOperation = 'overlay'
     const wash = ctx.createLinearGradient(0, ch, cw, 0)
-    wash.addColorStop(0, 'rgba(13,87,45,0.55)')
-    wash.addColorStop(0.6, 'rgba(0,125,52,0.28)')
-    wash.addColorStop(1, 'rgba(255,229,36,0.16)')
+    wash.addColorStop(0, 'rgba(13,87,45,0.30)')
+    wash.addColorStop(0.6, 'rgba(0,125,52,0.14)')
+    wash.addColorStop(1, 'rgba(255,229,36,0.10)')
     ctx.fillStyle = wash
     ctx.fillRect(0, 0, cw, ch)
 
+    // Bottom vignette: the booking widget and the story copy sit down there.
     ctx.globalCompositeOperation = 'source-over'
+    const vignette = ctx.createLinearGradient(0, ch, 0, ch * 0.45)
+    vignette.addColorStop(0, 'rgba(6,9,18,0.75)')
+    vignette.addColorStop(1, 'rgba(6,9,18,0)')
+    ctx.fillStyle = vignette
+    ctx.fillRect(0, 0, cw, ch)
   }
 
   const lastIndex = useRef(-1)
@@ -169,7 +172,14 @@ export default function PlaneScroll() {
       ))}
 
       <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
-        <canvas ref={canvasRef} className="h-full w-full" />
+        {/* 4K still under the canvas: it is what the hero shows while the 64
+            frames decode, and what stays if any of them fail to load. */}
+        <img
+          src={photoUrl('HERO', 3840)}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <canvas ref={canvasRef} className="relative h-full w-full" />
 
         {/* Booking widget sits in the hero so a fare is reachable without
             scrolling. It fades out as the takeoff scrub begins. */}
@@ -230,8 +240,13 @@ export default function PlaneScroll() {
 
       {!ready && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-[#060912]">
-          <div className="ps-spinner" />
-          <span className="text-sm tracking-wide text-white/60">
+          <img
+            src={photoUrl('HERO', 2560)}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-40"
+          />
+          <div className="ps-spinner relative" />
+          <span className="relative text-sm tracking-wide text-white/60">
             Preparing for departure… {Math.round((loaded / FRAME_COUNT) * 100)}%
           </span>
         </div>

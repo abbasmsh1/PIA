@@ -186,7 +186,7 @@ export function FleetPage() {
         <div className="grid gap-6 md:grid-cols-2">
           {FLEET.map((a) => (
             <div key={a.type} className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-              <Scenic seed={a.type} label={a.type.split(' ').pop()} className="h-44 w-full" />
+              <Scenic seed={a.type} label={a.type.split(' ').pop()} sizes="(min-width: 768px) 50vw, 100vw" className="h-44 w-full" />
               <div className="p-6">
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-xl font-semibold tracking-tight text-white/90">{a.type}</h3>
@@ -221,7 +221,7 @@ export function HajjUmrahPage() {
         eyebrow="Hajj & Umrah"
         title="Journeys to the Haramain"
         subtitle="Direct to Jeddah and Medina from cities across Pakistan, with a dedicated baggage policy for the Kingdom."
-        seed="JED"
+        seed="HAJJ"
       />
 
       <Section eyebrow="Airports" title="Where you land">
