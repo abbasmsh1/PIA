@@ -132,23 +132,26 @@ export default function Scenic({
             : 'from-[#060912] via-[#060912]/55 to-[#060912]/20'
         }`}
       />
-      {/* faint contour lines, a nod to a route chart */}
-      <svg
-        className={`absolute inset-0 h-full w-full ${photo ? 'opacity-10' : 'opacity-25'}`}
-        viewBox="0 0 200 150"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        {[0, 1, 2, 3].map((i) => (
-          <path
-            key={i}
-            d={`M-10 ${40 + i * 28} Q 60 ${10 + i * 26} 120 ${45 + i * 24} T 210 ${30 + i * 27}`}
-            fill="none"
-            stroke="white"
-            strokeWidth="0.6"
-          />
-        ))}
-      </svg>
+      {/* Faint contour lines, a nod to a route chart. Only over a gradient — on
+          a photograph they read as scratches across the subject. */}
+      {!photo && (
+        <svg
+          className="absolute inset-0 h-full w-full opacity-25"
+          viewBox="0 0 200 150"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {[0, 1, 2, 3].map((i) => (
+            <path
+              key={i}
+              d={`M-10 ${40 + i * 28} Q 60 ${10 + i * 26} 120 ${45 + i * 24} T 210 ${30 + i * 27}`}
+              fill="none"
+              stroke="white"
+              strokeWidth="0.6"
+            />
+          ))}
+        </svg>
+      )}
       {label && (
         <span className="data pointer-events-none absolute -bottom-3 right-2 text-[5rem] font-bold leading-none text-white/10">
           {label}
