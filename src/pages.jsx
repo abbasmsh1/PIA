@@ -56,7 +56,7 @@ export function DestinationsPage() {
             <Link
               key={d.code}
               to={`/?from=KHI&to=${d.code}`}
-              className="data rounded-md border border-white/8 bg-s2 px-4 py-2 text-xs tracking-[0.08em] text-white/75 transition hover:border-mint/40 hover:text-white"
+              className="data rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs tracking-[0.08em] text-white/70 backdrop-blur transition hover:border-mint/40 hover:text-white"
             >
               {d.city} <span className="data text-white/40">{d.code}</span>
             </Link>
@@ -100,8 +100,8 @@ export function ServicesPage() {
           {CABINS.map((c) => (
             <div
               key={c.name}
-              className={`flex flex-col rounded-xl border p-6 ${
-                c.highlight ? 'border-mint/40 bg-brand/[0.10]' : 'border-white/8 bg-s2'
+              className={`panel flex flex-col p-7 ${
+                c.highlight ? 'border-mint/45 shadow-brand/10' : ''
               }`}
             >
               <h3 className="text-xl font-semibold text-white/90">{c.name}</h3>
@@ -115,10 +115,10 @@ export function ServicesPage() {
               </ul>
               <Link
                 to="/"
-                className={`data mt-5 rounded-md py-2.5 text-center text-xs uppercase tracking-[0.15em] transition ${
+                className={`data mt-6 rounded-full py-3 text-center text-xs uppercase tracking-[0.15em] transition ${
                   c.highlight
-                    ? 'bg-brand text-white hover:brightness-115'
-                    : 'border border-white/10 text-white/75 hover:border-mint/40'
+                    ? 'bg-brand text-white shadow-lg shadow-brand/25 hover:brightness-115'
+                    : 'border border-white/12 bg-white/[0.04] text-white/75 hover:border-mint/40'
                 }`}
               >
                 Search fares
@@ -162,7 +162,7 @@ export function ServicesPage() {
         </div>
         <Link
           to="/manage"
-          className="mt-8 inline-block data rounded-md bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115"
+          className="data mt-8 inline-block rounded-full bg-brand px-7 py-3.5 text-xs uppercase tracking-[0.15em] text-white shadow-lg shadow-brand/25 transition hover:brightness-115"
         >
           Web check-in →
         </Link>

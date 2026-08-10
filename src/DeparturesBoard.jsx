@@ -39,7 +39,7 @@ function SplitFlap({ text, className = '' }) {
 // Status as a bordered pill, the way the design calls it: boarding is the only
 // filled one, so the eye lands on the flight that is actually leaving.
 const STATUS = {
-  BOARDING: 'border-transparent bg-lime text-s0',
+  BOARDING: 'border-lime/40 bg-lime/20 text-lime',
   'ON TIME': 'text-mint',
   DELAYED: 'text-[#f5a524]',
   'GATE OPEN': 'text-[#44a5d8]',
@@ -47,8 +47,8 @@ const STATUS = {
 
 export default function DeparturesBoard() {
   return (
-    <div className="overflow-hidden rounded-xl bg-s0/70 backdrop-blur-sm hairline">
-      <div className="flex items-center justify-between border-b border-white/8 bg-s2 px-5 py-3">
+    <div className="panel overflow-hidden">
+      <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-5 py-3">
         <span className="data text-[11px] uppercase tracking-[0.2em] text-white/45">
           Karachi (KHI) · departures
         </span>

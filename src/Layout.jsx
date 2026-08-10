@@ -54,7 +54,7 @@ function AdvisoryBar() {
 
   if (!open) return null
   return (
-    <div className="pointer-events-auto flex w-full items-center justify-center gap-3 border-b border-white/5 bg-s0/95 px-4 py-2 text-center text-xs text-white/70 backdrop-blur">
+    <div className="pointer-events-auto flex w-full items-center justify-center gap-3 border-b border-white/8 bg-black/35 px-4 py-2 text-center text-xs text-white/70 backdrop-blur-xl">
       <span className="data hidden text-[10px] tracking-[0.2em] text-mint sm:inline">NOTICE</span>
       <span className="truncate">{ADVISORIES[i]}</span>
       <a href="#help" className="hidden shrink-0 font-semibold text-lime underline-offset-2 hover:underline sm:inline">
@@ -81,7 +81,7 @@ export function Header() {
   return (
     <header className="pointer-events-none fixed top-0 left-0 z-40 w-full">
       <AdvisoryBar />
-      <div className="flex w-full items-center justify-between bg-gradient-to-b from-[#060912] via-[#060912]/50 to-transparent px-6 py-4 pb-10 md:px-10">
+      <div className="mx-auto mt-3 flex w-[calc(100%-1.5rem)] max-w-7xl items-center justify-between rounded-full px-5 py-3 md:px-7 panel panel-thick">
         <Link to="/" className="pointer-events-auto">
           <img src="/logo.svg" alt="PIA — Pakistan International Airlines" className="h-9 w-auto md:h-11" />
         </Link>
@@ -105,14 +105,14 @@ export function Header() {
         </nav>
 
         <div className="pointer-events-auto flex items-center gap-3">
-          <button className="data hidden rounded-md bg-brand px-5 py-2.5 text-[11px] uppercase tracking-[0.15em] text-white transition hover:brightness-115 md:block">
+          <button className="data hidden rounded-full bg-brand/90 px-5 py-2.5 text-[11px] uppercase tracking-[0.15em] text-white shadow-lg shadow-black/40 backdrop-blur transition hover:bg-brand md:block">
             Award +Plus
           </button>
           <button
             onClick={() => setOpen((o) => !o)}
             aria-label="Menu"
             aria-expanded={open}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 text-white lg:hidden"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white backdrop-blur lg:hidden"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {open ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
@@ -122,7 +122,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-s0/97 px-6 pt-24 backdrop-blur-xl lg:hidden">
+        <div className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-black/55 px-6 pt-28 backdrop-blur-2xl lg:hidden">
           <nav className="flex flex-col gap-2">
             {NAV.map(([label, to]) => (
               <NavLink
@@ -138,7 +138,7 @@ export function Header() {
               </NavLink>
             ))}
           </nav>
-          <button className="data mt-8 rounded-md bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white">
+          <button className="data mt-8 rounded-full bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white">
             Award +Plus
           </button>
         </div>
@@ -156,10 +156,11 @@ export function Section({ id, eyebrow, title, children }) {
     >
       <div ref={ref} className="reveal">
         {eyebrow && <span className="eyebrow">{eyebrow}</span>}
-        <h2 className="mt-4 text-3xl font-bold text-white md:text-[2.75rem]">{title}</h2>
-        <div className="mt-6 h-px w-full bg-white/8" />
+        <h2 className="mt-5 max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white md:text-[3.25rem] md:leading-[1.05]">
+          {title}
+        </h2>
       </div>
-      <div className="mt-10">{children}</div>
+      <div className="mt-14">{children}</div>
     </section>
   )
 }
@@ -169,18 +170,18 @@ export function DestCard({ city, code, fare, from = 'KHI' }) {
   return (
     <Link
       to={`/?from=${from}&to=${code}`}
-      className="group relative block aspect-[4/3] overflow-hidden rounded-xl hairline transition hover:border-mint/40"
+      className="panel panel-hover group relative block aspect-[4/3] overflow-hidden p-0"
     >
       <Scenic seed={code} label={code} className="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-105" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 border-t border-white/10 bg-black/25 p-4 backdrop-blur-xl">
         <div>
-          <div className="text-lg font-bold text-white">{city}</div>
-          <div className="data mt-0.5 text-[11px] tracking-[0.15em] text-mint">
+          <div className="text-lg font-semibold text-white">{city}</div>
+          <div className="data mt-0.5 text-[11px] tracking-[0.15em] text-white/55">
             {from} — {code}
           </div>
         </div>
         {fare && (
-          <div className="data rounded-md bg-brand px-2.5 py-1 text-[11px] font-medium text-white">
+          <div className="data shrink-0 rounded-full bg-brand/85 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
             {new Intl.NumberFormat('en-PK').format(fare)}
           </div>
         )}
@@ -211,8 +212,10 @@ export function PageHero({ eyebrow, title, subtitle, seed }) {
           {title}
         </span>
         {eyebrow && <span className="eyebrow relative">{eyebrow}</span>}
-        <h1 className="relative mt-4 max-w-3xl text-4xl font-extrabold text-white md:text-6xl">{title}</h1>
-        {subtitle && <p className="relative mt-5 max-w-xl text-base leading-relaxed text-white/60">{subtitle}</p>}
+        <h1 className="relative mt-5 max-w-3xl text-5xl font-semibold tracking-[-0.035em] text-white md:text-[4.5rem] md:leading-[1.02]">
+          {title}
+        </h1>
+        {subtitle && <p className="relative mt-6 max-w-xl text-lg leading-relaxed text-white/55">{subtitle}</p>}
       </div>
     </section>
   )
@@ -243,7 +246,7 @@ function FooterCol({ title, items }) {
 
 export function Footer() {
   return (
-    <footer id="help" className="border-t border-white/8 bg-s0">
+    <footer id="help" className="border-t border-white/8 bg-black/25 backdrop-blur-xl">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 md:grid-cols-4 md:px-10">
         <div>
           <img src="/logo.svg" alt="PIA" className="h-11 w-auto" />

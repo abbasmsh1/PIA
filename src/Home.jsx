@@ -39,7 +39,7 @@ export default function Home() {
         </div>
         <Link
           to="/destinations"
-          className="data mt-8 inline-block rounded-md bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115"
+          className="data mt-8 inline-block rounded-full bg-brand px-7 py-3.5 text-xs uppercase tracking-[0.15em] text-white shadow-lg shadow-brand/25 transition hover:brightness-115"
         >
           All destinations →
         </Link>
@@ -97,7 +97,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-          <button className="w-fit data rounded-md bg-brand px-8 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115">
+          <button className="data w-fit rounded-full bg-brand px-8 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115">
             Join Award +Plus
           </button>
         </div>
@@ -106,9 +106,7 @@ export default function Home() {
           {LOYALTY_TIERS.map((t, i) => (
             <div
               key={t.name}
-              className={`rounded-2xl border p-6 ${
-                i === 2 ? 'border-mint/40 bg-brand/[0.10]' : 'border-white/8 bg-s2'
-              }`}
+              className={`panel p-7 ${i === 2 ? 'border-mint/45' : ''}`}
             >
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-lg font-semibold text-white/90">{t.name}</h3>
@@ -136,8 +134,8 @@ export default function Home() {
               ))}
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
-              <span className="data rounded-md border border-white/8 bg-s2 px-5 py-3 text-xs tracking-[0.1em] text-white/85"> App Store</span>
-              <span className="data rounded-md border border-white/8 bg-s2 px-5 py-3 text-xs tracking-[0.1em] text-white/85">▶ Google Play</span>
+              <span className="data rounded-2xl border border-white/10 bg-white/[0.05] px-5 py-3 text-xs tracking-[0.1em] text-white/85 backdrop-blur"> App Store</span>
+              <span className="data rounded-2xl border border-white/10 bg-white/[0.05] px-5 py-3 text-xs tracking-[0.1em] text-white/85 backdrop-blur">▶ Google Play</span>
             </div>
           </div>
 
