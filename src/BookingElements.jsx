@@ -59,27 +59,22 @@ const TABS = [
   ['checkin', 'Web check-in'],
 ]
 
-// Field with a floating label once a value is set.
+// Field: label always visible above the value, value in the data face, the
+// whole thing inset darker than the panel it sits in.
 function Field({ label, value, onChange, options, placeholder }) {
   const active = !!value
   return (
-    <div
-      className={`relative flex-1 rounded-lg border border-white/15 bg-white/5 px-4 text-left focus-within:border-[#71af2e] ${
-        active ? 'pb-2 pt-5' : 'py-4'
-      }`}
-    >
-      {active && (
-        <span className="pointer-events-none absolute left-4 top-1.5 text-[11px] font-medium text-[#cdd500]">
-          {label}
-        </span>
-      )}
+    <div className="group relative flex-1 rounded-md bg-s0 px-3 py-2.5 text-left hairline focus-within:border-mint/50">
+      <span className="data pointer-events-none block text-[10px] uppercase tracking-[0.18em] text-white/40 group-focus-within:text-mint">
+        {label}
+      </span>
       {options ? (
         <select
           aria-label={label}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`w-full cursor-pointer truncate bg-transparent text-base outline-none [&>option]:bg-[#0b1220] [&>option]:text-white ${
-            active ? 'text-white/90' : 'text-white/45'
+          className={`data mt-1 w-full cursor-pointer truncate bg-transparent text-sm outline-none [&>option]:bg-s2 [&>option]:font-sans [&>option]:text-white ${
+            active ? 'text-white' : 'text-white/40'
           }`}
         >
           <option value="">{label}</option>
@@ -91,14 +86,11 @@ function Field({ label, value, onChange, options, placeholder }) {
           ))}
         </select>
       ) : (
-        <>
-          {!active && (
-            <span className="pointer-events-none absolute left-4 top-4 text-base text-white/45">
-              {placeholder}
-            </span>
-          )}
-          <input aria-label={label} className="w-full bg-transparent text-base text-white/90 outline-none [color-scheme:dark]" />
-        </>
+        <input
+          aria-label={label}
+          placeholder={placeholder}
+          className="data mt-1 w-full bg-transparent text-sm text-white outline-none placeholder:text-white/35 [color-scheme:dark]"
+        />
       )}
     </div>
   )
@@ -128,22 +120,18 @@ function DateField({ round }) {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className={`w-full rounded-lg border bg-white/5 px-4 text-left ${active ? 'pb-2 pt-5' : 'py-4'} ${
-          open ? 'border-[#71af2e]' : 'border-white/15'
+        className={`w-full rounded-md border bg-s0 px-3 py-2.5 text-left ${
+          open ? 'border-mint/50' : 'border-white/8'
         }`}
       >
-        {active && (
-          <span className="pointer-events-none absolute left-4 top-1.5 text-[11px] font-medium text-[#cdd500]">
-            Departure - Return
-          </span>
-        )}
-        <span className={`block truncate text-base ${active ? 'text-white/90' : 'text-white/45'}`}>
-          {active ? text : 'Departure - Return'}
+        <span className="data block text-[10px] uppercase tracking-[0.18em] text-white/40">Dates</span>
+        <span className={`data mt-1 block truncate text-sm ${active ? 'text-white' : 'text-white/35'}`}>
+          {active ? text : 'Departure — Return'}
         </span>
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-30 mt-2 w-64 rounded-xl border border-white/10 bg-[#0b1220] p-4 shadow-2xl shadow-black/60">
+        <div className="panel absolute left-0 top-full z-30 mt-2 w-64 p-4 shadow-2xl shadow-black/60">
           <label className="block text-xs font-medium text-white/60">
             Departure
             <input
@@ -151,7 +139,7 @@ function DateField({ round }) {
               min={today}
               value={lv}
               onChange={(e) => setLv(e.target.value)}
-              className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white/90 outline-none [color-scheme:dark] focus:border-[#71af2e]"
+              className="data mt-1 w-full rounded-md border border-white/8 bg-s0 px-3 py-2 text-sm text-white outline-none [color-scheme:dark] focus:border-mint/50"
             />
           </label>
           {round && (
@@ -162,14 +150,14 @@ function DateField({ round }) {
                 min={lv || today}
                 value={rt}
                 onChange={(e) => setRt(e.target.value)}
-                className="mt-1 w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm text-white/90 outline-none [color-scheme:dark] focus:border-[#71af2e]"
+                className="data mt-1 w-full rounded-md border border-white/8 bg-s0 px-3 py-2 text-sm text-white outline-none [color-scheme:dark] focus:border-mint/50"
               />
             </label>
           )}
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="mt-4 w-full rounded-lg bg-[#005779] py-2 text-sm font-semibold text-white hover:bg-[#046b92]"
+            className="data mt-4 w-full rounded-md bg-brand py-2 text-xs uppercase tracking-[0.15em] text-white hover:brightness-115"
           >
             Done
           </button>
@@ -186,7 +174,7 @@ export function LookupPanel({ mode }) {
   const [ln, setLn] = useState('')
   const [found, setFound] = useState(false)
   const inputCls =
-    'flex-1 rounded-lg border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white/90 outline-none placeholder:text-white/40 focus:border-[#71af2e]'
+    'flex-1 rounded-md border border-white/8 bg-s0 px-4 py-3.5 text-sm text-white outline-none placeholder:text-white/35 focus:border-mint/50'
 
   return (
     <div className="mt-5">
@@ -207,14 +195,14 @@ export function LookupPanel({ mode }) {
         />
         <button
           onClick={() => setFound(!!(pnr.trim() && ln.trim()))}
-          className="rounded-lg bg-[#005779] px-8 py-3.5 font-semibold text-white transition hover:bg-[#046b92]"
+          className="data rounded-md bg-brand px-8 py-3.5 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115"
         >
           {mode === 'checkin' ? 'Check in' : 'Find booking'}
         </button>
       </div>
 
       {found && mode === 'manage' && (
-        <div className="mt-5 rounded-xl border border-white/10 bg-white/[0.03] p-5">
+        <div className="panel mt-5 p-5">
           <div className="flex items-center justify-between">
             <span className="data text-sm text-white/90">
               {pnr} · {ln}
@@ -243,7 +231,7 @@ export function LookupPanel({ mode }) {
       )}
 
       {found && mode === 'checkin' && (
-        <div className="mt-5 flex overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+        <div className="mt-5 flex overflow-hidden rounded-xl hairline bg-s2">
           <div className="ramp w-1.5 shrink-0" />
           <div className="flex-1 p-5">
             <span className="data text-xs uppercase tracking-[0.2em] text-white/40">
@@ -332,7 +320,7 @@ export function FlightSearch() {
   return (
     <div
       ref={ref}
-      className="reveal mx-auto w-full max-w-5xl rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.10] to-white/[0.03] p-6 shadow-2xl shadow-black/60 ring-1 ring-inset ring-white/5 backdrop-blur-2xl backdrop-saturate-150 md:p-8"
+      className="reveal mx-auto w-full max-w-5xl rounded-xl bg-s2/85 p-6 shadow-2xl shadow-black/60 backdrop-blur-2xl hairline md:p-8"
     >
       <div className="flex flex-wrap gap-6 border-b border-white/10 sm:gap-8">
         {TABS.map(([k, lbl]) => (
@@ -341,8 +329,8 @@ export function FlightSearch() {
             onClick={() => setTab(k)}
             className={`-mb-px flex items-center gap-2 border-b-2 pb-3 text-sm font-medium transition ${
               tab === k
-                ? 'border-[#cdd500] text-[#cdd500]'
-                : 'border-transparent text-white/50 hover:text-white/80'
+                ? 'border-mint text-mint'
+                : 'border-transparent text-white/45 hover:text-white/80'
             }`}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round">
@@ -366,10 +354,10 @@ export function FlightSearch() {
               <button key={k} onClick={() => setTrip(k)} className="flex items-center gap-2 text-sm text-white/80">
                 <span
                   className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${
-                    trip === k ? 'border-[#71af2e]' : 'border-white/30'
+                    trip === k ? 'border-mint' : 'border-white/25'
                   }`}
                 >
-                  {trip === k && <span className="h-2.5 w-2.5 rounded-full bg-[#71af2e]" />}
+                  {trip === k && <span className="h-2.5 w-2.5 rounded-full bg-mint" />}
                 </span>
                 {lbl}
               </button>
@@ -381,7 +369,7 @@ export function FlightSearch() {
               onClick={() => setMiles((m) => !m)}
               aria-label="Buy a ticket with Award +Plus points"
               aria-pressed={miles}
-              className={`relative h-6 w-11 rounded-full transition ${miles ? 'bg-[#007d34]' : 'bg-white/20'}`}
+              className={`relative h-6 w-11 rounded-full transition ${miles ? 'bg-brand' : 'bg-white/15'}`}
             >
               <span
                 className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-all ${
@@ -398,7 +386,7 @@ export function FlightSearch() {
               <button
                 onClick={swap}
                 aria-label="Swap ports"
-                className="shrink-0 rounded-full border border-white/15 bg-white/5 p-2 text-white/60 transition hover:text-[#cdd500]"
+                className="shrink-0 rounded-md border border-white/8 bg-s0 p-2.5 text-mint transition hover:border-mint/50"
                 style={{ transform: spin ? 'rotate(180deg)' : 'none', transitionDuration: '400ms' }}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -424,9 +412,12 @@ export function FlightSearch() {
           <div className="mt-5 flex justify-end">
             <button
               onClick={runSearch}
-              className="rounded-lg bg-[#007d34] px-8 py-3 font-semibold text-white transition hover:brightness-110"
+              className="data flex items-center gap-2 rounded-md bg-brand px-8 py-3 text-xs uppercase tracking-[0.18em] text-white transition hover:brightness-115"
             >
               Search flights
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 12h15m0 0l-5-5m5 5l-5 5" />
+              </svg>
             </button>
           </div>
 
@@ -440,7 +431,7 @@ export function FlightSearch() {
                 {results.map((f) => (
                   <div
                     key={f.flight}
-                    className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3"
+                    className="panel panel-hover flex flex-wrap items-center justify-between gap-3 px-4 py-3"
                   >
                     <div className="flex items-center gap-4">
                       <span className="data text-lg font-bold text-white/90">
@@ -455,13 +446,13 @@ export function FlightSearch() {
                     <div className="flex items-center gap-4">
                       <span className="text-right leading-tight">
                         <span className="block text-[10px] uppercase tracking-wide text-white/40">Economy</span>
-                        <span className="data font-bold text-[#cdd500]">{money(f.eco, currency)}</span>
+                        <span className="data font-bold text-mint">{money(f.eco, currency)}</span>
                       </span>
                       <span className="hidden text-right leading-tight sm:block">
                         <span className="block text-[10px] uppercase tracking-wide text-white/40">Executive</span>
                         <span className="data font-bold text-white/80">{money(f.exe, currency)}</span>
                       </span>
-                      <button className="rounded-lg bg-[#007d34] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">
+                      <button className="data rounded-md bg-brand px-4 py-2 text-[11px] uppercase tracking-[0.12em] text-white transition hover:brightness-115">
                         Select
                       </button>
                     </div>
@@ -484,38 +475,40 @@ function Ticket({ offer, index }) {
     <Link
       ref={ref}
       to={`/?from=${offer.from}&to=${offer.code}`}
-      className="reveal group relative flex overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-white/25"
+      className="reveal panel panel-hover group relative block overflow-hidden p-5"
     >
-      <div className="ramp w-1.5 shrink-0" />
-
-      <div className="flex-1 p-5">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">PIA</span>
-          {offer.real && (
-            <span className="data text-[10px] text-white/35">published fare</span>
-          )}
-        </div>
-        <div className="mt-3 flex items-center gap-3">
-          <span className="data text-2xl font-bold text-white/90">{offer.from}</span>
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#71af2e" strokeWidth="2" className="mt-0.5">
-            <path d="M2 12h18m0 0l-5-5m5 5l-5 5" />
+      {/* Route: codes at the ends, the sector drawn as a dashed line between. */}
+      <div className="flex items-center gap-3">
+        <span className="data text-base tracking-[0.1em] text-white">{offer.from}</span>
+        <span className="relative flex-1">
+          <span className="block border-t border-dashed border-white/15" />
+          <svg
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style={{ color: 'var(--pia-mint)' }}
+          >
+            <path d="M21 16v-2l-8-2.5V6.5a1.5 1.5 0 0 0-3 0v5L2 14v2l8-1.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-4.5L21 16Z" />
           </svg>
-          <span className="data text-2xl font-bold text-white/90">{offer.code}</span>
-        </div>
-        <p className="mt-1 text-sm text-white/50">{offer.city}</p>
+        </span>
+        <span className="data text-base tracking-[0.1em] text-white">{offer.code}</span>
       </div>
 
-      <div className="relative flex w-36 shrink-0 flex-col items-center justify-center border-l border-dashed border-white/15 p-4">
-        <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">from</span>
-        <span className="data text-lg font-bold text-[#cdd500]">
-          {new Intl.NumberFormat('en-PK').format(offer.fare)}
+      <div className="mt-5 flex items-end justify-between gap-3">
+        <div>
+          <span className="data block text-[10px] uppercase tracking-[0.2em] text-lime">
+            {offer.real ? 'Published fare' : 'Economy'}
+          </span>
+          <span className="data mt-1 block text-xl text-white">
+            PKR {new Intl.NumberFormat('en-PK').format(offer.fare)}
+          </span>
+          <span className="mt-1 block text-sm text-white/45">{offer.city}</span>
+        </div>
+        <span className="data shrink-0 text-[10px] uppercase tracking-[0.15em] text-mint opacity-0 transition group-hover:opacity-100">
+          Book →
         </span>
-        <span className="data text-[10px] text-white/40">PKR</span>
-        <span className="mt-2 rounded-full bg-[#007d34] px-4 py-1.5 text-xs font-semibold text-white transition group-hover:brightness-110">
-          Book
-        </span>
-        <span className="absolute -left-2 -top-2 h-4 w-4 rounded-full bg-[#060912]" />
-        <span className="absolute -bottom-2 -left-2 h-4 w-4 rounded-full bg-[#060912]" />
       </div>
     </Link>
   )

@@ -45,14 +45,14 @@ export default function StickyScroll() {
 
   return (
     <section className="snap-start snap-always mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-6 py-24 md:px-10">
-      <span className="data text-xs uppercase tracking-[0.3em] text-[#cdd500]">Why fly with us</span>
-      <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white/90 md:text-5xl">
+      <span className="eyebrow">Why fly with us</span>
+      <h2 className="mt-4 text-3xl font-bold text-white md:text-[2.75rem]">
         Great people to fly with
       </h2>
 
       <div className="mt-12 grid gap-12 md:grid-cols-2">
         <div className="hidden md:block">
-          <div className="sticky top-28 aspect-[4/5] max-h-[72vh] overflow-hidden rounded-3xl border border-white/10">
+          <div className="sticky top-28 aspect-[4/5] max-h-[72vh] overflow-hidden rounded-xl hairline">
             {STEPS.map((s, i) => (
               <div
                 key={s.title}
@@ -69,7 +69,7 @@ export default function StickyScroll() {
               </div>
             ))}
             <div className="absolute inset-x-0 bottom-0 p-6">
-              <span className="data text-xs tracking-[0.2em] text-[#cdd500]">
+              <span className="data text-xs tracking-[0.2em] text-lime">
                 0{active + 1} <span className="text-white/40">/ 0{STEPS.length}</span>
               </span>
               <h3 className="mt-1 text-2xl font-bold tracking-tight text-white">{STEPS[active].title}</h3>
@@ -89,14 +89,14 @@ export default function StickyScroll() {
                 active === i ? 'opacity-100' : 'md:opacity-35'
               }`}
             >
-              <Scenic seed={s.seed} label={s.seed} sizes="100vw" className="mb-6 aspect-video w-full rounded-2xl border border-white/10 md:hidden" />
-              <span className="data text-xs tracking-[0.2em] text-[#cdd500] md:hidden">
+              <Scenic seed={s.seed} label={s.seed} sizes="100vw" className="mb-6 aspect-video w-full rounded-xl hairline md:hidden" />
+              <span className="data text-xs tracking-[0.2em] text-lime md:hidden">
                 0{i + 1} / 0{STEPS.length}
               </span>
-              <h3 className="mt-2 text-3xl font-semibold tracking-tight text-white/90 md:mt-0 md:text-4xl">
+              <h3 className="mt-2 text-3xl font-bold text-white md:mt-0 md:text-4xl">
                 {s.title}
               </h3>
-              <p className="mt-4 max-w-md text-lg leading-relaxed text-white/60">{s.body}</p>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-white/55">{s.body}</p>
             </div>
           ))}
         </div>

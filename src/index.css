@@ -1,15 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
 /* Palette lifted from PIA's official logo SVG — the mark is a gradient running
-   yellow through green to teal and indigo, so the whole site is built on that
-   ramp rather than one flat accent colour. */
+   yellow through green to teal and indigo, so the accents come off that ramp.
+   The surfaces are a near-black stack rather than one flat panel colour, so
+   depth comes from five steps of elevation instead of white overlays. */
 :root {
-  --bg: #060912;
+  --bg: #0a0e17;
   --pia-yellow: #ffe524;
   --pia-lime: #cdd500;
   --pia-leaf: #71af2e;
-  --pia-green: #007d34; /* primary action */
+  --pia-green: #007d34; /* filled actions */
+  --pia-mint: #75dc86; /* accent type and icons, readable on near-black */
   --pia-forest: #0d572d;
   --pia-teal: #005779; /* wordmark */
   --pia-sky: #44a5d8;
@@ -17,22 +19,103 @@
   color-scheme: dark;
 }
 
+/* Surface stack + accents as Tailwind colours, so components say `bg-s2` and
+   `text-mint` rather than repeating hex values or stacking white overlays. */
+@theme {
+  --color-s0: #060912;
+  --color-s1: #0a0e17;
+  --color-s2: #10131d;
+  --color-s3: #181b25;
+  --color-s4: #22262f;
+  --color-mint: #75dc86;
+  --color-brand: #007d34;
+  --color-lime: #cdd500;
+  --font-display: "Chivo", ui-sans-serif, system-ui, sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
 body {
   margin: 0;
-  background: #072a45;
+  background: var(--bg);
   color: #fff;
-  font-family: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
+}
+
+/* Headlines are the display face, tight and heavy. */
+h1, h2, h3 {
+  font-family: "Chivo", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
 }
 
 /* Boarding-pass data face: airport codes, fares, flight numbers, times. */
 .data {
-  font-family: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   font-feature-settings: "tnum" 1;
   letter-spacing: 0;
+}
+
+/* --- Surfaces -------------------------------------------------------------
+   One panel treatment, one hairline, used everywhere a card or a strip of
+   content sits on the page. */
+.hairline {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.panel {
+  background: var(--color-s2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+.panel-hover {
+  transition: border-color 0.3s, background-color 0.3s;
+}
+.panel-hover:hover {
+  background: var(--color-s3);
+  border-color: rgba(117, 220, 134, 0.35);
+}
+
+/* Small uppercase label above a headline, with the lime tick the designs use. */
+.eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pia-lime);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: currentColor;
+}
+
+/* Status pill: BOARDING / ON TIME / DELAYED and the fare chips. */
+.chip {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+/* Oversized word set behind a page headline, barely there. */
+.ghost-word {
+  font-family: "Chivo", sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.045);
+  text-transform: uppercase;
+  line-height: 0.8;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* The brand ramp, reused for rules, stripes and text fills. */
@@ -68,15 +151,14 @@ body {
   width: 100%;
 }
 
-/* Drifting cloud puffs for the sky backdrop. */
+/* Drifting haze for the backdrop. Near-black ground, so these read as faint
+   light rather than the white cloud puffs the sky-blue build used. */
 .cloud {
   position: absolute;
   background:
-    radial-gradient(closest-side, rgba(255, 255, 255, 0.9), transparent) 15% 58%/42% 66% no-repeat,
-    radial-gradient(closest-side, rgba(255, 255, 255, 0.9), transparent) 44% 34%/54% 96% no-repeat,
-    radial-gradient(closest-side, rgba(255, 255, 255, 0.9), transparent) 72% 56%/44% 68% no-repeat,
-    radial-gradient(closest-side, rgba(255, 255, 255, 0.85), transparent) 50% 74%/86% 48% no-repeat;
-  filter: blur(8px);
+    radial-gradient(closest-side, rgba(117, 220, 134, 0.10), transparent) 20% 50%/48% 70% no-repeat,
+    radial-gradient(closest-side, rgba(68, 165, 216, 0.10), transparent) 60% 40%/52% 90% no-repeat;
+  filter: blur(30px);
   will-change: transform;
 }
 @keyframes ps-drift {

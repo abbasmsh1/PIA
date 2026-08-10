@@ -108,7 +108,7 @@ export default function RouteMap() {
             </span>
             <span className="text-sm font-semibold text-white/90">{active.city}</span>
             {active.fare && (
-              <span className="data font-bold text-[#cdd500]">
+              <span className="data font-bold text-lime">
                 from PKR {new Intl.NumberFormat('en-PK').format(active.fare)}
               </span>
             )}

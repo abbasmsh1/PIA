@@ -56,7 +56,7 @@ export function DestinationsPage() {
             <Link
               key={d.code}
               to={`/?from=KHI&to=${d.code}`}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75 transition hover:border-white/25 hover:text-white"
+              className="data rounded-md border border-white/8 bg-s2 px-4 py-2 text-xs tracking-[0.08em] text-white/75 transition hover:border-mint/40 hover:text-white"
             >
               {d.city} <span className="data text-white/40">{d.code}</span>
             </Link>
@@ -82,7 +82,7 @@ export function ServicesPage() {
           {SERVICES.map((s) => (
             <div
               key={s.title}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-white/20 hover:bg-white/[0.05]"
+              className="panel panel-hover p-6"
             >
               <h3 className="text-lg font-medium tracking-tight text-white/90">{s.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-white/55">{s.body}</p>
@@ -100,25 +100,25 @@ export function ServicesPage() {
           {CABINS.map((c) => (
             <div
               key={c.name}
-              className={`flex flex-col rounded-2xl border p-6 ${
-                c.highlight ? 'border-[#007d34]/50 bg-[#007d34]/[0.08]' : 'border-white/10 bg-white/[0.03]'
+              className={`flex flex-col rounded-xl border p-6 ${
+                c.highlight ? 'border-mint/40 bg-brand/[0.10]' : 'border-white/8 bg-s2'
               }`}
             >
               <h3 className="text-xl font-semibold text-white/90">{c.name}</h3>
-              <p className="data mt-1 text-sm text-[#cdd500]">{c.price}</p>
+              <p className="data mt-1 text-sm text-lime">{c.price}</p>
               <ul className="mt-4 flex flex-1 flex-col gap-2 text-sm">
                 {c.feats.map(([label, on]) => (
                   <li key={label} className={`flex items-center gap-2 ${on ? 'text-white/75' : 'text-white/30'}`}>
-                    <span className={on ? 'text-[#cdd500]' : 'text-white/30'}>{on ? '✓' : '—'}</span> {label}
+                    <span className={on ? 'text-lime' : 'text-white/30'}>{on ? '✓' : '—'}</span> {label}
                   </li>
                 ))}
               </ul>
               <Link
                 to="/"
-                className={`mt-5 rounded-full py-2.5 text-center text-sm font-semibold transition ${
+                className={`data mt-5 rounded-md py-2.5 text-center text-xs uppercase tracking-[0.15em] transition ${
                   c.highlight
-                    ? 'bg-[#007d34] text-white hover:brightness-110'
-                    : 'border border-white/15 text-white/80 hover:bg-white/10'
+                    ? 'bg-brand text-white hover:brightness-115'
+                    : 'border border-white/10 text-white/75 hover:border-mint/40'
                 }`}
               >
                 Search fares
@@ -131,7 +131,7 @@ export function ServicesPage() {
       <Section eyebrow="Baggage" title="What you can bring">
         <div className="grid gap-6 md:grid-cols-2">
           {BAGGAGE.map((b) => (
-            <div key={b.cls} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <div key={b.cls} className="panel p-6">
               <h3 className="text-lg font-semibold text-white/90">{b.cls}</h3>
               <ul className="mt-4 flex flex-col gap-2 text-sm text-white/70">
                 <li>
@@ -154,15 +154,15 @@ export function ServicesPage() {
       <Section eyebrow="Check-in" title="Skip the queue">
         <div className="grid gap-6 sm:grid-cols-3">
           {CHECKIN.map((c) => (
-            <div key={c.v} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-              <div className="data text-3xl font-bold text-[#cdd500]">{c.k}</div>
+            <div key={c.v} className="panel p-6 text-center">
+              <div className="data text-3xl font-bold text-lime">{c.k}</div>
               <div className="mt-2 text-sm text-white/55">{c.v}</div>
             </div>
           ))}
         </div>
         <Link
           to="/manage"
-          className="mt-8 inline-block rounded-full bg-[#007d34] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+          className="mt-8 inline-block data rounded-md bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115"
         >
           Web check-in →
         </Link>
@@ -185,12 +185,12 @@ export function FleetPage() {
       <Section eyebrow="Aircraft types" title="What we fly">
         <div className="grid gap-6 md:grid-cols-2">
           {FLEET.map((a) => (
-            <div key={a.type} className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+            <div key={a.type} className="panel overflow-hidden">
               <Scenic seed={a.type} label={a.type.split(' ').pop()} sizes="(min-width: 768px) 50vw, 100vw" className="h-44 w-full" />
               <div className="p-6">
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-xl font-semibold tracking-tight text-white/90">{a.type}</h3>
-                  <span className="data shrink-0 text-sm font-bold text-[#cdd500]">
+                  <span className="data shrink-0 text-sm font-bold text-lime">
                     {a.ordered ? `${a.count} on order` : `${a.count} in service`}
                   </span>
                 </div>
@@ -227,8 +227,8 @@ export function HajjUmrahPage() {
       <Section eyebrow="Airports" title="Where you land">
         <div className="grid gap-6 sm:grid-cols-3">
           {PILGRIMAGE_FACTS.map((f) => (
-            <div key={f.k} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <div className="data text-2xl font-bold text-[#cdd500]">{f.k}</div>
+            <div key={f.k} className="panel p-6">
+              <div className="data text-2xl font-bold text-lime">{f.k}</div>
               <div className="mt-2 text-sm text-white/55">{f.v}</div>
             </div>
           ))}
@@ -238,8 +238,8 @@ export function HajjUmrahPage() {
       <Section eyebrow="Before you go" title="Four steps to your journey">
         <div className="grid gap-5 sm:grid-cols-2">
           {PILGRIMAGE_STEPS.map((s) => (
-            <div key={s.k} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-              <span className="data text-xs tracking-[0.25em] text-[#cdd500]">{s.k}</span>
+            <div key={s.k} className="panel p-6">
+              <span className="data text-xs tracking-[0.25em] text-lime">{s.k}</span>
               <h3 className="mt-2 text-lg font-semibold text-white/90">{s.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-white/55">{s.body}</p>
             </div>
@@ -253,7 +253,7 @@ export function HajjUmrahPage() {
             <DestCard key={d.code} {...d} />
           ))}
         </div>
-        <div className="mt-8 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-8">
+        <div className="mt-8 panel p-8">
           <h3 className="text-lg font-semibold text-white/90">Baggage on Saudi sectors</h3>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/60">
             Travel to and from the Kingdom follows a dedicated baggage acceptance policy, including
@@ -262,7 +262,7 @@ export function HajjUmrahPage() {
           </p>
           <Link
             to="/services"
-            className="mt-6 inline-block rounded-full bg-[#007d34] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+            className="mt-6 inline-block data rounded-md bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115"
           >
             Baggage guide →
           </Link>
@@ -294,8 +294,8 @@ export function ManagePage() {
         </div>
         <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {CHECKIN.map((c) => (
-            <div key={c.v} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-              <div className="data text-3xl font-bold text-[#cdd500]">{c.k}</div>
+            <div key={c.v} className="panel p-6 text-center">
+              <div className="data text-3xl font-bold text-lime">{c.k}</div>
               <div className="mt-2 text-sm text-white/55">{c.v}</div>
             </div>
           ))}
@@ -305,7 +305,7 @@ export function ManagePage() {
       <Section eyebrow="What you can change" title="After you have booked">
         <div className="grid gap-6 sm:grid-cols-2">
           {MANAGE_ACTIONS.map((a) => (
-            <div key={a.title} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <div key={a.title} className="panel p-6">
               <h3 className="text-lg font-medium tracking-tight text-white/90">{a.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-white/55">{a.body}</p>
             </div>
@@ -333,8 +333,8 @@ export function AboutPage() {
       <Section eyebrow="At a glance" title="PIA in numbers">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {ABOUT_STATS.map((s) => (
-            <div key={s.v} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-center">
-              <div className="data text-4xl font-bold text-[#cdd500]">{s.k}</div>
+            <div key={s.v} className="panel p-6 text-center">
+              <div className="data text-4xl font-bold text-lime">{s.k}</div>
               <div className="mt-2 text-sm text-white/55">{s.v}</div>
             </div>
           ))}
@@ -364,10 +364,10 @@ export function AboutPage() {
       <Section eyebrow="Award +Plus" title="Programmes">
         <div className="grid gap-5 md:grid-cols-3">
           {LOYALTY_TIERS.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <div key={t.name} className="panel p-6">
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-lg font-semibold text-white/90">{t.name}</h3>
-                <span className="data text-xs tracking-[0.15em] text-[#cdd500]">{t.req}</span>
+                <span className="data text-xs tracking-[0.15em] text-lime">{t.req}</span>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/55">{t.perks}</p>
             </div>
@@ -376,9 +376,9 @@ export function AboutPage() {
       </Section>
 
       <Section eyebrow="Contact" title="Get in touch">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+        <div className="panel p-8">
           <p className="text-white/70">{CONTACT.address}</p>
-          <p className="data mt-4 text-lg text-[#cdd500]">{CONTACT.phone}</p>
+          <p className="data mt-4 text-lg text-lime">{CONTACT.phone}</p>
           <p className="data text-white/70">{CONTACT.email}</p>
         </div>
       </Section>
@@ -393,7 +393,7 @@ export function NotFound() {
       <div className="mx-auto max-w-6xl px-6 py-16 md:px-10">
         <Link
           to="/"
-          className="rounded-full bg-[#007d34] px-8 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+          className="data rounded-md bg-brand px-8 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115"
         >
           Back to home
         </Link>

@@ -4,24 +4,22 @@ import { useReveal } from './BookingElements.jsx'
 import Scenic from './Scenic.jsx'
 import { NAV, CONTACT } from './data.js'
 
-// Fixed sky backdrop, built on the teal end of the brand ramp so it reads as
-// PIA rather than generic aviation blue. The takeoff canvas covers it, so the
-// page reads as "depart at night, climb into daylight".
+// Fixed backdrop. Near-black ground with two slow drifting glows off the brand
+// ramp — the photography and the takeoff canvas are what carry colour now, so
+// the page behind them stays quiet.
 function Backdrop() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-s1">
       <div
         className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg,#061a2e 0%,#005779 42%,#1c7ba6 72%,#44a5d8 100%)' }}
+        style={{ background: 'linear-gradient(180deg,#060912 0%,#0a0e17 45%,#0d1420 100%)' }}
       />
       <div
         className="absolute -top-[10%] right-[-6%] h-[70vh] w-[70vh] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(255,229,36,0.20), rgba(255,255,255,0) 65%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(0,125,52,0.16), rgba(0,0,0,0) 65%)' }}
       />
-      <div className="cloud" style={{ top: '16%', width: '32vw', height: '20vh', opacity: 0.55, animation: 'ps-drift 90s linear infinite', animationDelay: '-20s' }} />
-      <div className="cloud" style={{ top: '40%', width: '24vw', height: '15vh', opacity: 0.4, animation: 'ps-drift 130s linear infinite', animationDelay: '-70s' }} />
-      <div className="cloud" style={{ top: '62%', width: '38vw', height: '22vh', opacity: 0.5, animation: 'ps-drift 110s linear infinite', animationDelay: '-45s' }} />
-      <div className="cloud" style={{ top: '82%', width: '28vw', height: '17vh', opacity: 0.35, animation: 'ps-drift 150s linear infinite', animationDelay: '-100s' }} />
+      <div className="cloud" style={{ top: '28%', width: '46vw', height: '30vh', opacity: 0.9, animation: 'ps-drift 140s linear infinite', animationDelay: '-30s' }} />
+      <div className="cloud" style={{ top: '68%', width: '38vw', height: '26vh', opacity: 0.7, animation: 'ps-drift 190s linear infinite', animationDelay: '-110s' }} />
     </div>
   )
 }
@@ -56,9 +54,10 @@ function AdvisoryBar() {
 
   if (!open) return null
   return (
-    <div className="pointer-events-auto flex w-full items-center justify-center gap-3 bg-[#0d572d]/90 px-4 py-2 text-center text-xs text-white/80 backdrop-blur">
+    <div className="pointer-events-auto flex w-full items-center justify-center gap-3 border-b border-white/5 bg-s0/95 px-4 py-2 text-center text-xs text-white/70 backdrop-blur">
+      <span className="data hidden text-[10px] tracking-[0.2em] text-mint sm:inline">NOTICE</span>
       <span className="truncate">{ADVISORIES[i]}</span>
-      <a href="#help" className="hidden shrink-0 font-semibold text-[#cdd500] underline-offset-2 hover:underline sm:inline">
+      <a href="#help" className="hidden shrink-0 font-semibold text-lime underline-offset-2 hover:underline sm:inline">
         Read more
       </a>
       <button
@@ -87,14 +86,16 @@ export function Header() {
           <img src="/logo.svg" alt="PIA — Pakistan International Airlines" className="h-9 w-auto md:h-11" />
         </Link>
 
-        <nav className="pointer-events-auto hidden gap-6 lg:flex">
+        <nav className="pointer-events-auto hidden gap-7 lg:flex">
           {NAV.map(([label, to]) => (
             <NavLink
               key={to}
               to={to}
               className={({ isActive }) =>
-                `text-xs uppercase tracking-[0.16em] transition ${
-                  isActive ? 'text-[#cdd500]' : 'text-white/50 hover:text-white/90'
+                `data border-b-2 pb-1 text-[11px] uppercase tracking-[0.2em] transition ${
+                  isActive
+                    ? 'border-mint text-mint'
+                    : 'border-transparent text-white/45 hover:text-white/85'
                 }`
               }
             >
@@ -104,8 +105,8 @@ export function Header() {
         </nav>
 
         <div className="pointer-events-auto flex items-center gap-3">
-          <button className="hidden rounded-full bg-[#007d34] px-5 py-2 text-xs font-semibold tracking-wide text-white transition hover:brightness-110 md:block">
-            Award +Plus Login
+          <button className="data hidden rounded-md bg-brand px-5 py-2.5 text-[11px] uppercase tracking-[0.15em] text-white transition hover:brightness-115 md:block">
+            Award +Plus
           </button>
           <button
             onClick={() => setOpen((o) => !o)}
@@ -121,15 +122,15 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-[#060912]/95 px-6 pt-24 backdrop-blur-xl lg:hidden">
+        <div className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-s0/97 px-6 pt-24 backdrop-blur-xl lg:hidden">
           <nav className="flex flex-col gap-2">
             {NAV.map(([label, to]) => (
               <NavLink
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `border-b border-white/10 py-4 text-lg tracking-tight ${
-                    isActive ? 'text-[#cdd500]' : 'text-white/80'
+                  `data border-b border-white/8 py-4 text-sm uppercase tracking-[0.18em] ${
+                    isActive ? 'text-mint' : 'text-white/75'
                   }`
                 }
               >
@@ -137,8 +138,8 @@ export function Header() {
               </NavLink>
             ))}
           </nav>
-          <button className="mt-8 rounded-full bg-[#007d34] px-6 py-3 text-sm font-semibold text-white">
-            Award +Plus Login
+          <button className="data mt-8 rounded-md bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white">
+            Award +Plus
           </button>
         </div>
       )}
@@ -154,8 +155,9 @@ export function Section({ id, eyebrow, title, children }) {
       className="snap-start snap-always mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-6 py-24 md:px-10"
     >
       <div ref={ref} className="reveal">
-        {eyebrow && <span className="data text-xs uppercase tracking-[0.3em] text-[#cdd500]">{eyebrow}</span>}
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white/90 md:text-5xl">{title}</h2>
+        {eyebrow && <span className="eyebrow">{eyebrow}</span>}
+        <h2 className="mt-4 text-3xl font-bold text-white md:text-[2.75rem]">{title}</h2>
+        <div className="mt-6 h-px w-full bg-white/8" />
       </div>
       <div className="mt-10">{children}</div>
     </section>
@@ -167,18 +169,18 @@ export function DestCard({ city, code, fare, from = 'KHI' }) {
   return (
     <Link
       to={`/?from=${from}&to=${code}`}
-      className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 transition hover:border-white/25"
+      className="group relative block aspect-[4/3] overflow-hidden rounded-xl hairline transition hover:border-mint/40"
     >
       <Scenic seed={code} label={code} className="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-105" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
         <div>
-          <div className="text-lg font-semibold tracking-tight text-white">{city}</div>
-          <div className="data text-xs tracking-[0.15em] text-white/60">
-            {from} → {code}
+          <div className="text-lg font-bold text-white">{city}</div>
+          <div className="data mt-0.5 text-[11px] tracking-[0.15em] text-mint">
+            {from} — {code}
           </div>
         </div>
         {fare && (
-          <div className="data rounded-full bg-[#007d34] px-3 py-1 text-xs font-bold text-white">
+          <div className="data rounded-md bg-brand px-2.5 py-1 text-[11px] font-medium text-white">
             {new Intl.NumberFormat('en-PK').format(fare)}
           </div>
         )}
@@ -196,14 +198,21 @@ export function PageHero({ eyebrow, title, subtitle, seed }) {
       <div className="pointer-events-none absolute inset-0">
         <Scenic seed={seed || title} sizes="100vw" eager className="h-full w-full" />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#060912]/95 via-[#060912]/45 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#060912] via-[#060912]/70 to-transparent" />
       {/* The header is transparent over the hero, so keep the top of the frame
           dark enough for the nav to stay readable against a bright sky. */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#060912]/85 to-transparent" />
       <div className="relative mx-auto w-full max-w-6xl">
-        {eyebrow && <span className="data text-xs uppercase tracking-[0.3em] text-[#cdd500]">{eyebrow}</span>}
-        <h1 className="mt-3 max-w-3xl text-4xl font-semibold tracking-tight text-white/90 md:text-6xl">{title}</h1>
-        {subtitle && <p className="mt-4 max-w-2xl text-lg text-white/60">{subtitle}</p>}
+        {/* The title again, oversized and almost invisible behind itself. */}
+        <span
+          aria-hidden
+          className="ghost-word absolute -top-6 left-0 hidden whitespace-nowrap text-[7rem] md:block"
+        >
+          {title}
+        </span>
+        {eyebrow && <span className="eyebrow relative">{eyebrow}</span>}
+        <h1 className="relative mt-4 max-w-3xl text-4xl font-extrabold text-white md:text-6xl">{title}</h1>
+        {subtitle && <p className="relative mt-5 max-w-xl text-base leading-relaxed text-white/60">{subtitle}</p>}
       </div>
     </section>
   )
@@ -212,7 +221,7 @@ export function PageHero({ eyebrow, title, subtitle, seed }) {
 function FooterCol({ title, items }) {
   return (
     <div>
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/40">{title}</p>
+      <p className="data text-[11px] uppercase tracking-[0.2em] text-mint/70">{title}</p>
       <ul className="mt-4 flex flex-col gap-2">
         {items.map(([label, to]) => (
           <li key={label}>
@@ -234,7 +243,7 @@ function FooterCol({ title, items }) {
 
 export function Footer() {
   return (
-    <footer id="help" className="border-t border-white/10">
+    <footer id="help" className="border-t border-white/8 bg-s0">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 md:grid-cols-4 md:px-10">
         <div>
           <img src="/logo.svg" alt="PIA" className="h-11 w-auto" />
@@ -274,7 +283,7 @@ export function Footer() {
         />
       </div>
       <div className="ramp h-0.5 w-full opacity-70" />
-      <div className="py-6 text-center text-xs text-white/35">
+      <div className="py-6 text-center text-[11px] text-white/30">
         Fan concept, not affiliated with Pakistan International Airlines · content adapted from piac.com.pk
       </div>
     </footer>

@@ -39,7 +39,7 @@ export default function Home() {
         </div>
         <Link
           to="/destinations"
-          className="mt-8 inline-block rounded-full bg-[#007d34] px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110"
+          className="data mt-8 inline-block rounded-md bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115"
         >
           All destinations →
         </Link>
@@ -52,14 +52,14 @@ export default function Home() {
           {SERVICES.slice(0, 6).map((s) => (
             <div
               key={s.title}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-white/20 hover:bg-white/[0.05]"
+              className="panel panel-hover p-6"
             >
               <h3 className="text-lg font-medium tracking-tight text-white/90">{s.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-white/55">{s.body}</p>
             </div>
           ))}
         </div>
-        <Link to="/services" className="mt-8 inline-block text-sm font-medium text-[#44a5d8] hover:text-white">
+        <Link to="/services" className="data mt-8 inline-block text-xs uppercase tracking-[0.15em] text-mint transition hover:text-white">
           All services →
         </Link>
       </Section>
@@ -69,10 +69,10 @@ export default function Home() {
           {NEWS.slice(0, 6).map((n) => (
             <article
               key={n.title}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-white/20 hover:bg-white/[0.05]"
+              className="group flex flex-col panel panel-hover p-6"
             >
               <div className="flex items-center gap-2 text-xs text-white/40">
-                <span className="text-[#cdd500]">{n.cat}</span>
+                <span className="text-lime">{n.cat}</span>
                 <span>·</span>
                 <span className="data">{n.date}</span>
               </div>
@@ -80,7 +80,7 @@ export default function Home() {
                 {n.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-white/55">{n.body}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#44a5d8] transition group-hover:gap-2">
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-mint transition group-hover:gap-2">
                 Learn more →
               </span>
             </article>
@@ -93,11 +93,11 @@ export default function Home() {
           <ul className="grid gap-3 sm:grid-cols-2">
             {LOYALTY_PERKS.map((f) => (
               <li key={f} className="flex items-center gap-3 text-white/75">
-                <span className="text-[#cdd500]">✓</span> {f}
+                <span className="text-mint">✓</span> {f}
               </li>
             ))}
           </ul>
-          <button className="w-fit rounded-full bg-[#007d34] px-8 py-3 text-sm font-semibold text-white transition hover:brightness-110">
+          <button className="w-fit data rounded-md bg-brand px-8 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:brightness-115">
             Join Award +Plus
           </button>
         </div>
@@ -107,12 +107,12 @@ export default function Home() {
             <div
               key={t.name}
               className={`rounded-2xl border p-6 ${
-                i === 2 ? 'border-[#007d34]/50 bg-[#007d34]/[0.08]' : 'border-white/10 bg-white/[0.03]'
+                i === 2 ? 'border-mint/40 bg-brand/[0.10]' : 'border-white/8 bg-s2'
               }`}
             >
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-lg font-semibold text-white/90">{t.name}</h3>
-                <span className="data text-xs tracking-[0.15em] text-[#cdd500]">{t.req}</span>
+                <span className="data text-xs tracking-[0.15em] text-lime">{t.req}</span>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/55">{t.perks}</p>
             </div>
@@ -121,7 +121,7 @@ export default function Home() {
       </Section>
 
       <Section id="app" eyebrow="On the go" title="The PIA mobile app">
-        <div className="flex flex-col items-center gap-10 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-8 md:flex-row md:justify-between md:p-12">
+        <div className="flex flex-col items-center gap-10 panel p-8 md:flex-row md:justify-between md:p-12">
           <div className="max-w-md">
             <ul className="flex flex-col gap-3">
               {[
@@ -131,17 +131,17 @@ export default function Home() {
                 'Award +Plus balance and redemptions',
               ].map((f) => (
                 <li key={f} className="flex items-center gap-3 text-white/75">
-                  <span className="text-[#cdd500]">✓</span> {f}
+                  <span className="text-mint">✓</span> {f}
                 </li>
               ))}
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
-              <span className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-white/90"> App Store</span>
-              <span className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-medium text-white/90">▶ Google Play</span>
+              <span className="data rounded-md border border-white/8 bg-s2 px-5 py-3 text-xs tracking-[0.1em] text-white/85"> App Store</span>
+              <span className="data rounded-md border border-white/8 bg-s2 px-5 py-3 text-xs tracking-[0.1em] text-white/85">▶ Google Play</span>
             </div>
           </div>
 
-          <div className="relative h-72 w-40 shrink-0 rounded-[2rem] border-4 border-white/15 bg-gradient-to-b from-[#0b1220] to-[#060912] p-3 shadow-2xl">
+          <div className="relative h-72 w-40 shrink-0 rounded-[2rem] border-4 border-white/10 bg-gradient-to-b from-s3 to-s0 p-3 shadow-2xl">
             <div className="mx-auto mt-1 h-1.5 w-12 rounded-full bg-white/20" />
             <div className="mt-6 flex flex-col items-center gap-2">
               <span className="text-sm font-semibold text-white/90">PIA</span>
@@ -150,7 +150,7 @@ export default function Home() {
             <div className="mt-6 space-y-2 px-1">
               <div className="data rounded-lg bg-white/[0.06] px-3 py-2 text-[10px] text-white/70">KHI → DXB</div>
               <div className="data rounded-lg bg-white/[0.06] px-3 py-2 text-[10px] text-white/50">Seat 21C · Gate B1</div>
-              <div className="rounded-lg bg-[#007d34]/90 px-3 py-2 text-center text-[10px] font-semibold text-white">
+              <div className="rounded-lg bg-brand/90 px-3 py-2 text-center text-[10px] font-semibold text-white">
                 Boarding pass
               </div>
             </div>
