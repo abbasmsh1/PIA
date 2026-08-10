@@ -25,14 +25,30 @@ npm run build
 | `src/data.js` | Every string, fare and airport on the site |
 | `src/geo.js` | Equirectangular projection for the route map |
 | `src/PlaneScroll.jsx` | Scroll-scrubbed takeoff canvas + hero booking widget |
-| `public/takeoff/` | 240-frame PIA 777 takeoff sequence the hero canvas scrubs |
+| `public/takeoff/` | 192-frame PIA 777 takeoff sequence the hero canvas scrubs |
 | `src/BookingElements.jsx` | Booking widget, PNR lookup, fare tickets |
 | `src/Scenic.jsx` | Image frame: Unsplash photo per seed, brand-gradient fallback |
 
-The hero scrubs `public/takeoff/`, 240 frames of a PIA 777 rotating off the
+The hero scrubs `public/takeoff/`, 192 frames of a PIA 777 rotating off the
 runway. It replaced a 64-frame 4K sequence of another carrier's A320 (still in
 git history), which is why the canvas grade is now a light brand wash instead of
 a duotone that hid the livery.
+
+The PNG renders live in a git-ignored `Assets/` folder. To re-encode after
+changing them:
+
+```bash
+python3 - <<'PY'
+import glob, os
+from PIL import Image
+for p in sorted(glob.glob('Assets/frame_*.png')):
+    n = os.path.basename(p).replace('.png', '.jpg')
+    Image.open(p).convert('RGB').save(
+        'public/takeoff/' + n, 'JPEG', quality=72, optimize=True, progressive=True)
+PY
+```
+
+Then set `FRAME_COUNT` in `src/PlaneScroll.jsx` to the new frame count.
 
 Photography is from [Unsplash](https://unsplash.com), hotlinked off their CDN
 (`images.unsplash.com`) at the size each frame needs, up to 4K on the heroes.

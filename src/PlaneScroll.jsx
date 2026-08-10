@@ -11,11 +11,13 @@ import { photoUrl } from './Scenic.jsx'
 // 19.2 throws a WAAPI animate() offset error that unmounts the tree. useScroll
 // and useMotionValueEvent are stable, so plain divs are driven from state.
 
-// 240 frames of a PIA 777 rotating off the runway, 1280x720 each (~4.9 MB for
-// the set). They replaced a 64-frame 4K sequence of another carrier's A320 at
-// night, which is why the brand duotone below is now only a light grade.
-const FRAME_COUNT = 240
-const frameUrl = (i) => `/takeoff/ezgif-frame-${String(i + 1).padStart(3, '0')}.jpg`
+// 192 frames of a PIA 777 rotating off the runway, 1280x720 each. The source
+// renders in `Assets/` are PNG (121 MB, git-ignored); `public/takeoff` holds
+// them re-encoded as progressive JPEG at q72 — 8.9 MB for the set, and
+// indistinguishable from the PNGs at 1:1. The whole set preloads before the
+// hero reveals, so the encode size is the page's first-paint budget.
+const FRAME_COUNT = 192
+const frameUrl = (i) => `/takeoff/frame_${String(i + 1).padStart(4, '0')}.jpg`
 
 // Story beats keyed to scroll progress. `pos` puts each block in the part of
 // the frame the aircraft is not occupying as it climbs.
