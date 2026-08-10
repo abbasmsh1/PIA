@@ -44,20 +44,24 @@ const PHOTOS = {
   HERO: 'photo-1565614873782-ec6ef19e18f1', // airliner into the sun
   NETWORK: 'photo-1565444007614-6b38c78224df', // wing over cloud
   EXPERIENCE: 'photo-1641447093043-241f064568fb', // cabin, seatback screens
-  FLEET: 'photo-1565614873782-ec6ef19e18f1',
+  FLEET: 'photo-1687885461404-5ab0c1aa4ad9', // twin-jet into the sun
   MANAGE: 'photo-1490430657723-4d607c1503fc', // split-flap departure board
-  ABOUT: 'photo-1543903905-cee4ab46985c',
+  ABOUT: 'photo-1570970580763-7993ca30d726', // airliner silhouette, golden sky
   HAJJ: 'photo-1513072064285-240f87fa81e8', // the Kaaba, Masjid al-Haram
-  B777: 'photo-1601544564660-98f64a967a9a',
+  B777: 'photo-1785735011417-d85ff3998a70', // engine and wing above cloud
   EXE: 'photo-1636699811128-1a83547b76d5', // cabin under mood lighting
   AWARD: 'photo-1746020681437-bb0a721cf2fa', // passengers in a terminal
 
-  'Boeing 777-300ER': 'photo-1601544564660-98f64a967a9a',
-  'Boeing 777-200ER': 'photo-1504723246034-0977641ea907',
-  'Boeing 777-200LR': 'photo-1571306603861-20c055ab2e5c',
-  'Airbus A320-200': 'photo-1677795664119-f3b70cacb18c',
-  'ATR 42-500': 'photo-1659232246974-d35664b0bea8',
-  'Boeing 787': 'photo-1623319780202-5579777bdf82',
+  // A concept site should not put a competitor's livery next to PIA's own name,
+  // so the aircraft frames are silhouettes, engines and unmarked airframes
+  // rather than the Emirates 777 / Lufthansa 747 / United A320 / ANA 787 shots
+  // an Unsplash type search hands you first.
+  'Boeing 777-300ER': 'photo-1571306603861-20c055ab2e5c', // widebody nose at a jetbridge
+  'Boeing 777-200ER': 'photo-1696238628662-e820babaf1e3', // engine and wing on the apron
+  'Boeing 777-200LR': 'photo-1629221731259-4f0760e3ee89', // widebody at the gate at night
+  'Airbus A320-200': 'photo-1772965490826-45f77a1d441f', // narrowbody engine, mono
+  'ATR 42-500': 'photo-1659232246974-d35664b0bea8', // turboprop on approach
+  'Boeing 787': 'photo-1780739978396-a0c834d5b501', // fan close-up
 }
 
 const WIDTHS = [640, 1280, 1920, 2560, 3840]
