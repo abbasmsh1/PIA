@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap");
 @import "tailwindcss";
 
-/* Palette lifted from PIA's official logo SVG — the mark is a gradient running
-   yellow through green to teal and indigo, so the accents come off that ramp.
-   The surfaces are a near-black stack rather than one flat panel colour, so
-   depth comes from five steps of elevation instead of white overlays. */
+/* Brand colours.
+   --pia-official-* are the two fills in PIA's real logo (public/pia-logo.svg,
+   taken off piac.com.pk): a deep green wordmark and a gold calligraphic mark.
+   No gradient — an earlier note in this file claimed the mark was a yellow to
+   indigo ramp, which the actual asset disproves. The wider ramp below is this
+   site's own extension of those two, used for accents and rules; the surfaces
+   are a near-black stack so depth comes from elevation, not colour. */
 :root {
+  --pia-official-green: #006937;
+  --pia-official-gold: #a48d29;
   --bg: #0a0e17;
   --pia-yellow: #ffe524;
   --pia-lime: #cdd500;

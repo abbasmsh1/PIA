@@ -50,6 +50,15 @@ PY
 
 Then set `FRAME_COUNT` in `src/PlaneScroll.jsx` to the new frame count.
 
+The logo is PIA's own `images/assets/pia-logo.svg`, retrieved from the Internet
+Archive capture of 4 Jun 2024 because the live host 403s any non-browser request.
+`public/pia-logo.svg` is that file with the indentation stripped and nothing else
+touched; `public/pia-logo-reversed.svg` is the same geometry with the green
+wordmark set to white and the gold lifted to `#D9BC55`, which is what the header
+and footer use over the near-black ground. The real mark is two flat colours —
+green `#006937` and gold `#A48D29`. It is a registered trademark and appears here
+only because this is an unaffiliated fan concept.
+
 Photography is from [Unsplash](https://unsplash.com), hotlinked off their CDN
 (`images.unsplash.com`) at the size each frame needs, up to 4K on the heroes.
 The seed-to-photo map lives at the top of `src/Scenic.jsx`; any seed missing from

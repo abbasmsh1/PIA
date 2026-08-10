@@ -83,7 +83,11 @@ export function Header() {
       <AdvisoryBar />
       <div className="mx-auto mt-3 flex w-[calc(100%-1.5rem)] max-w-7xl items-center justify-between rounded-full px-5 py-3 md:px-7 panel panel-thick">
         <Link to="/" className="pointer-events-auto">
-          <img src="/logo.svg" alt="PIA — Pakistan International Airlines" className="h-9 w-auto md:h-11" />
+          <img
+            src="/pia-logo-reversed.svg"
+            alt="PIA — Pakistan International Airlines"
+            className="h-8 w-auto md:h-10"
+          />
         </Link>
 
         <nav className="pointer-events-auto hidden gap-7 lg:flex">
@@ -249,7 +253,7 @@ export function Footer() {
     <footer id="help" className="border-t border-white/8 bg-black/25 backdrop-blur-xl">
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 md:grid-cols-4 md:px-10">
         <div>
-          <img src="/logo.svg" alt="PIA" className="h-11 w-auto" />
+          <img src="/pia-logo-reversed.svg" alt="PIA" className="h-12 w-auto" />
           <p className="mt-4 text-sm leading-relaxed text-white/45">{CONTACT.address}</p>
           <p className="data mt-3 text-sm text-white/70">{CONTACT.phone}</p>
           <p className="data text-sm text-white/70">{CONTACT.email}</p>
