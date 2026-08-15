@@ -44,9 +44,8 @@ export default function StickyScroll() {
   }, [])
 
   return (
-    <section className="snap-start snap-always mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-6 py-24 md:px-10">
-      <span className="eyebrow">Why fly with us</span>
-      <h2 className="mt-5 text-4xl font-semibold tracking-[-0.03em] text-white md:text-[3.25rem] md:leading-[1.05]">
+    <section className="snap-start snap-always scroll-mt-40 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-start px-6 pb-28 pt-44 md:px-10">
+      <h2 className="text-4xl font-semibold tracking-[-0.03em] text-white md:text-[3.25rem] md:leading-[1.05]">
         Great people to fly with
       </h2>
 
@@ -70,7 +69,7 @@ export default function StickyScroll() {
             ))}
             <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/25 p-6 backdrop-blur-xl">
               <span className="data text-xs tracking-[0.2em] text-lime">
-                0{active + 1} <span className="text-white/40">/ 0{STEPS.length}</span>
+                0{active + 1} <span className="text-white/60">/ 0{STEPS.length}</span>
               </span>
               <h3 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-white">{STEPS[active].title}</h3>
             </div>
@@ -96,7 +95,7 @@ export default function StickyScroll() {
               <h3 className="mt-2 text-3xl font-semibold tracking-[-0.02em] text-white md:mt-0 md:text-[2.5rem]">
                 {s.title}
               </h3>
-              <p className="mt-4 max-w-md text-base leading-relaxed text-white/55">{s.body}</p>
+              <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-white/70">{s.body}</p>
             </div>
           ))}
         </div>

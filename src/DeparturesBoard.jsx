@@ -49,7 +49,7 @@ export default function DeparturesBoard() {
   return (
     <div className="panel overflow-hidden">
       <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-5 py-3">
-        <span className="data text-[11px] uppercase tracking-[0.2em] text-white/45">
+        <span className="data text-[11px] uppercase tracking-[0.2em] text-white/65">
           Karachi (KHI) · departures
         </span>
         <span className="data flex items-center gap-2 text-[11px] tracking-[0.15em] text-mint">
@@ -57,7 +57,7 @@ export default function DeparturesBoard() {
         </span>
       </div>
 
-      <div className="grid grid-cols-[4.5rem_1fr_4rem_6rem] gap-3 px-5 py-2 text-[10px] uppercase tracking-[0.15em] text-white/30 sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]">
+      <div className="grid grid-cols-[4.5rem_1fr_4rem_6rem] gap-3 px-5 py-2 text-[10px] uppercase tracking-[0.15em] text-white/55 sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]">
         <span>Time</span>
         <span className="hidden sm:block">Flight</span>
         <span>Destination</span>

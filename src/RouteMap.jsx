@@ -71,7 +71,13 @@ export default function RouteMap() {
               key={d.code}
               onMouseEnter={() => setHover(d.code)}
               onMouseLeave={() => setHover(null)}
-              className="cursor-pointer"
+              onFocus={() => setHover(d.code)}
+              onBlur={() => setHover(null)}
+              onTouchStart={() => setHover(d.code)}
+              tabIndex={0}
+              role="button"
+              aria-label={`${d.city} (${d.code})`}
+              className="cursor-pointer focus:outline-none"
             >
               <circle cx={x} cy={y} r={on ? 6 : 3.5} fill={on ? '#cdd500' : '#fff'} />
               {(on || showLabel.has(d.code)) && (
@@ -114,7 +120,7 @@ export default function RouteMap() {
             )}
           </div>
         ) : (
-          <span className="data text-xs uppercase tracking-[0.2em] text-white/40">Hover a destination</span>
+          <span className="text-xs font-medium tracking-[0.02em] text-white/70">Pick a destination to see its fare</span>
         )}
       </div>
     </div>

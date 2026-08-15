@@ -65,7 +65,7 @@ function Field({ label, value, onChange, options, placeholder }) {
   const active = !!value
   return (
     <div className="well group relative flex-1 px-3.5 py-2.5 text-left">
-      <span className="data pointer-events-none block text-[10px] uppercase tracking-[0.18em] text-white/40 group-focus-within:text-mint">
+      <span className="pointer-events-none block text-[11px] font-medium tracking-[0.04em] text-white/65 group-focus-within:text-mint">
         {label}
       </span>
       {options ? (
@@ -74,7 +74,7 @@ function Field({ label, value, onChange, options, placeholder }) {
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={`data mt-1 w-full cursor-pointer truncate bg-transparent text-sm outline-none [&>option]:bg-s2 [&>option]:font-sans [&>option]:text-white ${
-            active ? 'text-white' : 'text-white/40'
+            active ? 'text-white' : 'text-white/60'
           }`}
         >
           <option value="">{label}</option>
@@ -89,7 +89,7 @@ function Field({ label, value, onChange, options, placeholder }) {
         <input
           aria-label={label}
           placeholder={placeholder}
-          className="data mt-1 w-full bg-transparent text-sm text-white outline-none placeholder:text-white/35 [color-scheme:dark]"
+          className="data mt-1 w-full bg-transparent text-sm text-white outline-none placeholder:text-white/55 [color-scheme:dark]"
         />
       )}
     </div>
@@ -122,8 +122,8 @@ function DateField({ round }) {
         onClick={() => setOpen((o) => !o)}
         className={`well w-full px-3.5 py-2.5 text-left ${open ? 'border-mint/45' : ''}`}
       >
-        <span className="data block text-[10px] uppercase tracking-[0.18em] text-white/40">Dates</span>
-        <span className={`data mt-1 block truncate text-sm ${active ? 'text-white' : 'text-white/35'}`}>
+        <span className="block text-[11px] font-medium tracking-[0.04em] text-white/65">Dates</span>
+        <span className={`data mt-1 block truncate text-sm ${active ? 'text-white' : 'text-white/55'}`}>
           {active ? text : 'Departure — Return'}
         </span>
       </button>
@@ -155,7 +155,7 @@ function DateField({ round }) {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="data mt-4 w-full rounded-full bg-brand py-2 text-xs uppercase tracking-[0.15em] text-white hover:brightness-115"
+            className="mt-4 w-full rounded-full bg-brand py-2 text-sm font-semibold text-white hover:brightness-115"
           >
             Done
           </button>
@@ -193,7 +193,7 @@ export function LookupPanel({ mode }) {
         />
         <button
           onClick={() => setFound(!!(pnr.trim() && ln.trim()))}
-          className="data rounded-full bg-brand px-8 py-3.5 text-xs uppercase tracking-[0.15em] text-white shadow-lg shadow-brand/25 transition hover:brightness-115"
+          className="rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition hover:brightness-115"
         >
           {mode === 'checkin' ? 'Check in' : 'Find booking'}
         </button>
@@ -343,7 +343,7 @@ export function FlightSearch() {
         <LookupPanel mode={tab} />
       ) : (
         <>
-          <div className="mt-5 flex flex-wrap items-center gap-6">
+          <div className="mt-5 hidden flex-wrap items-center gap-6 sm:flex">
             {[
               ['oneway', 'One Way'],
               ['round', 'Round Trip'],
@@ -362,7 +362,7 @@ export function FlightSearch() {
             ))}
           </div>
 
-          <div className="mt-4 flex items-center gap-3">
+          <div className="mt-4 hidden items-center gap-3 sm:flex">
             <button
               onClick={() => setMiles((m) => !m)}
               aria-label="Buy a ticket with Award +Plus points"
@@ -410,7 +410,7 @@ export function FlightSearch() {
           <div className="mt-5 flex justify-end">
             <button
               onClick={runSearch}
-              className="data flex items-center gap-2 rounded-full bg-brand px-8 py-3.5 text-xs uppercase tracking-[0.18em] text-white shadow-lg shadow-brand/25 transition hover:brightness-115"
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-brand/25 transition hover:brightness-115 sm:w-auto"
             >
               Search flights
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -421,7 +421,7 @@ export function FlightSearch() {
 
           {results && (
             <div className="mt-6 border-t border-white/10 pt-5">
-              <p className="data mb-3 text-xs uppercase tracking-[0.2em] text-white/50">
+              <p className="data mb-3 text-xs tracking-[0.14em] text-white/65">
                 {portLabel(from)} → {portLabel(to)} · {results.length} flights ·{' '}
                 {trip === 'round' ? 'round trip' : 'one way'}
               </p>
@@ -437,20 +437,20 @@ export function FlightSearch() {
                         <span className="text-white/30"> → </span>
                         {f.arr}
                       </span>
-                      <span className="hidden text-xs text-white/40 sm:inline">
+                      <span className="hidden text-xs text-white/60 sm:inline">
                         {f.dur} · {f.flight} · direct
                       </span>
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-right leading-tight">
-                        <span className="block text-[10px] uppercase tracking-wide text-white/40">Economy</span>
+                        <span className="block text-[11px] tracking-wide text-white/60">Economy</span>
                         <span className="data font-bold text-mint">{money(f.eco, currency)}</span>
                       </span>
                       <span className="hidden text-right leading-tight sm:block">
-                        <span className="block text-[10px] uppercase tracking-wide text-white/40">Executive</span>
+                        <span className="block text-[11px] tracking-wide text-white/60">Executive</span>
                         <span className="data font-bold text-white/80">{money(f.exe, currency)}</span>
                       </span>
-                      <button className="data rounded-full bg-brand px-4 py-2 text-[11px] uppercase tracking-[0.12em] text-white transition hover:brightness-115">
+                      <button className="rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white transition hover:brightness-115">
                         Select
                       </button>
                     </div>
@@ -480,17 +480,14 @@ function Ticket({ offer, index }) {
       to={`/?from=${offer.from}&to=${offer.code}`}
       className="reveal panel panel-hover group relative block overflow-hidden p-6"
     >
-      <div className="flex items-baseline justify-between">
-        <span className="data text-[10px] uppercase tracking-[0.2em] text-lime">
-          {offer.real ? 'Published fare' : 'Economy'}
-        </span>
-        <span className="data text-[10px] uppercase tracking-[0.2em] text-white/40">Round trip</span>
-      </div>
+      <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-lime">
+        {offer.real ? 'Published fare' : 'Economy'}
+      </span>
 
       <div className="mt-5 flex items-center gap-4">
         <span className="min-w-0 flex-1">
           <span className="data block truncate text-[2rem] leading-none text-white">{offer.from}</span>
-          <span className="data mt-2 block truncate text-[10px] uppercase tracking-[0.15em] text-white/40">
+          <span className="mt-2 block truncate text-[11px] tracking-[0.02em] text-white/60">
             {originCity}
           </span>
         </span>
@@ -509,14 +506,14 @@ function Ticket({ offer, index }) {
         </span>
         <span className="min-w-0 flex-1 text-right">
           <span className="data block truncate text-[2rem] leading-none text-white">{offer.code}</span>
-          <span className="data mt-2 block truncate text-[10px] uppercase tracking-[0.15em] text-white/40">
+          <span className="mt-2 block truncate text-[11px] tracking-[0.02em] text-white/60">
             {offer.city}
           </span>
         </span>
       </div>
 
       <div className="mt-6 flex items-baseline justify-between border-t border-white/8 pt-4">
-        <span className="text-sm text-white/45">From</span>
+        <span className="text-sm text-white/60">From</span>
         <span className="data text-lg text-white">
           PKR {new Intl.NumberFormat('en-PK').format(offer.fare)}
         </span>

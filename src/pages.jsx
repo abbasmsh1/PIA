@@ -25,7 +25,6 @@ export function DestinationsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Where we Fly"
         title="Our network"
         subtitle="Direct from Karachi, Lahore and Islamabad to the Gulf, Asia, Europe and North America."
         seed="NETWORK"
@@ -34,15 +33,15 @@ export function DestinationsPage() {
         <FlightSearch />
       </div>
 
-      <Section eyebrow="The map" title="From Karachi, outward">
+      <Section title="From Karachi, outward">
         <RouteMap />
-        <p className="mt-4 text-sm text-white/45">
+        <p className="mt-4 text-sm text-white/65">
           The network runs from Toronto to Tokyo, so the map is deliberately wide — longitudes are
           compressed to fit both ends on one canvas.
         </p>
       </Section>
 
-      <Section eyebrow="International" title="Every city we serve">
+      <Section title="Every city we serve">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {intl.map((d) => (
             <DestCard key={d.code} {...d} />
@@ -50,7 +49,7 @@ export function DestinationsPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Domestic" title="Across Pakistan">
+      <Section title="Across Pakistan">
         <div className="flex flex-wrap items-center gap-3">
           {domestic.map((d) => (
             <Link
@@ -58,7 +57,7 @@ export function DestinationsPage() {
               to={`/?from=KHI&to=${d.code}`}
               className="data rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs tracking-[0.08em] text-white/70 backdrop-blur transition hover:border-mint/40 hover:text-white"
             >
-              {d.city} <span className="data text-white/40">{d.code}</span>
+              {d.city} <span className="data text-white/60">{d.code}</span>
             </Link>
           ))}
         </div>
@@ -71,13 +70,12 @@ export function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Experience"
         title="Services & extras"
         subtitle="Pre-book a meal, a seat or extra baggage, and arrange assistance before you travel."
         seed="EXPERIENCE"
       />
 
-      <Section eyebrow="Our Services" title="Everything you can add">
+      <Section title="Everything you can add">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
             <div
@@ -85,13 +83,13 @@ export function ServicesPage() {
               className="panel panel-hover p-6"
             >
               <h3 className="text-lg font-medium tracking-tight text-white/90">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/55">{s.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">{s.body}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="Cabins" title="Executive Economy or Economy">
+      <Section title="Executive Economy or Economy">
         <p className="mb-8 max-w-2xl text-white/60">
           PIA markets two cabins. Executive Economy is the premium product — there is no separately
           branded business class.
@@ -108,8 +106,8 @@ export function ServicesPage() {
               <p className="data mt-1 text-sm text-lime">{c.price}</p>
               <ul className="mt-4 flex flex-1 flex-col gap-2 text-sm">
                 {c.feats.map(([label, on]) => (
-                  <li key={label} className={`flex items-center gap-2 ${on ? 'text-white/75' : 'text-white/30'}`}>
-                    <span className={on ? 'text-lime' : 'text-white/30'}>{on ? '✓' : '—'}</span> {label}
+                  <li key={label} className={`flex items-center gap-2 ${on ? 'text-white/75' : 'text-white/55'}`}>
+                    <span className={on ? 'text-lime' : 'text-white/55'}>{on ? '✓' : '—'}</span> {label}
                   </li>
                 ))}
               </ul>
@@ -128,35 +126,35 @@ export function ServicesPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Baggage" title="What you can bring">
+      <Section title="What you can bring">
         <div className="grid gap-6 md:grid-cols-2">
           {BAGGAGE.map((b) => (
             <div key={b.cls} className="panel p-6">
               <h3 className="text-lg font-semibold text-white/90">{b.cls}</h3>
               <ul className="mt-4 flex flex-col gap-2 text-sm text-white/70">
                 <li>
-                  <span className="text-white/40">Cabin</span> · <span className="data text-white/90">{b.cabin}</span>
+                  <span className="text-white/60">Cabin</span> · <span className="data text-white/90">{b.cabin}</span>
                 </li>
-                <li className="text-white/55">{b.personal}</li>
+                <li className="text-white/70">{b.personal}</li>
                 <li>
-                  <span className="text-white/40">Hold</span> · <span className="text-white/80">{b.checked}</span>
+                  <span className="text-white/60">Hold</span> · <span className="text-white/80">{b.checked}</span>
                 </li>
               </ul>
             </div>
           ))}
         </div>
-        <p className="mt-6 max-w-2xl text-sm text-white/45">
+        <p className="mt-6 max-w-2xl text-sm text-white/65">
           Checked allowance genuinely differs by region on PIA and is published per route under
           Booking Conditions, so it is not summarised here.
         </p>
       </Section>
 
-      <Section eyebrow="Check-in" title="Skip the queue">
+      <Section title="Skip the queue">
         <div className="grid gap-6 sm:grid-cols-3">
           {CHECKIN.map((c) => (
             <div key={c.v} className="panel p-6 text-center">
               <div className="data text-3xl font-bold text-lime">{c.k}</div>
-              <div className="mt-2 text-sm text-white/55">{c.v}</div>
+              <div className="mt-2 text-sm text-white/70">{c.v}</div>
             </div>
           ))}
         </div>
@@ -177,12 +175,11 @@ export function FleetPage() {
   return (
     <>
       <PageHero
-        eyebrow="Our aircraft"
         title="The fleet"
         subtitle={`${inService} aircraft in service — Boeing 777s on the long haul, A320s and ATRs across the network.`}
         seed="FLEET"
       />
-      <Section eyebrow="Aircraft types" title="What we fly">
+      <Section title="What we fly">
         <div className="grid gap-6 md:grid-cols-2">
           {FLEET.map((a) => (
             <div key={a.type} className="panel overflow-hidden">
@@ -194,10 +191,10 @@ export function FleetPage() {
                     {a.ordered ? `${a.count} on order` : `${a.count} in service`}
                   </span>
                 </div>
-                <p className="mt-2 text-sm text-white/55">{a.note}</p>
+                <p className="mt-2 text-sm text-white/70">{a.note}</p>
                 <div className="mt-4 text-sm">
                   <span className="data text-white/80">
-                    <span className="font-sans text-white/40">Range </span>
+                    <span className="font-sans text-white/60">Range </span>
                     {a.range}
                   </span>
                 </div>
@@ -205,7 +202,7 @@ export function FleetPage() {
             </div>
           ))}
         </div>
-        <p className="mt-6 text-sm text-white/45">
+        <p className="mt-6 text-sm text-white/65">
           Counts from the published fleet table, February 2026. Ranges are the manufacturers'
           figures for the type.
         </p>
@@ -218,36 +215,35 @@ export function HajjUmrahPage() {
   return (
     <>
       <PageHero
-        eyebrow="Hajj & Umrah"
         title="Journeys to the Haramain"
         subtitle="Direct to Jeddah and Medina from cities across Pakistan, with a dedicated baggage policy for the Kingdom."
         seed="HAJJ"
       />
 
-      <Section eyebrow="Airports" title="Where you land">
+      <Section title="Where you land">
         <div className="grid gap-6 sm:grid-cols-3">
           {PILGRIMAGE_FACTS.map((f) => (
             <div key={f.k} className="panel p-6">
               <div className="data text-2xl font-bold text-lime">{f.k}</div>
-              <div className="mt-2 text-sm text-white/55">{f.v}</div>
+              <div className="mt-2 text-sm text-white/70">{f.v}</div>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="Before you go" title="Four steps to your journey">
+      <Section title="Four steps to your journey">
         <div className="grid gap-5 sm:grid-cols-2">
           {PILGRIMAGE_STEPS.map((s) => (
             <div key={s.k} className="panel p-6">
               <span className="data text-xs tracking-[0.25em] text-lime">{s.k}</span>
               <h3 className="mt-2 text-lg font-semibold text-white/90">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/55">{s.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">{s.body}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="Fares" title="Fly to Jeddah or Medina">
+      <Section title="Fly to Jeddah or Medina">
         <div className="grid gap-5 sm:grid-cols-2">
           {DESTINATIONS.filter((d) => ['JED', 'MED'].includes(d.code)).map((d) => (
             <DestCard key={d.code} {...d} />
@@ -276,19 +272,18 @@ export function ManagePage() {
   return (
     <>
       <PageHero
-        eyebrow="My booking"
         title="Manage your trip"
         subtitle="Retrieve a booking with your PNR and surname to change dates, add baggage, pick a seat or check in."
         seed="MANAGE"
       />
 
-      <Section eyebrow="Retrieve" title="Find your booking">
+      <Section title="Find your booking">
         <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.10] to-white/[0.03] p-6 backdrop-blur-2xl md:p-8">
           <LookupPanel mode="manage" />
         </div>
       </Section>
 
-      <Section eyebrow="Web check-in" title="Get your boarding pass">
+      <Section title="Get your boarding pass">
         <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.10] to-white/[0.03] p-6 backdrop-blur-2xl md:p-8">
           <LookupPanel mode="checkin" />
         </div>
@@ -296,22 +291,22 @@ export function ManagePage() {
           {CHECKIN.map((c) => (
             <div key={c.v} className="panel p-6 text-center">
               <div className="data text-3xl font-bold text-lime">{c.k}</div>
-              <div className="mt-2 text-sm text-white/55">{c.v}</div>
+              <div className="mt-2 text-sm text-white/70">{c.v}</div>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="What you can change" title="After you have booked">
+      <Section title="After you have booked">
         <div className="grid gap-6 sm:grid-cols-2">
           {MANAGE_ACTIONS.map((a) => (
             <div key={a.title} className="panel p-6">
               <h3 className="text-lg font-medium tracking-tight text-white/90">{a.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/55">{a.body}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">{a.body}</p>
             </div>
           ))}
         </div>
-        <p className="mt-6 max-w-2xl text-sm text-white/45">
+        <p className="mt-6 max-w-2xl text-sm text-white/65">
           Change charges, fare differences and refund eligibility follow the fare rules for your
           route and booking class.
         </p>
@@ -324,24 +319,23 @@ export function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="Who we are"
         title="The flag carrier of Pakistan"
         subtitle="Flying from Karachi since 1955, connecting Pakistan to the Gulf, Asia, Europe and North America."
         seed="ABOUT"
       />
 
-      <Section eyebrow="At a glance" title="PIA in numbers">
+      <Section title="PIA in numbers">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {ABOUT_STATS.map((s) => (
             <div key={s.v} className="panel p-6 text-center">
               <div className="data text-4xl font-bold text-lime">{s.k}</div>
-              <div className="mt-2 text-sm text-white/55">{s.v}</div>
+              <div className="mt-2 text-sm text-white/70">{s.v}</div>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="Our story" title="Great people to fly with">
+      <Section title="Great people to fly with">
         <div className="max-w-3xl space-y-4 text-white/60">
           <p>
             Pakistan International Airlines grew out of Orient Airways and became the national flag
@@ -361,7 +355,7 @@ export function AboutPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Award +Plus" title="Programmes">
+      <Section title="Programmes">
         <div className="grid gap-5 md:grid-cols-3">
           {LOYALTY_TIERS.map((t) => (
             <div key={t.name} className="panel p-6">
@@ -369,13 +363,13 @@ export function AboutPage() {
                 <h3 className="text-lg font-semibold text-white/90">{t.name}</h3>
                 <span className="data text-xs tracking-[0.15em] text-lime">{t.req}</span>
               </div>
-              <p className="mt-3 text-sm leading-relaxed text-white/55">{t.perks}</p>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">{t.perks}</p>
             </div>
           ))}
         </div>
       </Section>
 
-      <Section eyebrow="Contact" title="Get in touch">
+      <Section title="Get in touch">
         <div className="panel p-8">
           <p className="text-white/70">{CONTACT.address}</p>
           <p className="data mt-4 text-lg text-lime">{CONTACT.phone}</p>
@@ -389,7 +383,7 @@ export function AboutPage() {
 export function NotFound() {
   return (
     <>
-      <PageHero eyebrow="404" title="Page not found" subtitle="This gate does not exist." seed="404" />
+      <PageHero title="Page not found" subtitle="This gate does not exist." seed="404" />
       <div className="mx-auto max-w-6xl px-6 py-16 md:px-10">
         <Link
           to="/"

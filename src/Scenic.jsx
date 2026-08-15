@@ -6,9 +6,10 @@
 // its seed, so the picture matches the place or the aircraft it sits behind.
 //
 // Seeds without a photo (a domestic port, the 404 page) fall back to the
-// original deterministic brand wash, so nothing renders as an empty box. The
-// wash is also kept as a faint tint over the photographs, which is what holds
-// the page together as one palette.
+// original deterministic brand wash, so nothing renders as an empty box. That
+// wash, its contour lines and the oversized code are the fallback's own
+// treatment; a photograph gets none of them, only the dark gradient that keeps
+// overlaid type readable.
 
 const CDN = 'https://images.unsplash.com/'
 
@@ -115,14 +116,14 @@ export default function Scenic({
           className="absolute inset-0 h-full w-full object-cover"
         />
       )}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(${angle}deg, ${a}, ${b})`,
-          opacity: photo ? 0.16 : 0.55,
-          mixBlendMode: photo ? 'soft-light' : 'normal',
-        }}
-      />
+      {/* The brand wash belongs to the fallback. Over a photograph it turned
+          skylines green and cost the picture its own colour. */}
+      {!photo && (
+        <div
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(${angle}deg, ${a}, ${b})`, opacity: 0.55 }}
+        />
+      )}
       {/* Dark wash so white type stays legible. A photograph needs far less of
           it than a full-strength gradient does, or it turns to mud. */}
       <div
@@ -152,7 +153,9 @@ export default function Scenic({
           ))}
         </svg>
       )}
-      {label && (
+      {/* The code is set large as texture on a fallback; over a photograph it
+          just collides with the subject. */}
+      {label && !photo && (
         <span className="data pointer-events-none absolute -bottom-3 right-2 text-[5rem] font-bold leading-none text-white/10">
           {label}
         </span>

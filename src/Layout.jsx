@@ -55,7 +55,7 @@ function AdvisoryBar() {
   if (!open) return null
   return (
     <div className="pointer-events-auto flex w-full items-center justify-center gap-3 border-b border-white/8 bg-black/35 px-4 py-2 text-center text-xs text-white/70 backdrop-blur-xl">
-      <span className="data hidden text-[10px] tracking-[0.2em] text-mint sm:inline">NOTICE</span>
+      <span className="data hidden shrink-0 text-[10px] tracking-[0.2em] text-mint sm:inline">NOTICE</span>
       <span className="truncate">{ADVISORIES[i]}</span>
       <a href="#help" className="hidden shrink-0 font-semibold text-lime underline-offset-2 hover:underline sm:inline">
         Read more
@@ -96,10 +96,10 @@ export function Header() {
               key={to}
               to={to}
               className={({ isActive }) =>
-                `data border-b-2 pb-1 text-[11px] uppercase tracking-[0.2em] transition ${
+                `border-b-2 pb-1 text-[13px] font-medium tracking-[0.01em] transition ${
                   isActive
-                    ? 'border-mint text-mint'
-                    : 'border-transparent text-white/45 hover:text-white/85'
+                    ? 'border-mint text-white'
+                    : 'border-transparent text-white/60 hover:text-white'
                 }`
               }
             >
@@ -109,7 +109,7 @@ export function Header() {
         </nav>
 
         <div className="pointer-events-auto flex items-center gap-3">
-          <button className="data hidden rounded-full bg-brand/90 px-5 py-2.5 text-[11px] uppercase tracking-[0.15em] text-white shadow-lg shadow-black/40 backdrop-blur transition hover:bg-brand md:block">
+          <button className="hidden rounded-full bg-brand px-5 py-2.5 text-[13px] font-semibold text-white shadow-lg shadow-black/40 transition hover:brightness-115 md:block">
             Award +Plus
           </button>
           <button
@@ -133,8 +133,8 @@ export function Header() {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `data border-b border-white/8 py-4 text-sm uppercase tracking-[0.18em] ${
-                    isActive ? 'text-mint' : 'text-white/75'
+                  `border-b border-white/8 py-4 text-lg font-medium ${
+                    isActive ? 'text-mint' : 'text-white/80'
                   }`
                 }
               >
@@ -142,7 +142,7 @@ export function Header() {
               </NavLink>
             ))}
           </nav>
-          <button className="data mt-8 rounded-full bg-brand px-6 py-3 text-xs uppercase tracking-[0.15em] text-white">
+          <button className="mt-8 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white">
             Award +Plus
           </button>
         </div>
@@ -151,16 +151,15 @@ export function Header() {
   )
 }
 
-export function Section({ id, eyebrow, title, children }) {
+export function Section({ id, title, children }) {
   const ref = useReveal()
   return (
     <section
       id={id}
-      className="snap-start snap-always mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-6 py-24 md:px-10"
+      className="snap-start snap-always scroll-mt-40 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-start px-6 pb-28 pt-44 md:px-10"
     >
       <div ref={ref} className="reveal">
-        {eyebrow && <span className="eyebrow">{eyebrow}</span>}
-        <h2 className="mt-5 max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white md:text-[3.25rem] md:leading-[1.05]">
+        <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white md:text-[3.25rem] md:leading-[1.05]">
           {title}
         </h2>
       </div>
@@ -180,7 +179,7 @@ export function DestCard({ city, code, fare, from = 'KHI' }) {
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 border-t border-white/10 bg-black/25 p-4 backdrop-blur-xl">
         <div>
           <div className="text-lg font-semibold text-white">{city}</div>
-          <div className="data mt-0.5 text-[11px] tracking-[0.15em] text-white/55">
+          <div className="data mt-0.5 text-[11px] tracking-[0.12em] text-white/70">
             {from} — {code}
           </div>
         </div>
@@ -194,7 +193,7 @@ export function DestCard({ city, code, fare, from = 'KHI' }) {
   )
 }
 
-export function PageHero({ eyebrow, title, subtitle, seed }) {
+export function PageHero({ title, subtitle, seed }) {
   return (
     <section className="snap-start snap-always relative flex min-h-screen flex-col justify-center overflow-hidden border-b border-white/10 px-6 pb-16 pt-40 md:px-10">
       {/* Scenic sets `relative` on itself, and Tailwind emits `.relative` after
@@ -215,11 +214,10 @@ export function PageHero({ eyebrow, title, subtitle, seed }) {
         >
           {title}
         </span>
-        {eyebrow && <span className="eyebrow relative">{eyebrow}</span>}
-        <h1 className="relative mt-5 max-w-3xl text-5xl font-semibold tracking-[-0.035em] text-white md:text-[4.5rem] md:leading-[1.02]">
+        <h1 className="relative max-w-3xl text-5xl font-semibold tracking-[-0.035em] text-white md:text-[4.5rem] md:leading-[1.02]">
           {title}
         </h1>
-        {subtitle && <p className="relative mt-6 max-w-xl text-lg leading-relaxed text-white/55">{subtitle}</p>}
+        {subtitle && <p className="relative mt-6 max-w-[46ch] text-lg leading-relaxed text-white/70">{subtitle}</p>}
       </div>
     </section>
   )
@@ -228,16 +226,16 @@ export function PageHero({ eyebrow, title, subtitle, seed }) {
 function FooterCol({ title, items }) {
   return (
     <div>
-      <p className="data text-[11px] uppercase tracking-[0.2em] text-mint/70">{title}</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mint">{title}</p>
       <ul className="mt-4 flex flex-col gap-2">
         {items.map(([label, to]) => (
           <li key={label}>
             {to.startsWith('/') ? (
-              <Link to={to} className="text-sm text-white/60 transition hover:text-white/90">
+              <Link to={to} className="text-sm text-white/65 transition hover:text-white">
                 {label}
               </Link>
             ) : (
-              <a href={to} className="text-sm text-white/60 transition hover:text-white/90">
+              <a href={to} className="text-sm text-white/65 transition hover:text-white">
                 {label}
               </a>
             )}
@@ -254,7 +252,7 @@ export function Footer() {
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 md:grid-cols-4 md:px-10">
         <div>
           <img src="/pia-logo-reversed.svg" alt="PIA" className="h-12 w-auto" />
-          <p className="mt-4 text-sm leading-relaxed text-white/45">{CONTACT.address}</p>
+          <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-white/60">{CONTACT.address}</p>
           <p className="data mt-3 text-sm text-white/70">{CONTACT.phone}</p>
           <p className="data text-sm text-white/70">{CONTACT.email}</p>
         </div>
@@ -290,7 +288,7 @@ export function Footer() {
         />
       </div>
       <div className="ramp h-0.5 w-full opacity-70" />
-      <div className="py-6 text-center text-[11px] text-white/30">
+      <div className="py-6 text-center text-xs text-white/70">
         Fan concept, not affiliated with Pakistan International Airlines · content adapted from piac.com.pk
       </div>
     </footer>

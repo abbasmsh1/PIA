@@ -25,28 +25,24 @@ const SECTIONS = [
   {
     at: 0.0,
     pos: 'justify-start items-center text-center pt-[14vh]',
-    kicker: 'Pakistan International Airlines',
     title: 'Great People to Fly With',
     body: 'Cleared for takeoff from Karachi.',
   },
   {
     at: 0.3,
     pos: 'justify-start items-start text-left pt-[16vh]',
-    kicker: 'Fifty destinations',
     title: 'Pakistan to the world',
     body: 'From Skardu in the Karakoram to Dubai, Jeddah, Kuala Lumpur, Paris and Toronto.',
   },
   {
     at: 0.6,
     pos: 'justify-end items-start text-left pb-[14vh]',
-    kicker: 'Executive Economy',
     title: 'The premium cabin',
     body: '12 kg of cabin baggage, priority check-in, extra legroom and full meal service.',
   },
   {
     at: 0.9,
     pos: 'justify-end items-start text-left pb-[14vh]',
-    kicker: 'Award +Plus',
     title: 'Every sector counts',
     body: 'Earn on every flight, pool points across the family, redeem for award tickets and upgrades.',
   },
@@ -216,20 +212,14 @@ export default function PlaneScroll() {
                     'radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 55%, transparent 80%)',
                 }}
               >
-                <span
-                  className="text-xs font-semibold uppercase tracking-[0.35em]"
-                  style={{ color: s.at === 0.9 ? '#ffe524' : 'rgba(255,255,255,0.55)' }}
-                >
-                  {s.kicker}
-                </span>
                 <h2 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white/90 md:text-6xl">
                   {s.title}
                 </h2>
-                <p className="text-base leading-relaxed text-white/65 md:text-lg">{s.body}</p>
+                <p className="max-w-[46ch] text-base leading-relaxed text-white/75 md:text-lg">{s.body}</p>
                 {s.at === 0.9 && (
                   <a
                     href="#offers"
-                    className="mt-2 w-fit rounded-full bg-[#007d34] px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-[#007d34]/25 transition hover:brightness-110"
+                    className="mt-3 w-fit rounded-full bg-[#007d34] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#007d34]/25 transition hover:brightness-115"
                   >
                     See fares
                   </a>
