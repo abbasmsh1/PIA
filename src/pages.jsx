@@ -57,7 +57,8 @@ export function DestinationsPage() {
               to={`/?from=KHI&to=${d.code}`}
               className="data rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-xs tracking-[0.08em] text-white/70 backdrop-blur transition hover:border-mint/40 hover:text-white"
             >
-              {d.city} <span className="data text-white/60">{d.code}</span>
+              {d.city} <span className="data text-gold">{d.code}</span>
+              {d.ur && <span className="urdu ml-2 text-[11px] text-white/55">{d.ur}</span>}
             </Link>
           ))}
         </div>
@@ -97,7 +98,7 @@ export function ServicesPage() {
               }`}
             >
               <h3 className="text-xl font-semibold text-white/90">{c.name}</h3>
-              <p className="data mt-1 text-sm text-lime">{c.price}</p>
+              <p className="data mt-1 text-sm text-gold">{c.price}</p>
               <ul className="mt-4 flex flex-1 flex-col gap-2 text-sm">
                 {c.feats.map(([label, on]) => (
                   <li key={label} className={`flex items-center gap-2 ${on ? 'text-white/75' : 'text-white/55'}`}>
@@ -147,7 +148,7 @@ export function ServicesPage() {
         <div className="grid gap-6 sm:grid-cols-3">
           {CHECKIN.map((c) => (
             <div key={c.v} className="panel p-6 text-center">
-              <div className="data text-3xl font-bold text-lime">{c.k}</div>
+              <div className="data text-3xl font-bold text-gold">{c.k}</div>
               <div className="mt-2 text-sm text-white/70">{c.v}</div>
             </div>
           ))}
@@ -181,7 +182,7 @@ export function FleetPage() {
               <div className="p-6">
                 <div className="flex items-baseline justify-between gap-3">
                   <h3 className="text-xl font-semibold tracking-tight text-white/90">{a.type}</h3>
-                  <span className="data shrink-0 text-sm font-bold text-lime">
+                  <span className="data shrink-0 text-sm font-bold text-gold">
                     {a.ordered ? `${a.count} on order` : `${a.count} in service`}
                   </span>
                 </div>
@@ -284,7 +285,7 @@ export function ManagePage() {
         <div className="mt-8 grid gap-6 sm:grid-cols-3">
           {CHECKIN.map((c) => (
             <div key={c.v} className="panel p-6 text-center">
-              <div className="data text-3xl font-bold text-lime">{c.k}</div>
+              <div className="data text-3xl font-bold text-gold">{c.k}</div>
               <div className="mt-2 text-sm text-white/70">{c.v}</div>
             </div>
           ))}

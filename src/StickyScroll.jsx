@@ -68,7 +68,7 @@ export default function StickyScroll() {
               </div>
             ))}
             <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/25 p-6 backdrop-blur-xl">
-              <span className="data text-xs tracking-[0.2em] text-lime">
+              <span className="data text-xs tracking-[0.2em] text-gold">
                 0{active + 1} <span className="text-white/60">/ 0{STEPS.length}</span>
               </span>
               <h3 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-white">{STEPS[active].title}</h3>
@@ -89,7 +89,7 @@ export default function StickyScroll() {
               }`}
             >
               <Scenic seed={s.seed} label={s.seed} sizes="100vw" className="panel mb-6 aspect-video w-full overflow-hidden p-0 md:hidden" />
-              <span className="data text-xs tracking-[0.2em] text-lime md:hidden">
+              <span className="data text-xs tracking-[0.2em] text-gold md:hidden">
                 0{i + 1} / 0{STEPS.length}
               </span>
               <h3 className="mt-2 text-3xl font-semibold tracking-[-0.02em] text-white md:mt-0 md:text-[2.5rem]">

@@ -39,7 +39,7 @@ function SplitFlap({ text, className = '' }) {
 // Status as a bordered pill, the way the design calls it: boarding is the only
 // filled one, so the eye lands on the flight that is actually leaving.
 const STATUS = {
-  BOARDING: 'border-lime/40 bg-lime/20 text-lime',
+  BOARDING: 'border-gold/40 bg-gold/20 text-gold',
   'ON TIME': 'text-mint',
   DELAYED: 'text-[#f5a524]',
   'GATE OPEN': 'text-[#44a5d8]',
@@ -72,7 +72,7 @@ export default function DeparturesBoard() {
             className="grid grid-cols-[4.5rem_1fr_4rem_6rem] items-center gap-3 px-5 py-3 text-sm sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]"
           >
             <SplitFlap text={d.time} className="text-white" />
-            <SplitFlap text={d.flight} className="hidden text-mint sm:block" />
+            <SplitFlap text={d.flight} className="hidden text-gold sm:block" />
             <SplitFlap text={d.dest} className="tracking-wider text-white/85" />
             <SplitFlap text={d.gate} className="text-white/50" />
             <span className="text-right">

@@ -9,24 +9,26 @@
 
 // ---------------------------------------------------------------------------
 // Network. `hub: true` marks Karachi. Entries without `intl` are domestic and
-// render as chips rather than cards.
+// render as chips rather than cards. `ur` carries the city's Urdu name for the
+// Pakistani ports — the name the city actually has, not a transliteration of
+// the English one, so the international destinations do not get one.
 export const DESTINATIONS = [
-  { city: 'Karachi', code: 'KHI', country: 'Pakistan', hub: true },
-  { city: 'Lahore', code: 'LHE', country: 'Pakistan' },
-  { city: 'Islamabad', code: 'ISB', country: 'Pakistan' },
-  { city: 'Peshawar', code: 'PEW', country: 'Pakistan' },
-  { city: 'Quetta', code: 'UET', country: 'Pakistan' },
-  { city: 'Multan', code: 'MUX', country: 'Pakistan' },
-  { city: 'Faisalabad', code: 'LYP', country: 'Pakistan' },
-  { city: 'Sialkot', code: 'SKT', country: 'Pakistan' },
-  { city: 'Sukkur', code: 'SKZ', country: 'Pakistan' },
-  { city: 'Gwadar', code: 'GWD', country: 'Pakistan' },
-  { city: 'Turbat', code: 'TUK', country: 'Pakistan' },
-  { city: 'Skardu', code: 'KDU', country: 'Pakistan', intl: true, fare: 20830 },
-  { city: 'Gilgit', code: 'GIL', country: 'Pakistan' },
-  { city: 'Bahawalpur', code: 'BHV', country: 'Pakistan' },
-  { city: 'Rahim Yar Khan', code: 'RYK', country: 'Pakistan' },
-  { city: 'Dera Ghazi Khan', code: 'DEA', country: 'Pakistan' },
+  { city: 'Karachi', code: 'KHI', ur: 'کراچی', country: 'Pakistan', hub: true },
+  { city: 'Lahore', code: 'LHE', ur: 'لاہور', country: 'Pakistan' },
+  { city: 'Islamabad', code: 'ISB', ur: 'اسلام آباد', country: 'Pakistan' },
+  { city: 'Peshawar', code: 'PEW', ur: 'پشاور', country: 'Pakistan' },
+  { city: 'Quetta', code: 'UET', ur: 'کوئٹہ', country: 'Pakistan' },
+  { city: 'Multan', code: 'MUX', ur: 'ملتان', country: 'Pakistan' },
+  { city: 'Faisalabad', code: 'LYP', ur: 'فیصل آباد', country: 'Pakistan' },
+  { city: 'Sialkot', code: 'SKT', ur: 'سیالکوٹ', country: 'Pakistan' },
+  { city: 'Sukkur', code: 'SKZ', ur: 'سکھر', country: 'Pakistan' },
+  { city: 'Gwadar', code: 'GWD', ur: 'گوادر', country: 'Pakistan' },
+  { city: 'Turbat', code: 'TUK', ur: 'تربت', country: 'Pakistan' },
+  { city: 'Skardu', code: 'KDU', ur: 'سکردو', country: 'Pakistan', intl: true, fare: 20830 },
+  { city: 'Gilgit', code: 'GIL', ur: 'گلگت', country: 'Pakistan' },
+  { city: 'Bahawalpur', code: 'BHV', ur: 'بہاولپور', country: 'Pakistan' },
+  { city: 'Rahim Yar Khan', code: 'RYK', ur: 'رحیم یار خان', country: 'Pakistan' },
+  { city: 'Dera Ghazi Khan', code: 'DEA', ur: 'ڈیرہ غازی خان', country: 'Pakistan' },
 
   { city: 'Dubai', code: 'DXB', country: 'United Arab Emirates', intl: true, fare: 62500 },
   { city: 'Abu Dhabi', code: 'AUH', country: 'United Arab Emirates', intl: true, fare: 61000 },

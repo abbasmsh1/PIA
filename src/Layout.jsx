@@ -303,7 +303,7 @@ export function ServiceCard({ title, body }) {
 }
 
 // Destination card. Clicking it prefills the booking widget with this route.
-export function DestCard({ city, code, fare, from = 'KHI' }) {
+export function DestCard({ city, code, ur, fare, from = 'KHI' }) {
   return (
     <Link
       to={`/?from=${from}&to=${code}`}
@@ -311,9 +311,12 @@ export function DestCard({ city, code, fare, from = 'KHI' }) {
     >
       <Scenic seed={code} label={code} className="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-105" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 border-t border-white/10 bg-black/25 p-4 backdrop-blur-xl">
-        <div>
-          <div className="text-lg font-semibold text-white">{city}</div>
-          <div className="data mt-0.5 text-[11px] tracking-[0.12em] text-white/70">
+        <div className="min-w-0">
+          <div className="flex items-baseline gap-2">
+            <span className="truncate text-lg font-semibold text-ivory">{city}</span>
+            {ur && <span className="urdu shrink-0 text-xs text-white/55">{ur}</span>}
+          </div>
+          <div className="data mt-0.5 text-[11px] tracking-[0.12em] text-gold">
             {from} — {code}
           </div>
         </div>
@@ -360,7 +363,7 @@ export function PageHero({ title, subtitle, seed }) {
 function FooterCol({ title, items }) {
   return (
     <div>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-mint">{title}</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{title}</p>
       <ul className="mt-4 flex flex-col gap-2">
         {items.map(([label, to]) => (
           <li key={label}>

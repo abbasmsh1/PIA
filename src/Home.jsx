@@ -4,13 +4,19 @@ import { OfferTickets } from './BookingElements.jsx'
 import DeparturesBoard from './DeparturesBoard.jsx'
 import StickyScroll from './StickyScroll.jsx'
 import Scenic from './Scenic.jsx'
+import RouteMarquee from './RouteMarquee.jsx'
 import { Section, DestCard, ServiceCard } from './Layout.jsx'
 import { SERVICES, NEWS, DESTINATIONS, LOYALTY_PERKS, LOYALTY_TIERS, ABOUT_STATS } from './data.js'
 
 const POPULAR = ['DXB', 'JED', 'KDU', 'LHR', 'KUL', 'YYZ']
 
+// The ports that ride the departure arc: the domestic network first, since the
+// arc leaves Pakistan, then the long-haul ends of the route map.
+const ARC_CODES = ['KHI', 'KDU', 'DXB', 'JED', 'LHR', 'YYZ']
+
 export default function Home() {
   const popular = POPULAR.map((code) => DESTINATIONS.find((d) => d.code === code)).filter(Boolean)
+  const ARC = ARC_CODES.map((code) => DESTINATIONS.find((d) => d.code === code)).filter(Boolean)
 
   return (
     <>
@@ -33,7 +39,9 @@ export default function Home() {
           Direct from Karachi, Lahore and Islamabad across Pakistan, the Gulf, Asia, Europe and
           North America.
         </p>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <RouteMarquee items={ARC} />
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {popular.map((d) => (
             <DestCard key={d.code} {...d} />
           ))}
@@ -48,7 +56,7 @@ export default function Home() {
         <div className="panel mt-12 grid grid-cols-2 sm:grid-cols-4 sm:divide-x sm:divide-white/8">
           {ABOUT_STATS.map((s) => (
             <div key={s.v} className="p-6 text-center">
-              <div className="data text-2xl font-bold text-mint">{s.k}</div>
+              <div className="data text-2xl font-bold text-gold">{s.k}</div>
               <div className="mt-1 text-xs uppercase tracking-[0.15em] text-white/55">{s.v}</div>
             </div>
           ))}

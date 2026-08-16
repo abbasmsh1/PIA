@@ -444,7 +444,7 @@ export function FlightSearch() {
                     <div className="flex items-center gap-4">
                       <span className="text-right leading-tight">
                         <span className="block text-[11px] tracking-wide text-white/60">Economy</span>
-                        <span className="data font-bold text-mint">{money(f.eco, currency)}</span>
+                        <span className="data font-bold text-gold">{money(f.eco, currency)}</span>
                       </span>
                       <span className="hidden text-right leading-tight sm:block">
                         <span className="block text-[11px] tracking-wide text-white/60">Executive</span>
@@ -480,7 +480,7 @@ function Ticket({ offer, index }) {
       to={`/?from=${offer.from}&to=${offer.code}`}
       className="reveal panel panel-hover group relative block overflow-hidden p-6"
     >
-      <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-lime">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
         {offer.real ? 'Published fare' : 'Economy'}
       </span>
 
@@ -499,7 +499,7 @@ function Ticket({ offer, index }) {
             height="18"
             viewBox="0 0 24 24"
             fill="currentColor"
-            style={{ color: 'var(--pia-lime)' }}
+            style={{ color: 'var(--pia-gold)' }}
           >
             <path d="M21 16v-2l-8-2.5V6.5a1.5 1.5 0 0 0-3 0v5L2 14v2l8-1.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-4.5L21 16Z" />
           </svg>

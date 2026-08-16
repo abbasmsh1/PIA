@@ -17,7 +17,9 @@
   --pia-lime: #cdd500;
   --pia-leaf: #71af2e;
   --pia-green: #007d34; /* filled actions */
-  --pia-mint: #75dc86; /* accent type and icons, readable on near-black */
+  --pia-mint: #75dc86; /* interactive: focus, links, live state */
+  --pia-gold: #d9bc55; /* the logo's gold, lifted to read on near-black */
+  --pia-ivory: #f2ece0; /* headline ink — warmer than white, closer to print */
   --pia-forest: #0d572d;
   --pia-teal: #005779; /* wordmark */
   --pia-sky: #44a5d8;
@@ -34,10 +36,13 @@
   --color-s3: #181b25;
   --color-s4: #22262f;
   --color-mint: #75dc86;
+  --color-gold: #d9bc55;
+  --color-ivory: #f2ece0;
   --color-brand: #007d34;
   --color-lime: #cdd500;
   --font-display: "Chivo", ui-sans-serif, system-ui, sans-serif;
   --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-urdu: "Noto Nastaliq Urdu", serif;
 }
 
 @layer base {
@@ -58,6 +63,15 @@ body {
 h1, h2, h3 {
   font-family: "Chivo", ui-sans-serif, system-ui, sans-serif;
   letter-spacing: -0.02em;
+  color: var(--pia-ivory);
+}
+
+/* Urdu sits on its own baseline and needs the line height Nastaliq wants. */
+.urdu {
+  font-family: "Noto Nastaliq Urdu", serif;
+  line-height: 2.1;
+  direction: rtl;
+  unicode-bidi: isolate;
 }
 }
 

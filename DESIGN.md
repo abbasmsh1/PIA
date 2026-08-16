@@ -15,6 +15,8 @@ colors:
   ramp-yellow: "#ffe524"
   ramp-leaf: "#71af2e"
   ramp-teal: "#005779"
+  gold: "#d9bc55"
+  ivory: "#f2ece0"
   white: "#ffffff"
   glass-fill-top: "rgba(255, 255, 255, 0.085)"
   glass-fill-bottom: "rgba(255, 255, 255, 0.035)"
@@ -82,6 +84,12 @@ typography:
     fontWeight: 900
     lineHeight: 0.8
     letterSpacing: "-0.04em"
+  urdu:
+    fontFamily: "Noto Nastaliq Urdu, serif"
+    fontSize: "0.75rem"
+    fontWeight: 400
+    lineHeight: 2.1
+    letterSpacing: "normal"
   label:
     fontFamily: "Schibsted Grotesk, ui-sans-serif, system-ui, sans-serif"
     fontSize: "0.6875rem"
