@@ -77,9 +77,16 @@ export default function RouteMap() {
               tabIndex={0}
               role="button"
               aria-label={`${d.city} (${d.code})`}
-              className="cursor-pointer focus:outline-none"
+              className="cursor-pointer [&:focus-visible>circle]:stroke-mint"
             >
-              <circle cx={x} cy={y} r={on ? 6 : 3.5} fill={on ? '#cdd500' : '#fff'} />
+              <circle
+                cx={x}
+                cy={y}
+                r={on ? 6 : 3.5}
+                fill={on ? '#cdd500' : '#fff'}
+                strokeWidth="2"
+                className="[stroke:transparent]"
+              />
               {(on || showLabel.has(d.code)) && (
                 <text
                   x={x}
