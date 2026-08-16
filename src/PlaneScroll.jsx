@@ -179,12 +179,20 @@ export default function PlaneScroll() {
     ctx.fillStyle = wash
     ctx.fillRect(0, 0, cw, ch)
 
-    // Bottom vignette: the booking widget and the story copy sit down there.
+    // Vignettes top and bottom: the story beats sit in one or the other, and a
+    // scrim across the whole frame holds white type without drawing a box
+    // behind it.
     ctx.globalCompositeOperation = 'source-over'
-    const vignette = ctx.createLinearGradient(0, ch, 0, ch * 0.45)
-    vignette.addColorStop(0, 'rgba(6,9,18,0.75)')
-    vignette.addColorStop(1, 'rgba(6,9,18,0)')
-    ctx.fillStyle = vignette
+    const bottom = ctx.createLinearGradient(0, ch, 0, ch * 0.42)
+    bottom.addColorStop(0, 'rgba(6,9,18,0.80)')
+    bottom.addColorStop(1, 'rgba(6,9,18,0)')
+    ctx.fillStyle = bottom
+    ctx.fillRect(0, 0, cw, ch)
+
+    const top = ctx.createLinearGradient(0, 0, 0, ch * 0.52)
+    top.addColorStop(0, 'rgba(6,9,18,0.72)')
+    top.addColorStop(1, 'rgba(6,9,18,0)')
+    ctx.fillStyle = top
     ctx.fillRect(0, 0, cw, ch)
   }
 
@@ -260,13 +268,7 @@ export default function PlaneScroll() {
               }}
               className={`absolute inset-0 flex flex-col gap-4 px-8 md:px-20 ${s.pos}`}
             >
-              <div
-                className="flex max-w-xl flex-col gap-3 rounded-3xl px-6 py-5 [text-shadow:_0_1px_24px_rgba(0,0,0,0.85)]"
-                style={{
-                  backgroundImage:
-                    'radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 55%, transparent 80%)',
-                }}
-              >
+              <div className="flex max-w-xl flex-col gap-3 px-6 py-5 [text-shadow:_0_2px_18px_rgba(0,0,0,0.7)]">
                 <h2 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white/90 md:text-6xl">
                   {s.title}
                 </h2>
