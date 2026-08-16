@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useReveal } from './BookingElements.jsx'
 import Scenic from './Scenic.jsx'
@@ -76,7 +76,40 @@ function AdvisoryBar() {
 export function Header() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
+  const menuRef = useRef(null)
+  const toggleRef = useRef(null)
   useEffect(() => setOpen(false), [pathname])
+
+  // An open full-screen menu owns the keyboard: Escape closes it and returns
+  // focus to the button that opened it, Tab cycles inside it rather than
+  // wandering into the page behind, and the page underneath stops scrolling.
+  useEffect(() => {
+    if (!open) return
+    const first = menuRef.current?.querySelector('a, button')
+    first?.focus()
+    document.body.style.overflow = 'hidden'
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setOpen(false)
+        toggleRef.current?.focus()
+        return
+      }
+      if (e.key !== 'Tab') return
+      const items = menuRef.current?.querySelectorAll('a, button')
+      if (!items?.length) return
+      const edge = e.shiftKey ? items[0] : items[items.length - 1]
+      if (document.activeElement === edge) {
+        e.preventDefault()
+        ;(e.shiftKey ? items[items.length - 1] : items[0]).focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [open])
 
   return (
     <header className="pointer-events-none fixed top-0 left-0 z-40 w-full">
@@ -113,9 +146,11 @@ export function Header() {
             Award +Plus
           </button>
           <button
+            ref={toggleRef}
             onClick={() => setOpen((o) => !o)}
-            aria-label="Menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
+            aria-controls="site-menu"
             className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white backdrop-blur lg:hidden"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -126,7 +161,14 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-black/55 px-6 pt-28 backdrop-blur-2xl lg:hidden">
+        <div
+          id="site-menu"
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site menu"
+          className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-black/55 px-6 pt-28 backdrop-blur-2xl lg:hidden"
+        >
           <nav className="flex flex-col gap-2">
             {NAV.map(([label, to]) => (
               <NavLink

@@ -14,8 +14,8 @@ import { photoUrl } from './Scenic.jsx'
 // 192 frames of a PIA 777 rotating off the runway, 1280x720 each. The source
 // renders in `Assets/` are PNG (121 MB, git-ignored); `public/takeoff` holds
 // them re-encoded as progressive JPEG at q72 — 8.9 MB for the set, and
-// indistinguishable from the PNGs at 1:1. The whole set preloads before the
-// hero reveals, so the encode size is the page's first-paint budget.
+// indistinguishable from the PNGs at 1:1. Only a 24-frame subset gates the
+// reveal (see the loader below); the rest arrives behind a usable hero.
 const FRAME_COUNT = 192
 const frameUrl = (i) => `/takeoff/frame_${String(i + 1).padStart(4, '0')}.jpg`
 
@@ -66,22 +66,64 @@ export default function PlaneScroll() {
     offset: ['start start', 'end end'],
   })
 
+  const lastIndex = useRef(-1)
+  const drawRef = useRef(null)
+
+  // Frames arrive coarse-to-fine rather than first-to-last.
+  //
+  // Waiting on all 192 frames meant an 8.9 MB spinner before anything moved.
+  // The first pass takes every 8th frame, which covers the whole takeoff in 24
+  // images (~1.1 MB) and is enough to scrub, so the hero reveals there. Later
+  // passes fill in the halves, then the quarters, and the scrub sharpens while
+  // it is already usable. Phones stop at every 2nd frame — 96 images is smooth
+  // at that size and halves what a mobile connection has to carry.
   useEffect(() => {
     let alive = true
-    let done = 0
-    const imgs = new Array(FRAME_COUNT)
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new Image()
-      img.src = frameUrl(i)
-      img.onload = img.onerror = () => {
-        if (!alive) return
-        done++
-        setLoaded(done)
-        if (done === FRAME_COUNT) setReady(true)
+    const coarse = []
+    const rest = []
+    const fine = window.matchMedia('(min-width: 768px)').matches ? 1 : 2
+    for (let gap = 8; gap >= fine; gap = gap >> 1) {
+      for (let i = 0; i < FRAME_COUNT; i += gap) {
+        if (imagesRef.current[i] !== undefined) continue
+        imagesRef.current[i] = null // claimed, so a later gap does not requeue it
+        ;(gap === 8 ? coarse : rest).push(i)
       }
-      imgs[i] = img
     }
-    imagesRef.current = imgs
+
+    let done = 0
+    const load = (i) =>
+      new Promise((resolve) => {
+        const img = new Image()
+        img.src = frameUrl(i)
+        img.onload = img.onerror = () => {
+          if (alive) {
+            imagesRef.current[i] = img.width ? img : null
+            done++
+            setLoaded(done)
+            // Repaint if this frame is the one the current scroll position
+            // wanted; otherwise a reader who has stopped keeps the coarse frame.
+            if (Math.abs(i - lastIndex.current) <= 12) drawRef.current?.(lastIndex.current)
+          }
+          resolve()
+        }
+      })
+
+    // Six at a time: enough to saturate a fast link, few enough that the coarse
+    // pass is not stuck behind a queue of frames nobody can see yet.
+    const drain = async (queue) => {
+      const workers = Array.from({ length: 6 }, async () => {
+        while (alive && queue.length) await load(queue.shift())
+      })
+      await Promise.all(workers)
+    }
+
+    ;(async () => {
+      await drain(coarse)
+      if (!alive) return
+      setReady(true)
+      await drain(rest)
+    })()
+
     return () => {
       alive = false
     }
@@ -94,9 +136,22 @@ export default function PlaneScroll() {
   // and a bottom vignette to keep the overlay type legible.
   const ZOOM = 1.18
 
+  // The frame for this scroll position may not have arrived yet, so fall back
+  // to the closest one that has. Within 8 frames of a 192-frame takeoff the
+  // aircraft has barely moved, and the gap closes as the fine passes land.
+  function nearestLoaded(index) {
+    const imgs = imagesRef.current
+    if (imgs[index]) return imgs[index]
+    for (let d = 1; d <= 12; d++) {
+      if (imgs[index - d]) return imgs[index - d]
+      if (imgs[index + d]) return imgs[index + d]
+    }
+    return null
+  }
+
   function draw(index) {
     const canvas = canvasRef.current
-    const img = imagesRef.current[index]
+    const img = nearestLoaded(index)
     if (!canvas || !img || !img.width) return
     const ctx = canvas.getContext('2d')
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -133,7 +188,7 @@ export default function PlaneScroll() {
     ctx.fillRect(0, 0, cw, ch)
   }
 
-  const lastIndex = useRef(-1)
+  drawRef.current = draw
 
   useMotionValueEvent(scrollYProgress, 'change', (p) => {
     setProgress(p)
@@ -239,7 +294,7 @@ export default function PlaneScroll() {
           />
           <div className="ps-spinner relative" />
           <span className="relative text-sm tracking-wide text-white/60">
-            Preparing for departure… {Math.round((loaded / FRAME_COUNT) * 100)}%
+            Preparing for departure… {Math.min(100, Math.round((loaded / 24) * 100))}%
           </span>
         </div>
       )}
