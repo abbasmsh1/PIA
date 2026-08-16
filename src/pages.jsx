@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { PageHero, Section, DestCard } from './Layout.jsx'
+import { PageHero, Section, DestCard, ServiceCard } from './Layout.jsx'
 import { FlightSearch, LookupPanel } from './BookingElements.jsx'
 import RouteMap from './RouteMap.jsx'
 import Scenic from './Scenic.jsx'
@@ -78,13 +78,7 @@ export function ServicesPage() {
       <Section title="Everything you can add">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
-            <div
-              key={s.title}
-              className="panel panel-hover p-6"
-            >
-              <h3 className="text-lg font-medium tracking-tight text-white/90">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">{s.body}</p>
-            </div>
+            <ServiceCard key={s.title} {...s} />
           ))}
         </div>
       </Section>

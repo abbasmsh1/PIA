@@ -57,7 +57,7 @@ export default function DeparturesBoard() {
         </span>
       </div>
 
-      <div className="grid grid-cols-[4.5rem_1fr_4rem_6rem] gap-3 px-5 py-2 text-[10px] uppercase tracking-[0.15em] text-white/55 sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]">
+      <div className="grid grid-cols-[4.5rem_1fr_4rem_6rem] gap-3 px-5 py-2 text-[11px] uppercase tracking-[0.15em] text-white/55 sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]">
         <span>Time</span>
         <span className="hidden sm:block">Flight</span>
         <span>Destination</span>

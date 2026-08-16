@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { COORDS, HUB, W, H, MARGIN, px, py } from './geo.js'
-import { DESTINATIONS, FLEET, FX_PKR_PER_UNIT } from './data.js'
+import { DESTINATIONS, FLEET, NEWS, FX_PKR_PER_UNIT } from './data.js'
 import { money } from './money.js'
 
 // --- route map -------------------------------------------------------------
@@ -74,5 +74,10 @@ assert.deepEqual(noPhoto, [], `international destinations with no photo: ${noPho
 
 const noFleetPhoto = FLEET.filter((a) => !seeds.includes(a.type)).map((a) => a.type)
 assert.deepEqual(noFleetPhoto, [], `aircraft types with no photo: ${noFleetPhoto.join(', ')}`)
+
+// News cards name their own frame, so a typo in a seed would silently drop the
+// card back to the gradient wash.
+const noNewsPhoto = NEWS.filter((n) => n.seed && !seeds.includes(n.seed)).map((n) => n.seed)
+assert.deepEqual(noNewsPhoto, [], `news seeds with no photo: ${noNewsPhoto.join(', ')}`)
 
 console.log(`photos ok — ${seeds.length} seeds mapped, every international city and aircraft covered`)

@@ -42,6 +42,12 @@ const PHOTOS = {
   CDG: 'photo-1511739001486-6bfe10ce785f', // Eiffel Tower
   YYZ: 'photo-1543962226-818f4301073f', // CN Tower
 
+  // Domestic ports, where Unsplash has a photograph that is actually of the
+  // city. The others keep the brand wash rather than borrow a stand-in.
+  PEW: 'photo-1644262941814-dffef47ac1f3', // old bazaar street, Peshawar
+  MUX: 'photo-1600434890250-44df6e4c0d05', // Shah Rukn-e-Alam shrine, Multan
+  GIL: 'photo-1646514323421-094bb563cd37', // Karakoram highway above Gilgit
+
   HERO: 'photo-1565614873782-ec6ef19e18f1', // airliner into the sun
   NETWORK: 'photo-1565444007614-6b38c78224df', // wing over cloud
   EXPERIENCE: 'photo-1641447093043-241f064568fb', // cabin, seatback screens
@@ -52,6 +58,9 @@ const PHOTOS = {
   B777: 'photo-1785735011417-d85ff3998a70', // engine and wing above cloud
   EXE: 'photo-1636699811128-1a83547b76d5', // cabin under mood lighting
   AWARD: 'photo-1746020681437-bb0a721cf2fa', // passengers in a terminal
+  SUITE: 'photo-1690935986319-c11e6cae84f7', // hotel room over a city at dusk
+  DINE: 'photo-1777113310112-d4f115599921', // an airline meal tray
+  404: 'photo-1762818084167-5124352f667b', // an empty check-in hall
 
   // A concept site should not put a competitor's livery next to PIA's own name,
   // so the aircraft frames are silhouettes, engines and unmarked airframes
@@ -156,7 +165,7 @@ export default function Scenic({
       {/* The code is set large as texture on a fallback; over a photograph it
           just collides with the subject. */}
       {label && !photo && (
-        <span className="data pointer-events-none absolute -bottom-3 right-2 text-[5rem] font-bold leading-none text-white/10">
+        <span className="data ghost-word pointer-events-none absolute -bottom-3 right-2 text-[7rem] leading-none">
           {label}
         </span>
       )}

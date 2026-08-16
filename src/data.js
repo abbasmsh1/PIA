@@ -155,13 +155,15 @@ export const ABOUT_STATS = [
 
 // ---------------------------------------------------------------------------
 // Headlines from the OUR NEWS rail on the archived homepage.
+// `seed` picks the Scenic frame on the card: a port code where the story has
+// one, otherwise a seed with no photo so the brand-wash fallback renders.
 export const NEWS = [
-  { date: 'January 10, 2025', cat: 'Network', title: 'Connecting dreams, families, and destinations', body: "PIA resumes flights to Paris after four years, reconnecting families, dreams and destinations with Pakistan's national airline." },
-  { date: 'April 20, 2025', cat: 'Network', title: 'Baku awaits you', body: 'Discover the Europe of Asia, where history, culture and affordability come together.' },
-  { date: 'March 2025', cat: 'Comfort', title: 'Corporate Executive Suite', body: "The blend of business and leisure at PIA's Airport Hotel Corporate Club Executive Suite." },
-  { date: 'August 14, 2024', cat: 'Pakistan', title: 'Independence Day', body: 'For 77 years we have proudly served this nation. Flying high with pride, from the heart of Pakistan to the skies above.' },
-  { date: '2024', cat: 'Destinations', title: 'Unveiling Skardu with PIA', body: 'A gem in the Karakoram Range — towering mountains, serene lakes, vibrant bazaars and rich cultural heritage.' },
-  { date: '2024', cat: 'Onboard', title: 'Dining with Luxury', body: 'Every meal a celebration of taste and tradition, offering a luxurious blend of flavours from around the world.' },
+  { date: 'January 10, 2025', cat: 'Network', title: 'Connecting dreams, families, and destinations', seed: 'CDG', body: "PIA resumes flights to Paris after four years, reconnecting families, dreams and destinations with Pakistan's national airline." },
+  { date: 'April 20, 2025', cat: 'Network', title: 'Baku awaits you', seed: 'GYD', body: 'Discover the Europe of Asia, where history, culture and affordability come together.' },
+  { date: 'March 2025', cat: 'Comfort', title: 'Corporate Executive Suite', seed: 'SUITE', body: "The blend of business and leisure at PIA's Airport Hotel Corporate Club Executive Suite." },
+  { date: 'August 14, 2024', cat: 'Pakistan', title: 'Independence Day', seed: 'ABOUT', body: 'For 77 years we have proudly served this nation. Flying high with pride, from the heart of Pakistan to the skies above.' },
+  { date: '2024', cat: 'Destinations', title: 'Unveiling Skardu with PIA', seed: 'KDU', body: 'A gem in the Karakoram Range — towering mountains, serene lakes, vibrant bazaars and rich cultural heritage.' },
+  { date: '2024', cat: 'Onboard', title: 'Dining with Luxury', seed: 'DINE', body: 'Every meal a celebration of taste and tradition, offering a luxurious blend of flavours from around the world.' },
 ]
 
 // Sample board. Flight numbers follow the real PK numbering but the times and

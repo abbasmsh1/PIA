@@ -29,3 +29,8 @@ dist-ssr
 # Source frame renders for the hero sequence. public/takeoff holds the JPEGs
 # the site actually serves; these PNGs are 121 MB and stay local.
 Assets/
+
+# Agent tooling installed into the repo by skill managers, not project source.
+.claude/
+.agents/
+skills-lock.json

@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-16T00:00:00Z",
+  "title": "Design System: PIA Concept",
+  "extensions": {
+    "colorMeta": {
+      "brand": {
+        "role": "primary",
+        "displayName": "PIA Green",
+        "canonical": "#007d34",
+        "tonalRamp": ["#00190a", "#002d14", "#00451f", "#005f2a", "#007d34", "#12a24f", "#4fc880", "#a9e8bf"]
+      },
+      "mint": {
+        "role": "secondary",
+        "displayName": "Signal Mint",
+        "canonical": "#75dc86",
+        "tonalRamp": ["#0d2412", "#14391d", "#1d5429", "#2c7a3c", "#3fa353", "#57c26c", "#75dc86", "#c3f2cd"]
+      },
+      "lime": {
+        "role": "tertiary",
+        "displayName": "Runway Lime",
+        "canonical": "#cdd500",
+        "tonalRamp": ["#232400", "#3a3c00", "#565a00", "#767b00", "#9aa100", "#b8bf00", "#cdd500", "#eaef7a"]
+      },
+      "s0": {
+        "role": "neutral",
+        "displayName": "Deepest Ground",
+        "canonical": "#060912",
+        "tonalRamp": ["#060912", "#0a0e17", "#10131d", "#181b25", "#22262f", "#3a3f4a", "#6d7280", "#b9bec9"]
+      },
+      "s1": {
+        "role": "neutral",
+        "displayName": "Ground",
+        "canonical": "#0a0e17",
+        "tonalRamp": ["#060912", "#0a0e17", "#10131d", "#181b25", "#22262f", "#3a3f4a", "#6d7280", "#b9bec9"]
+      },
+      "s2": { "role": "neutral", "displayName": "Raised Surface", "canonical": "#10131d" },
+      "s3": { "role": "neutral", "displayName": "Raised Surface, High", "canonical": "#181b25" },
+      "s4": { "role": "neutral", "displayName": "Raised Surface, Highest", "canonical": "#22262f" },
+      "official-green": {
+        "role": "neutral",
+        "displayName": "Logo Green",
+        "canonical": "#006937",
+        "tonalRamp": ["#001a0e", "#002d18", "#004123", "#00552d", "#006937", "#178f52", "#54b77f", "#aadcc0"]
+      },
+      "official-gold": {
+        "role": "neutral",
+        "displayName": "Logo Gold",
+        "canonical": "#a48d29",
+        "tonalRamp": ["#231e08", "#3a3210", "#544719", "#705f22", "#8c762b", "#a48d29", "#c7ae4a", "#e6d79a"]
+      },
+      "ramp-yellow": { "role": "tertiary", "displayName": "Ramp Yellow", "canonical": "#ffe524" },
+      "ramp-leaf": { "role": "tertiary", "displayName": "Ramp Leaf", "canonical": "#71af2e" },
+      "ramp-teal": { "role": "tertiary", "displayName": "Ramp Teal", "canonical": "#005779" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page hero title only, one per page, echoed behind itself as a 4.5% white watermark on desktop." },
+      "headline": { "displayName": "Section Headline", "purpose": "The single title of a full-viewport section." },
+      "title": { "displayName": "Card Title", "purpose": "Card and panel headings; drops the display face by design." },
+      "body": { "displayName": "Body", "purpose": "Paragraphs and all interface language, measure capped at 46 to 62 characters." },
+      "data": { "displayName": "Ticket Data", "purpose": "Fares, times, flight numbers, airport codes, dates, seats, gates. Never navigation or buttons." },
+      "label": { "displayName": "Label", "purpose": "Footer column headings and fare-class markers, uppercase at 0.16em tracking." }
+    },
+    "shadows": [
+      { "name": "panel-lift", "value": "inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75)", "purpose": "Resting elevation on every glass surface: inner top highlight plus a contact shadow." },
+      { "name": "panel-lift-raised", "value": "inset 0 1px 0 0 rgba(255,255,255,0.14), 0 26px 50px -22px rgba(0,0,0,0.8)", "purpose": "Hover state, paired with a 2px rise." },
+      { "name": "well-press", "value": "inset 0 1px 2px 0 rgba(0,0,0,0.45)", "purpose": "Inputs and controls that read as pressed into the panel holding them." },
+      { "name": "action-shadow", "value": "0 10px 15px -3px rgba(0,125,52,0.25)", "purpose": "Under filled green buttons only, tinted with the button's own colour." }
+    ],
+    "materials": [
+      { "name": "glass", "value": "background: linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.035)); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); backdrop-filter: blur(24px) saturate(160%); border-radius: 22px;", "purpose": "Default raised surface." },
+      { "name": "glass-thick", "value": "background: linear-gradient(180deg, rgba(18,22,32,0.72), rgba(10,14,23,0.62)); backdrop-filter: blur(40px) saturate(160%);", "purpose": "Panels sitting over a photograph or the takeoff film." },
+      { "name": "well", "value": "background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.45);", "purpose": "Inset form fields." }
+    ],
+    "motion": [
+      { "name": "ease-out-quint", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Scroll reveal (0.7s) and panel hover lift (0.4s)." },
+      { "name": "reveal", "value": "opacity 0 to 1, translateY(28px) to 0 over 0.7s", "purpose": "First-entry reveal driven by IntersectionObserver at a 0.15 threshold." },
+      { "name": "route-draw", "value": "stroke-dashoffset 1 to 0 over 1.6s ease", "purpose": "Route-map arcs drawing in on load, pathLength normalised to 1." },
+      { "name": "drift", "value": "translateX(-40vw) to 140vw over 140s to 190s linear", "purpose": "Backdrop haze passes." },
+      { "name": "reduced-motion", "value": "every animation above is disabled under prefers-reduced-motion: reduce", "purpose": "Non-negotiable; the split-flap board skips straight to its final text." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ],
+    "containers": [
+      { "name": "content", "value": "72rem" },
+      { "name": "widget", "value": "64rem" },
+      { "name": "header", "value": "80rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Filled brand green, used for the one committing action on a surface.",
+      "html": "<button class=\"ds-btn-primary\">Search flights</button>",
+      "css": ".ds-btn-primary { font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #fff; background: #007d34; border: none; border-radius: 9999px; padding: 14px 32px; box-shadow: 0 10px 15px -3px rgba(0,125,52,0.25); transition: filter 0.2s; } .ds-btn-primary:hover { filter: brightness(1.15); } .ds-btn-primary:focus-visible { outline: 2px solid #75dc86; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary actions inside a retrieved booking.",
+      "html": "<button class=\"ds-btn-ghost\">Change date</button>",
+      "css": ".ds-btn-ghost { font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 12px; color: rgba(255,255,255,0.8); background: transparent; border: 1px solid rgba(255,255,255,0.15); border-radius: 9999px; padding: 8px 16px; transition: background 0.2s; } .ds-btn-ghost:hover { background: rgba(255,255,255,0.1); } .ds-btn-ghost:focus-visible { outline: 2px solid #75dc86; outline-offset: 3px; }"
+    },
+    {
+      "name": "Glass Panel",
+      "kind": "card",
+      "refersTo": "card-panel",
+      "description": "The single raised-surface recipe: gradient fill, blur, brighter top edge, contact shadow.",
+      "html": "<div class=\"ds-panel\"><h3 class=\"ds-panel-title\">Special assistance</h3><p class=\"ds-panel-body\">Wheelchair support and medical clearance, arranged at booking.</p></div>",
+      "css": ".ds-panel { position: relative; background: linear-gradient(180deg, rgba(255,255,255,0.085) 0%, rgba(255,255,255,0.035) 100%); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); border-radius: 22px; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75); backdrop-filter: blur(24px) saturate(160%); padding: 24px; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s, border-color 0.4s; } .ds-panel:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.18); border-top-color: rgba(255,255,255,0.28); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.14), 0 26px 50px -22px rgba(0,0,0,0.8); } @media (prefers-reduced-motion: reduce) { .ds-panel:hover { transform: none; } } .ds-panel-title { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.9); margin: 0; } .ds-panel-body { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 14px; line-height: 1.625; color: rgba(255,255,255,0.7); margin: 12px 0 0; }"
+    },
+    {
+      "name": "Field Well",
+      "kind": "input",
+      "refersTo": "field-well",
+      "description": "Booking-widget field: label always visible above a value set in the data face, pressed into the panel.",
+      "html": "<label class=\"ds-well\"><span class=\"ds-well-label\">From</span><input class=\"ds-well-input\" value=\"KHI\" /></label>",
+      "css": ".ds-well { display: block; background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.45); padding: 10px 14px; transition: border-color 0.2s, background 0.2s; } .ds-well:focus-within { border-color: rgba(117,220,134,0.45); background: rgba(0,0,0,0.34); } .ds-well-label { display: block; font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: rgba(255,255,255,0.65); } .ds-well:focus-within .ds-well-label { color: #75dc86; } .ds-well-input { display: block; width: 100%; margin-top: 4px; background: transparent; border: none; outline: none; font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 14px; color: #fff; }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip-status",
+      "description": "Flight status. Boarding is the only filled variant, so the eye lands on the flight actually leaving.",
+      "html": "<span class=\"ds-chip ds-chip-boarding\">BOARDING</span><span class=\"ds-chip ds-chip-ontime\">ON TIME</span>",
+      "css": ".ds-chip { display: inline-block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 9999px; border: 1px solid currentColor; white-space: nowrap; } .ds-chip-boarding { color: #cdd500; background: rgba(205,213,0,0.2); border-color: rgba(205,213,0,0.4); } .ds-chip-ontime { color: #75dc86; }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Floating pill of thick glass; the active link takes a mint underline.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Book</a><a class=\"ds-nav-link\" href=\"#\">Manage</a><a class=\"ds-nav-link\" href=\"#\">Destinations</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 28px; align-items: center; background: linear-gradient(180deg, rgba(18,22,32,0.72) 0%, rgba(10,14,23,0.62) 100%); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); border-radius: 9999px; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(160%); padding: 12px 28px; } .ds-nav-link { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.01em; text-decoration: none; color: rgba(255,255,255,0.6); border-bottom: 2px solid transparent; padding-bottom: 4px; transition: color 0.2s; } .ds-nav-link:hover { color: #fff; } .ds-nav-link-active { color: #fff; border-bottom-color: #75dc86; } .ds-nav-link:focus-visible { outline: 2px solid #75dc86; outline-offset: 3px; border-radius: 6px; }"
+    },
+    {
+      "name": "Fare Ticket",
+      "kind": "custom",
+      "refersTo": "card-panel",
+      "description": "Boarding-pass fare card: two oversized codes either side of a dashed rule, fare on its own baseline.",
+      "html": "<a class=\"ds-ticket\" href=\"#\"><span class=\"ds-ticket-class\">Published fare</span><span class=\"ds-ticket-route\"><span class=\"ds-ticket-port\"><span class=\"ds-ticket-code\">KHI</span><span class=\"ds-ticket-city\">Karachi</span></span><span class=\"ds-ticket-rule\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M21 16v-2l-8-2.5V6.5a1.5 1.5 0 0 0-3 0v5L2 14v2l8-1.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-4.5L21 16Z\"/></svg></span><span class=\"ds-ticket-port ds-ticket-port-end\"><span class=\"ds-ticket-code\">DXB</span><span class=\"ds-ticket-city\">Dubai</span></span></span><span class=\"ds-ticket-fare\"><span class=\"ds-ticket-from\">From</span><span class=\"ds-ticket-amount\">PKR 62,000</span></span></a>",
+      "css": ".ds-ticket { display: block; text-decoration: none; padding: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.035)); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); border-radius: 22px; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75); backdrop-filter: blur(24px) saturate(160%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; } .ds-ticket:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.14), 0 26px 50px -22px rgba(0,0,0,0.8); } @media (prefers-reduced-motion: reduce) { .ds-ticket:hover { transform: none; } } .ds-ticket-class { display: block; font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: #cdd500; } .ds-ticket-route { display: flex; align-items: center; gap: 16px; margin-top: 20px; } .ds-ticket-port { flex: 1; min-width: 0; } .ds-ticket-port-end { text-align: right; } .ds-ticket-code { display: block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 32px; line-height: 1; color: #fff; } .ds-ticket-city { display: block; margin-top: 8px; font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 11px; color: rgba(255,255,255,0.6); } .ds-ticket-rule { position: relative; flex: 1; margin-bottom: 24px; border-top: 1px dashed rgba(255,255,255,0.2); display: flex; justify-content: center; color: #cdd500; } .ds-ticket-rule svg { position: absolute; top: -9px; } .ds-ticket-fare { display: flex; align-items: baseline; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); } .ds-ticket-from { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); } .ds-ticket-amount { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 18px; color: #fff; }"
+    },
+    {
+      "name": "Departures Row",
+      "kind": "custom",
+      "refersTo": "card-panel",
+      "description": "One row of the split-flap departures board: mono throughout, status as a chip.",
+      "html": "<div class=\"ds-dep-row\"><span class=\"ds-dep-time\">09:05</span><span class=\"ds-dep-flight\">PK213</span><span class=\"ds-dep-dest\">DUBAI</span><span class=\"ds-dep-gate\">B1</span><span class=\"ds-dep-status\"><span class=\"ds-chip ds-chip-boarding\">BOARDING</span></span></div>",
+      "css": ".ds-dep-row { display: grid; grid-template-columns: 5rem 5rem 1fr 4rem 7rem; align-items: center; gap: 12px; padding: 12px 20px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); } .ds-dep-time { color: #fff; } .ds-dep-flight { color: #75dc86; } .ds-dep-dest { color: rgba(255,255,255,0.85); letter-spacing: 0.05em; } .ds-dep-gate { color: rgba(255,255,255,0.5); } .ds-dep-status { text-align: right; } .ds-chip { display: inline-block; font-size: 11px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 9999px; border: 1px solid currentColor; white-space: nowrap; } .ds-chip-boarding { color: #cdd500; background: rgba(205,213,0,0.2); border-color: rgba(205,213,0,0.4); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lit Cabin Window",
+    "overview": "The page is a dark aircraft at night and the interface is the glass you read through. Nothing in the chrome is an opaque plate: every panel is a low-alpha white fill over a backdrop blur, so the photograph, the route map or the takeoff film behind it stays partly visible. Depth is therefore not a stack of grey boxes but a single sheet of material catching light from above, and the whole system is legible only because the ground underneath is close to black.\n\nColour is rationed on purpose. The surfaces carry none of it. What colour exists arrives from three places: the photographs, the brand ramp used as a hairline rule or a stripe, and three accents that each own one job. The result reads institutional rather than promotional, which is what an airline booking path needs; a passenger looking for a fare should meet numbers and dates, not a colour scheme competing with them.\n\nDensity is generous vertically and tight horizontally. Sections run a full viewport, top-aligned rather than centred, so the eye starts at the headline and travels down through the content instead of hunting for it in the middle of empty space. Type does the hierarchy work: a heavy, tightly tracked display face for headlines, a newsroom grotesk for everything a person reads, and a monospace face reserved strictly for the things printed on a boarding pass.",
+    "keyCharacteristics": [
+      "Near-black ground (#0a0e17) with a five-step surface stack behind the glass",
+      "Translucent panels: blurred, gradient-filled, top-edge lit, never flat",
+      "Three fonts with three non-overlapping jobs",
+      "Green for filled actions only; mint for accent type and focus; lime for small labels and live status",
+      "Full-viewport, top-aligned sections with the floating header's height reserved",
+      "Motion is entry and state only: reveal, draw, hover lift, all reduced-motion aware"
+    ],
+    "rules": [
+      { "name": "The One Green Rule", "body": "#007d34 fills buttons and nothing else. If a green needs to be read as type, it is mint; if it needs to be read as a small label, it is lime.", "section": "colors" },
+      { "name": "The Borrowed Colour Rule", "body": "Surfaces contribute no hue. Any colour on screen must come from a photograph, the brand ramp, or one of the three accents doing its assigned job.", "section": "colors" },
+      { "name": "The Ramp Is A Rule Rule", "body": "The five-stop brand gradient appears only as a line or a stripe: the footer rule, the boarding-pass edge, the app-mock underline, and the deterministic wash behind a photo-less scenic frame. It is never a button, a panel or a text fill on a body paragraph.", "section": "colors" },
+      { "name": "The Boarding Pass Rule", "body": "JetBrains Mono is reserved for what would be printed on a ticket: fares, times, flight numbers, airport codes, dates, seats, gates. It is never used for navigation, button text, headings or generic interface labels.", "section": "typography" },
+      { "name": "The Two-Level Display Rule", "body": "Chivo appears at exactly two levels, the page hero and the section title. A third level in the display face flattens the hierarchy the whole page depends on.", "section": "typography" },
+      { "name": "The No Eyebrow Rule", "body": "Nothing sits above a headline. No category kicker, no 'Introducing', no decorative label. A heading begins its own block.", "section": "typography" },
+      { "name": "The Reserved Header Rule", "body": "The header is fixed and translucent, so every scroll target must clear it. Any new snapped section carries the same top padding and scroll margin as Section.", "section": "layout" },
+      { "name": "The Top-Aligned Rule", "body": "A full-height section starts its content at the top. Vertical centring at this height leaves the headline floating and the fold empty.", "section": "layout" },
+      { "name": "The No Flat Fill Rule", "body": "A raised surface is never a solid colour. If a backdrop blur is unavailable, the fallback is the same gradient at higher alpha, not an opaque grey plate.", "section": "elevation" },
+      { "name": "The Light From Above Rule", "body": "The top border of a panel is always brighter than its other three. Any new surface that omits this reads as a sticker.", "section": "elevation" },
+      { "name": "The Fallback-Only Ornament Rule", "body": "Contour lines and the oversized airport code belong to the gradient fallback alone. Over a photograph they read as scratches across the subject and as a collision with it.", "section": "components" }
+    ],
+    "dos": [
+      "Do build every raised surface from the glass recipe: gradient fill, backdrop blur, hairline border with a brighter top edge, inset highlight, panel-lift shadow, 22px radius.",
+      "Do reserve JetBrains Mono for ticket data and give it tabular figures.",
+      "Do use brand green for filled actions, mint for accent type and focus, lime for small labels and live status.",
+      "Do start full-height sections at the top and reserve the floating header's height in both padding and scroll position.",
+      "Do guard every animation with prefers-reduced-motion, as the reveal, drift, route draw, split-flap and hover lift already do.",
+      "Do let photography carry the colour and keep the interface around it grey."
+    ],
+    "donts": [
+      "Don't put an opaque flat fill on a raised surface; if blur is unsupported, raise the gradient's alpha instead.",
+      "Don't set navigation, buttons, headings or generic labels in the mono face.",
+      "Don't use brand green as text or as a standalone border colour; mint is the readable green on this ground.",
+      "Don't place a kicker, eyebrow or category label above a heading.",
+      "Don't apply the brand ramp as a fill on a panel, a button or body text; it exists as a line, a stripe or the photo fallback.",
+      "Don't put the contour lines or the oversized airport code over a photograph.",
+      "Don't introduce a third display level in Chivo, or a fourth typeface."
+    ]
+  }
+}

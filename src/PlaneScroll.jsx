@@ -79,13 +79,20 @@ export default function PlaneScroll() {
   // at that size and halves what a mobile connection has to carry.
   useEffect(() => {
     let alive = true
+    // StrictMode mounts, unmounts and mounts again in development. The queue is
+    // therefore built from a local set and the frame store is reset here: a
+    // previous run's cancelled claims must not make this run think every frame
+    // is already handled, which left the canvas empty in dev while production
+    // was fine.
+    imagesRef.current = []
+    const queued = new Set()
     const coarse = []
     const rest = []
     const fine = window.matchMedia('(min-width: 768px)').matches ? 1 : 2
     for (let gap = 8; gap >= fine; gap = gap >> 1) {
       for (let i = 0; i < FRAME_COUNT; i += gap) {
-        if (imagesRef.current[i] !== undefined) continue
-        imagesRef.current[i] = null // claimed, so a later gap does not requeue it
+        if (queued.has(i)) continue
+        queued.add(i)
         ;(gap === 8 ? coarse : rest).push(i)
       }
     }

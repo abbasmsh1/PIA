@@ -3,8 +3,9 @@ import PlaneScroll from './PlaneScroll.jsx'
 import { OfferTickets } from './BookingElements.jsx'
 import DeparturesBoard from './DeparturesBoard.jsx'
 import StickyScroll from './StickyScroll.jsx'
-import { Section, DestCard } from './Layout.jsx'
-import { SERVICES, NEWS, DESTINATIONS, LOYALTY_PERKS, LOYALTY_TIERS } from './data.js'
+import Scenic from './Scenic.jsx'
+import { Section, DestCard, ServiceCard } from './Layout.jsx'
+import { SERVICES, NEWS, DESTINATIONS, LOYALTY_PERKS, LOYALTY_TIERS, ABOUT_STATS } from './data.js'
 
 const POPULAR = ['DXB', 'JED', 'KDU', 'LHR', 'KUL', 'YYZ']
 
@@ -43,6 +44,15 @@ export default function Home() {
         >
           All destinations →
         </Link>
+
+        <div className="panel mt-12 grid grid-cols-2 sm:grid-cols-4 sm:divide-x sm:divide-white/8">
+          {ABOUT_STATS.map((s) => (
+            <div key={s.v} className="p-6 text-center">
+              <div className="data text-2xl font-bold text-mint">{s.k}</div>
+              <div className="mt-1 text-xs uppercase tracking-[0.15em] text-white/55">{s.v}</div>
+            </div>
+          ))}
+        </div>
       </Section>
 
       <StickyScroll />
@@ -50,13 +60,7 @@ export default function Home() {
       <Section id="services" title="Add what you need">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.slice(0, 6).map((s) => (
-            <div
-              key={s.title}
-              className="panel panel-hover p-6"
-            >
-              <h3 className="text-lg font-medium tracking-tight text-white/90">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">{s.body}</p>
-            </div>
+            <ServiceCard key={s.title} {...s} />
           ))}
         </div>
         <Link to="/services" className="data mt-8 inline-block text-xs uppercase tracking-[0.15em] text-mint transition hover:text-white">
@@ -69,20 +73,30 @@ export default function Home() {
           {NEWS.slice(0, 6).map((n) => (
             <article
               key={n.title}
-              className="group flex flex-col panel panel-hover p-6"
+              className="group flex flex-col overflow-hidden panel panel-hover"
             >
-              <div className="flex items-center gap-2 text-xs text-white/60">
-                <span className="text-lime">{n.cat}</span>
-                <span>·</span>
-                <span className="data">{n.date}</span>
+              {/* Scenic positions itself, so the aspect wrapper sizes the frame
+                  — same arrangement as DestCard. */}
+              <div className="relative aspect-[16/9] overflow-hidden">
+                <Scenic
+                  seed={n.seed}
+                  className="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-105"
+                />
               </div>
-              <h3 className="mt-3 flex-1 text-lg font-medium leading-snug tracking-tight text-white/90">
-                {n.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">{n.body}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-mint transition group-hover:gap-2">
-                Learn more →
-              </span>
+              <div className="flex flex-1 flex-col border-t border-white/10 p-6">
+                <div className="flex items-center gap-2 text-xs text-white/60">
+                  <span className="text-lime">{n.cat}</span>
+                  <span>·</span>
+                  <span className="data">{n.date}</span>
+                </div>
+                <h3 className="mt-3 flex-1 text-lg font-medium leading-snug tracking-tight text-white/90">
+                  {n.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/70">{n.body}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-mint transition group-hover:gap-2">
+                  Learn more →
+                </span>
+              </div>
             </article>
           ))}
         </div>
@@ -103,11 +117,14 @@ export default function Home() {
         </div>
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {/* A+ Individual is the tier a passenger can act on today, so it
+              carries the highlight rather than the corporate product. */}
           {LOYALTY_TIERS.map((t, i) => (
             <div
               key={t.name}
-              className={`panel p-7 ${i === 2 ? 'border-mint/45' : ''}`}
+              className={`panel panel-hover relative overflow-hidden p-7 ${i === 0 ? 'border-mint/45' : ''}`}
             >
+              {i === 0 && <div className="ramp absolute inset-x-0 top-0 h-0.5" />}
               <div className="flex items-baseline justify-between gap-3">
                 <h3 className="text-lg font-semibold text-white/90">{t.name}</h3>
                 <span className="data text-xs tracking-[0.15em] text-lime">{t.req}</span>
@@ -146,9 +163,9 @@ export default function Home() {
               <div className="ramp h-1 w-16 rounded-full" />
             </div>
             <div className="mt-6 space-y-2 px-1">
-              <div className="data rounded-lg bg-white/[0.06] px-3 py-2 text-[10px] text-white/70">KHI → DXB</div>
-              <div className="data rounded-lg bg-white/[0.06] px-3 py-2 text-[10px] text-white/50">Seat 21C · Gate B1</div>
-              <div className="rounded-lg bg-brand/90 px-3 py-2 text-center text-[10px] font-semibold text-white">
+              <div className="data rounded-lg bg-white/[0.06] px-3 py-2 text-[11px] text-white/70">KHI → DXB</div>
+              <div className="data rounded-lg bg-white/[0.06] px-3 py-2 text-[11px] text-white/50">Seat 21C · Gate B1</div>
+              <div className="rounded-lg bg-brand/90 px-3 py-2 text-center text-[11px] font-semibold text-white">
                 Boarding pass
               </div>
             </div>

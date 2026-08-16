@@ -95,7 +95,7 @@ export default function RouteMap() {
                   className={`data ${on ? 'fill-white' : 'fill-white/55'}`}
                   fontSize="11"
                   // a hovered label must sit above its neighbours' dots
-                  style={on ? { paintOrder: 'stroke', stroke: '#03192b', strokeWidth: 4 } : undefined}
+                  style={on ? { paintOrder: 'stroke', stroke: 'var(--color-s0)', strokeWidth: 4 } : undefined}
                 >
                   {d.code}
                 </text>

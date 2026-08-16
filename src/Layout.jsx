@@ -55,7 +55,7 @@ function AdvisoryBar() {
   if (!open) return null
   return (
     <div className="pointer-events-auto flex w-full items-center justify-center gap-3 border-b border-white/8 bg-black/35 px-4 py-2 text-center text-xs text-white/70 backdrop-blur-xl">
-      <span className="data hidden shrink-0 text-[10px] tracking-[0.2em] text-mint sm:inline">NOTICE</span>
+      <span className="data hidden shrink-0 text-[11px] tracking-[0.2em] text-mint sm:inline">NOTICE</span>
       <span className="truncate">{ADVISORIES[i]}</span>
       <a href="#help" className="hidden shrink-0 font-semibold text-lime underline-offset-2 hover:underline sm:inline">
         Read more
@@ -129,7 +129,7 @@ export function Header() {
               key={to}
               to={to}
               className={({ isActive }) =>
-                `border-b-2 pb-1 text-[13px] font-medium tracking-[0.01em] transition ${
+                `border-b-2 pb-1 text-sm font-medium tracking-[0.01em] transition ${
                   isActive
                     ? 'border-mint text-white'
                     : 'border-transparent text-white/60 hover:text-white'
@@ -142,7 +142,7 @@ export function Header() {
         </nav>
 
         <div className="pointer-events-auto flex items-center gap-3">
-          <button className="hidden rounded-full bg-brand px-5 py-2.5 text-[13px] font-semibold text-white shadow-lg shadow-black/40 transition hover:brightness-115 md:block">
+          <button className="hidden rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/40 transition hover:brightness-115 md:block">
             Award +Plus
           </button>
           <button
@@ -207,6 +207,98 @@ export function Section({ id, title, children }) {
       </div>
       <div className="mt-14">{children}</div>
     </section>
+  )
+}
+
+// One 24px stroke glyph per service, keyed by title and drawn inline so no
+// icon library ships. Unknown titles fall back to the plane.
+const SERVICE_ICONS = {
+  'Pre-book Meal': (
+    <>
+      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+      <path d="M7 2v20" />
+      <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+    </>
+  ),
+  'Seat Selection': (
+    <>
+      <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
+      <path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v2H7v-2a2 2 0 0 0-4 0Z" />
+      <path d="M5 18v2M19 18v2" />
+    </>
+  ),
+  'Pre-book Baggage': (
+    <>
+      <path d="M6 20a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2" />
+      <path d="M8 18V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v12" />
+      <path d="M10 20h4" />
+    </>
+  ),
+  'Special Assistance': (
+    <>
+      <circle cx="16" cy="4" r="1" />
+      <path d="m18 19 1-7-6 1" />
+      <path d="m5 8 3-3 5.5 3-2.36 3.5" />
+      <path d="M4.24 14.5a5 5 0 0 0 6.88 6" />
+      <path d="M13.76 17.5a5 5 0 0 0-6.88-6" />
+    </>
+  ),
+  'Extra Legroom': (
+    <>
+      <path d="M12 2v20" />
+      <path d="m8 18 4 4 4-4" />
+      <path d="m8 6 4-4 4 4" />
+    </>
+  ),
+  'Preferred Seat': (
+    <path d="M12 3l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 20.9l1.1-6.5L2.6 9.8l6.5-.9Z" />
+  ),
+  'In-Flight Seat Upgrade': (
+    <>
+      <path d="M12 19V5" />
+      <path d="m5 12 7-7 7 7" />
+    </>
+  ),
+  'Sohni Dharti Remittance Program': (
+    <>
+      <rect x="2" y="6" width="20" height="12" rx="2" />
+      <circle cx="12" cy="12" r="2" />
+      <path d="M6 12h.01M18 12h.01" />
+    </>
+  ),
+  Humsafar: (
+    <>
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h6z" />
+    </>
+  ),
+}
+
+const PLANE_ICON = (
+  <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
+)
+
+export function ServiceCard({ title, body }) {
+  return (
+    <div className="panel panel-hover p-6">
+      <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-mint">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          {SERVICE_ICONS[title] ?? PLANE_ICON}
+        </svg>
+      </span>
+      <h3 className="mt-4 text-lg font-medium tracking-tight text-white/90">{title}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-white/70">{body}</p>
+    </div>
   )
 }
 
