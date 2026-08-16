@@ -133,7 +133,7 @@ export default function RouteMarquee({ items = [], seconds = 30 }) {
           aria-hidden="true"
           data-offset="0.34"
           style={{ offsetPath: 'var(--path)', offsetDistance: 'var(--d)', '--d': '34%' }}
-          className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 text-gold"
+          className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 text-brand"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
             <path d="M21 16v-2l-8-2.5V6.5a1.5 1.5 0 0 0-3 0v5L2 14v2l8-1.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-4.5L21 16Z" />

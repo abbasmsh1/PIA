@@ -39,7 +39,7 @@ export default function RouteMap() {
   const showLabel = labelled(dests)
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#03192b]/75 backdrop-blur-sm">
+    <div className="tablet relative overflow-hidden">
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="PIA route map from Karachi">
         {dests.map((d, i) => {
           const x = px(COORDS[d.code][0])
@@ -54,7 +54,7 @@ export default function RouteMap() {
               pathLength="1"
               d={`M${SX},${SY} Q${(SX + x) / 2},${(SY + y) / 2 - lift} ${x},${y}`}
               fill="none"
-              stroke={on ? '#cdd500' : 'rgba(255,255,255,0.16)'}
+              stroke={on ? '#d9bc55' : 'rgba(217,188,85,0.30)'}
               strokeWidth={on ? 2.5 : 1}
               className="route-line"
               style={{ animationDelay: `${i * 70}ms` }}
@@ -83,7 +83,7 @@ export default function RouteMap() {
                 cx={x}
                 cy={y}
                 r={on ? 6 : 3.5}
-                fill={on ? '#cdd500' : '#fff'}
+                fill={on ? '#d9bc55' : '#f3eee3'}
                 strokeWidth="2"
                 className="[stroke:transparent]"
               />
@@ -95,7 +95,7 @@ export default function RouteMap() {
                   className={`data ${on ? 'fill-white' : 'fill-white/55'}`}
                   fontSize="11"
                   // a hovered label must sit above its neighbours' dots
-                  style={on ? { paintOrder: 'stroke', stroke: 'var(--color-s0)', strokeWidth: 4 } : undefined}
+                  style={on ? { paintOrder: 'stroke', stroke: 'var(--emerald-deep)', strokeWidth: 4 } : undefined}
                 >
                   {d.code}
                 </text>
@@ -106,28 +106,28 @@ export default function RouteMap() {
         })}
 
         {/* Karachi hub */}
-        <circle cx={SX} cy={SY} r={13} fill="none" stroke="#007d34" strokeWidth="1.5" opacity="0.7" />
-        <circle cx={SX} cy={SY} r={6} fill="#007d34" />
+        <circle cx={SX} cy={SY} r={13} fill="none" stroke="#d9bc55" strokeWidth="1.5" opacity="0.7" />
+        <circle cx={SX} cy={SY} r={6} fill="#d9bc55" />
         <text x={SX} y={SY + 26} textAnchor="middle" className="data fill-white" fontSize="13" fontWeight="bold">
           KARACHI
         </text>
       </svg>
 
-      <div className="pointer-events-none absolute bottom-4 left-4 rounded-xl border border-white/10 bg-black/55 px-4 py-3 backdrop-blur">
+      <div className="pointer-events-none absolute bottom-4 left-4 rounded-md border border-[rgba(217,188,85,0.4)] bg-[#0a2e1e] px-4 py-3">
         {active ? (
           <div className="flex flex-wrap items-center gap-3">
-            <span className="data text-sm text-white/60">
+            <span className="data text-sm text-ivory/70">
               {HUB} → {active.code}
             </span>
-            <span className="text-sm font-semibold text-white/90">{active.city}</span>
+            <span className="text-sm font-semibold text-ivory">{active.city}</span>
             {active.fare && (
-              <span className="data font-bold text-lime">
+              <span className="data font-bold text-[#d9bc55]">
                 from PKR {new Intl.NumberFormat('en-PK').format(active.fare)}
               </span>
             )}
           </div>
         ) : (
-          <span className="text-xs font-medium tracking-[0.02em] text-white/70">Pick a destination to see its fare</span>
+          <span className="text-xs font-medium tracking-[0.02em] text-ivory/80">Pick a destination to see its fare</span>
         )}
       </div>
     </div>

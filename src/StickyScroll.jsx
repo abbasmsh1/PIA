@@ -44,34 +44,50 @@ export default function StickyScroll() {
   }, [])
 
   return (
-    <section className="snap-start snap-always scroll-mt-40 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-start px-6 pb-28 pt-44 md:px-10">
-      <h2 className="text-4xl font-semibold tracking-[-0.03em] text-white md:text-[3.25rem] md:leading-[1.05]">
+    <section className="snap-start snap-always scroll-mt-36 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-start px-6 pb-24 pt-40 md:px-10">
+      {/* The cusped Mughal arch that frames the pinned photograph. Normalised
+          coordinates so one path clips any size. */}
+      <svg width="0" height="0" aria-hidden className="absolute">
+        <defs>
+          <clipPath id="jali-arch" clipPathUnits="objectBoundingBox">
+            <path d="M 0,1 L 0,0.34 C 0,0.16 0.10,0.085 0.27,0.055 C 0.40,0.032 0.465,0.028 0.5,0 C 0.535,0.028 0.60,0.032 0.73,0.055 C 0.90,0.085 1,0.16 1,0.34 L 1,1 Z" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <h2 className="text-4xl text-ink md:text-[3.25rem] md:leading-[1.08]">
         Great people to fly with
       </h2>
+      <div className="ramp mt-5 h-px w-24" />
 
       <div className="mt-12 grid gap-12 md:grid-cols-2">
         <div className="hidden md:block">
-          <div className="panel sticky top-28 aspect-[4/5] max-h-[72vh] overflow-hidden p-0">
-            {STEPS.map((s, i) => (
-              <div
-                key={s.title}
-                className={`absolute inset-0 transition-opacity duration-700 ${
-                  active === i ? 'opacity-100' : 'opacity-0'
-                }`}
-              >
-                <Scenic
-                  seed={s.seed}
-                  label={s.seed}
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="h-full w-full"
-                />
+          <div className="sticky top-32">
+            <div
+              className="relative aspect-[4/5] max-h-[70vh] w-full overflow-hidden"
+              style={{ clipPath: 'url(#jali-arch)' }}
+            >
+              {STEPS.map((s, i) => (
+                <div
+                  key={s.title}
+                  className={`absolute inset-0 transition-opacity duration-700 ${
+                    active === i ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <Scenic
+                    seed={s.seed}
+                    label={s.seed}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="h-full w-full"
+                  />
+                </div>
+              ))}
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <span className="data text-xs tracking-[0.2em] text-[#d9bc55]">
+                  0{active + 1} <span className="text-ivory/70">/ 0{STEPS.length}</span>
+                </span>
+                <h3 className="mt-1 font-display text-2xl text-ivory">{STEPS[active].title}</h3>
               </div>
-            ))}
-            <div className="absolute inset-x-0 bottom-0 border-t border-white/10 bg-black/25 p-6 backdrop-blur-xl">
-              <span className="data text-xs tracking-[0.2em] text-gold">
-                0{active + 1} <span className="text-white/60">/ 0{STEPS.length}</span>
-              </span>
-              <h3 className="mt-1 text-2xl font-semibold tracking-[-0.02em] text-white">{STEPS[active].title}</h3>
             </div>
           </div>
         </div>
@@ -88,14 +104,17 @@ export default function StickyScroll() {
                 active === i ? 'opacity-100' : 'md:opacity-35'
               }`}
             >
-              <Scenic seed={s.seed} label={s.seed} sizes="100vw" className="panel mb-6 aspect-video w-full overflow-hidden p-0 md:hidden" />
+              <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-lg md:hidden" style={{ clipPath: 'url(#jali-arch)' }}>
+                <Scenic seed={s.seed} label={s.seed} sizes="100vw" className="absolute inset-0 h-full w-full" />
+              </div>
               <span className="data text-xs tracking-[0.2em] text-gold md:hidden">
                 0{i + 1} / 0{STEPS.length}
               </span>
-              <h3 className="mt-2 text-3xl font-semibold tracking-[-0.02em] text-white md:mt-0 md:text-[2.5rem]">
+              <h3 className="mt-2 font-display text-3xl text-ink md:mt-0 md:text-[2.5rem]">
                 {s.title}
               </h3>
-              <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-white/70">{s.body}</p>
+              <div className="ramp mt-4 h-px w-16" />
+              <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-ink/75">{s.body}</p>
             </div>
           ))}
         </div>

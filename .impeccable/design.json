@@ -1,201 +1,513 @@
 {
-  "schemaVersion": 2,
-  "generatedAt": "2026-08-16T00:00:00Z",
-  "title": "Design System: PIA Concept",
-  "extensions": {
-    "colorMeta": {
-      "brand": {
-        "role": "primary",
-        "displayName": "PIA Green",
-        "canonical": "#007d34",
-        "tonalRamp": ["#00190a", "#002d14", "#00451f", "#005f2a", "#007d34", "#12a24f", "#4fc880", "#a9e8bf"]
-      },
-      "mint": {
-        "role": "secondary",
-        "displayName": "Signal Mint",
-        "canonical": "#75dc86",
-        "tonalRamp": ["#0d2412", "#14391d", "#1d5429", "#2c7a3c", "#3fa353", "#57c26c", "#75dc86", "#c3f2cd"]
-      },
-      "lime": {
-        "role": "tertiary",
-        "displayName": "Runway Lime",
-        "canonical": "#cdd500",
-        "tonalRamp": ["#232400", "#3a3c00", "#565a00", "#767b00", "#9aa100", "#b8bf00", "#cdd500", "#eaef7a"]
-      },
-      "s0": {
-        "role": "neutral",
-        "displayName": "Deepest Ground",
-        "canonical": "#060912",
-        "tonalRamp": ["#060912", "#0a0e17", "#10131d", "#181b25", "#22262f", "#3a3f4a", "#6d7280", "#b9bec9"]
-      },
-      "s1": {
-        "role": "neutral",
-        "displayName": "Ground",
-        "canonical": "#0a0e17",
-        "tonalRamp": ["#060912", "#0a0e17", "#10131d", "#181b25", "#22262f", "#3a3f4a", "#6d7280", "#b9bec9"]
-      },
-      "s2": { "role": "neutral", "displayName": "Raised Surface", "canonical": "#10131d" },
-      "s3": { "role": "neutral", "displayName": "Raised Surface, High", "canonical": "#181b25" },
-      "s4": { "role": "neutral", "displayName": "Raised Surface, Highest", "canonical": "#22262f" },
-      "official-green": {
-        "role": "neutral",
-        "displayName": "Logo Green",
-        "canonical": "#006937",
-        "tonalRamp": ["#001a0e", "#002d18", "#004123", "#00552d", "#006937", "#178f52", "#54b77f", "#aadcc0"]
-      },
-      "official-gold": {
-        "role": "neutral",
-        "displayName": "Logo Gold",
-        "canonical": "#a48d29",
-        "tonalRamp": ["#231e08", "#3a3210", "#544719", "#705f22", "#8c762b", "#a48d29", "#c7ae4a", "#e6d79a"]
-      },
-      "ramp-yellow": { "role": "tertiary", "displayName": "Ramp Yellow", "canonical": "#ffe524" },
-      "ramp-leaf": { "role": "tertiary", "displayName": "Ramp Leaf", "canonical": "#71af2e" },
-      "ramp-teal": { "role": "tertiary", "displayName": "Ramp Teal", "canonical": "#005779" }
-    },
-    "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Page hero title only, one per page, echoed behind itself as a 4.5% white watermark on desktop." },
-      "headline": { "displayName": "Section Headline", "purpose": "The single title of a full-viewport section." },
-      "title": { "displayName": "Card Title", "purpose": "Card and panel headings; drops the display face by design." },
-      "body": { "displayName": "Body", "purpose": "Paragraphs and all interface language, measure capped at 46 to 62 characters." },
-      "data": { "displayName": "Ticket Data", "purpose": "Fares, times, flight numbers, airport codes, dates, seats, gates. Never navigation or buttons." },
-      "label": { "displayName": "Label", "purpose": "Footer column headings and fare-class markers, uppercase at 0.16em tracking." }
-    },
-    "shadows": [
-      { "name": "panel-lift", "value": "inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75)", "purpose": "Resting elevation on every glass surface: inner top highlight plus a contact shadow." },
-      { "name": "panel-lift-raised", "value": "inset 0 1px 0 0 rgba(255,255,255,0.14), 0 26px 50px -22px rgba(0,0,0,0.8)", "purpose": "Hover state, paired with a 2px rise." },
-      { "name": "well-press", "value": "inset 0 1px 2px 0 rgba(0,0,0,0.45)", "purpose": "Inputs and controls that read as pressed into the panel holding them." },
-      { "name": "action-shadow", "value": "0 10px 15px -3px rgba(0,125,52,0.25)", "purpose": "Under filled green buttons only, tinted with the button's own colour." }
-    ],
-    "materials": [
-      { "name": "glass", "value": "background: linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.035)); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); backdrop-filter: blur(24px) saturate(160%); border-radius: 22px;", "purpose": "Default raised surface." },
-      { "name": "glass-thick", "value": "background: linear-gradient(180deg, rgba(18,22,32,0.72), rgba(10,14,23,0.62)); backdrop-filter: blur(40px) saturate(160%);", "purpose": "Panels sitting over a photograph or the takeoff film." },
-      { "name": "well", "value": "background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.45);", "purpose": "Inset form fields." }
-    ],
-    "motion": [
-      { "name": "ease-out-quint", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Scroll reveal (0.7s) and panel hover lift (0.4s)." },
-      { "name": "reveal", "value": "opacity 0 to 1, translateY(28px) to 0 over 0.7s", "purpose": "First-entry reveal driven by IntersectionObserver at a 0.15 threshold." },
-      { "name": "route-draw", "value": "stroke-dashoffset 1 to 0 over 1.6s ease", "purpose": "Route-map arcs drawing in on load, pathLength normalised to 1." },
-      { "name": "drift", "value": "translateX(-40vw) to 140vw over 140s to 190s linear", "purpose": "Backdrop haze passes." },
-      { "name": "reduced-motion", "value": "every animation above is disabled under prefers-reduced-motion: reduce", "purpose": "Non-negotiable; the split-flap board skips straight to its final text." }
-    ],
-    "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" }
-    ],
-    "containers": [
-      { "name": "content", "value": "72rem" },
-      { "name": "widget", "value": "64rem" },
-      { "name": "header", "value": "80rem" }
+ "schemaVersion": 2,
+ "generatedAt": "2026-08-16T00:00:00Z",
+ "title": "Design System: PIA Concept",
+ "extensions": {
+  "colorMeta": {
+   "brand": {
+    "role": "primary",
+    "displayName": "PIA Emerald",
+    "canonical": "#006937",
+    "tonalRamp": [
+     "#001a0e",
+     "#002d18",
+     "#004123",
+     "#00552d",
+     "#006937",
+     "#178f52",
+     "#54b77f",
+     "#aadcc0"
     ]
+   },
+   "emerald": {
+    "role": "primary",
+    "displayName": "Deep Green Stone",
+    "canonical": "#0d3b26",
+    "tonalRamp": [
+     "#04150d",
+     "#082416",
+     "#0d3b26",
+     "#125338",
+     "#186c4a",
+     "#2f9068",
+     "#6cbb9b",
+     "#b8e0cf"
+    ]
+   },
+   "goldline": {
+    "role": "secondary",
+    "displayName": "Inlay Gold",
+    "canonical": "#a48d29",
+    "tonalRamp": [
+     "#231e08",
+     "#3a3210",
+     "#544719",
+     "#705f22",
+     "#8c762b",
+     "#a48d29",
+     "#c7ae4a",
+     "#e6d79a"
+    ]
+   },
+   "gold": {
+    "role": "secondary",
+    "displayName": "Gold Text",
+    "canonical": "#7d6a1d",
+    "tonalRamp": [
+     "#1b1707",
+     "#2e270c",
+     "#453b12",
+     "#5e5117",
+     "#7d6a1d",
+     "#a08a2c",
+     "#c4ae55",
+     "#e5d8a2"
+    ]
+   },
+   "gold-lit": {
+    "role": "secondary",
+    "displayName": "Lit Gold",
+    "canonical": "#d9bc55",
+    "tonalRamp": [
+     "#2b2410",
+     "#463a19",
+     "#625023",
+     "#7f682c",
+     "#9d8236",
+     "#bc9e43",
+     "#d9bc55",
+     "#efdea8"
+    ]
+   },
+   "ivory": {
+    "role": "neutral",
+    "displayName": "Marble Ground",
+    "canonical": "#f3eee3",
+    "tonalRamp": [
+     "#1d1a13",
+     "#332e23",
+     "#4c4535",
+     "#6b6350",
+     "#918872",
+     "#bab19b",
+     "#dcd5c6",
+     "#f3eee3"
+    ]
+   },
+   "plate": {
+    "role": "neutral",
+    "displayName": "Plate",
+    "canonical": "#faf6ec",
+    "tonalRamp": [
+     "#201d14",
+     "#373225",
+     "#514a37",
+     "#716853",
+     "#978d76",
+     "#c0b7a0",
+     "#e2dbcb",
+     "#faf6ec"
+    ]
+   },
+   "ink": {
+    "role": "neutral",
+    "displayName": "Green Ink",
+    "canonical": "#1d2a23",
+    "tonalRamp": [
+     "#0a0f0c",
+     "#131b16",
+     "#1d2a23",
+     "#2c4034",
+     "#3f5a4a",
+     "#5d8070",
+     "#93ada0",
+     "#cfdcd5"
+    ]
+   },
+   "mint": {
+    "role": "tertiary",
+    "displayName": "Signal Mint",
+    "canonical": "#75dc86"
+   },
+   "status-delayed": {
+    "role": "tertiary",
+    "displayName": "Delay Amber",
+    "canonical": "#f5a524"
+   },
+   "status-gate": {
+    "role": "tertiary",
+    "displayName": "Gate Sky",
+    "canonical": "#8fc7e8"
+   },
+   "paper": {
+    "role": "neutral",
+    "displayName": "Well Paper",
+    "canonical": "#fffdf6",
+    "tonalRamp": [
+     "#fffdf6"
+    ]
+   }
   },
-  "components": [
-    {
-      "name": "Primary Button",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Filled brand green, used for the one committing action on a surface.",
-      "html": "<button class=\"ds-btn-primary\">Search flights</button>",
-      "css": ".ds-btn-primary { font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #fff; background: #007d34; border: none; border-radius: 9999px; padding: 14px 32px; box-shadow: 0 10px 15px -3px rgba(0,125,52,0.25); transition: filter 0.2s; } .ds-btn-primary:hover { filter: brightness(1.15); } .ds-btn-primary:focus-visible { outline: 2px solid #75dc86; outline-offset: 3px; }"
-    },
-    {
-      "name": "Ghost Button",
-      "kind": "button",
-      "refersTo": "button-ghost",
-      "description": "Secondary actions inside a retrieved booking.",
-      "html": "<button class=\"ds-btn-ghost\">Change date</button>",
-      "css": ".ds-btn-ghost { font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif; font-size: 12px; color: rgba(255,255,255,0.8); background: transparent; border: 1px solid rgba(255,255,255,0.15); border-radius: 9999px; padding: 8px 16px; transition: background 0.2s; } .ds-btn-ghost:hover { background: rgba(255,255,255,0.1); } .ds-btn-ghost:focus-visible { outline: 2px solid #75dc86; outline-offset: 3px; }"
-    },
-    {
-      "name": "Glass Panel",
-      "kind": "card",
-      "refersTo": "card-panel",
-      "description": "The single raised-surface recipe: gradient fill, blur, brighter top edge, contact shadow.",
-      "html": "<div class=\"ds-panel\"><h3 class=\"ds-panel-title\">Special assistance</h3><p class=\"ds-panel-body\">Wheelchair support and medical clearance, arranged at booking.</p></div>",
-      "css": ".ds-panel { position: relative; background: linear-gradient(180deg, rgba(255,255,255,0.085) 0%, rgba(255,255,255,0.035) 100%); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); border-radius: 22px; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75); backdrop-filter: blur(24px) saturate(160%); padding: 24px; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s, border-color 0.4s; } .ds-panel:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.18); border-top-color: rgba(255,255,255,0.28); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.14), 0 26px 50px -22px rgba(0,0,0,0.8); } @media (prefers-reduced-motion: reduce) { .ds-panel:hover { transform: none; } } .ds-panel-title { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.9); margin: 0; } .ds-panel-body { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 14px; line-height: 1.625; color: rgba(255,255,255,0.7); margin: 12px 0 0; }"
-    },
-    {
-      "name": "Field Well",
-      "kind": "input",
-      "refersTo": "field-well",
-      "description": "Booking-widget field: label always visible above a value set in the data face, pressed into the panel.",
-      "html": "<label class=\"ds-well\"><span class=\"ds-well-label\">From</span><input class=\"ds-well-input\" value=\"KHI\" /></label>",
-      "css": ".ds-well { display: block; background: rgba(0,0,0,0.28); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.45); padding: 10px 14px; transition: border-color 0.2s, background 0.2s; } .ds-well:focus-within { border-color: rgba(117,220,134,0.45); background: rgba(0,0,0,0.34); } .ds-well-label { display: block; font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: rgba(255,255,255,0.65); } .ds-well:focus-within .ds-well-label { color: #75dc86; } .ds-well-input { display: block; width: 100%; margin-top: 4px; background: transparent; border: none; outline: none; font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 14px; color: #fff; }"
-    },
-    {
-      "name": "Status Chip",
-      "kind": "chip",
-      "refersTo": "chip-status",
-      "description": "Flight status. Boarding is the only filled variant, so the eye lands on the flight actually leaving.",
-      "html": "<span class=\"ds-chip ds-chip-boarding\">BOARDING</span><span class=\"ds-chip ds-chip-ontime\">ON TIME</span>",
-      "css": ".ds-chip { display: inline-block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 9999px; border: 1px solid currentColor; white-space: nowrap; } .ds-chip-boarding { color: #cdd500; background: rgba(205,213,0,0.2); border-color: rgba(205,213,0,0.4); } .ds-chip-ontime { color: #75dc86; }"
-    },
-    {
-      "name": "Navigation Bar",
-      "kind": "nav",
-      "refersTo": "nav-link",
-      "description": "Floating pill of thick glass; the active link takes a mint underline.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Book</a><a class=\"ds-nav-link\" href=\"#\">Manage</a><a class=\"ds-nav-link\" href=\"#\">Destinations</a></nav>",
-      "css": ".ds-nav { display: flex; gap: 28px; align-items: center; background: linear-gradient(180deg, rgba(18,22,32,0.72) 0%, rgba(10,14,23,0.62) 100%); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); border-radius: 9999px; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75); backdrop-filter: blur(40px) saturate(160%); padding: 12px 28px; } .ds-nav-link { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.01em; text-decoration: none; color: rgba(255,255,255,0.6); border-bottom: 2px solid transparent; padding-bottom: 4px; transition: color 0.2s; } .ds-nav-link:hover { color: #fff; } .ds-nav-link-active { color: #fff; border-bottom-color: #75dc86; } .ds-nav-link:focus-visible { outline: 2px solid #75dc86; outline-offset: 3px; border-radius: 6px; }"
-    },
-    {
-      "name": "Fare Ticket",
-      "kind": "custom",
-      "refersTo": "card-panel",
-      "description": "Boarding-pass fare card: two oversized codes either side of a dashed rule, fare on its own baseline.",
-      "html": "<a class=\"ds-ticket\" href=\"#\"><span class=\"ds-ticket-class\">Published fare</span><span class=\"ds-ticket-route\"><span class=\"ds-ticket-port\"><span class=\"ds-ticket-code\">KHI</span><span class=\"ds-ticket-city\">Karachi</span></span><span class=\"ds-ticket-rule\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M21 16v-2l-8-2.5V6.5a1.5 1.5 0 0 0-3 0v5L2 14v2l8-1.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-4.5L21 16Z\"/></svg></span><span class=\"ds-ticket-port ds-ticket-port-end\"><span class=\"ds-ticket-code\">DXB</span><span class=\"ds-ticket-city\">Dubai</span></span></span><span class=\"ds-ticket-fare\"><span class=\"ds-ticket-from\">From</span><span class=\"ds-ticket-amount\">PKR 62,000</span></span></a>",
-      "css": ".ds-ticket { display: block; text-decoration: none; padding: 24px; background: linear-gradient(180deg, rgba(255,255,255,0.085), rgba(255,255,255,0.035)); border: 1px solid rgba(255,255,255,0.10); border-top-color: rgba(255,255,255,0.18); border-radius: 22px; box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.09), 0 18px 40px -20px rgba(0,0,0,0.75); backdrop-filter: blur(24px) saturate(160%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s; } .ds-ticket:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.14), 0 26px 50px -22px rgba(0,0,0,0.8); } @media (prefers-reduced-motion: reduce) { .ds-ticket:hover { transform: none; } } .ds-ticket-class { display: block; font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: #cdd500; } .ds-ticket-route { display: flex; align-items: center; gap: 16px; margin-top: 20px; } .ds-ticket-port { flex: 1; min-width: 0; } .ds-ticket-port-end { text-align: right; } .ds-ticket-code { display: block; font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 32px; line-height: 1; color: #fff; } .ds-ticket-city { display: block; margin-top: 8px; font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 11px; color: rgba(255,255,255,0.6); } .ds-ticket-rule { position: relative; flex: 1; margin-bottom: 24px; border-top: 1px dashed rgba(255,255,255,0.2); display: flex; justify-content: center; color: #cdd500; } .ds-ticket-rule svg { position: absolute; top: -9px; } .ds-ticket-fare { display: flex; align-items: baseline; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); } .ds-ticket-from { font-family: 'Schibsted Grotesk', ui-sans-serif, sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); } .ds-ticket-amount { font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 18px; color: #fff; }"
-    },
-    {
-      "name": "Departures Row",
-      "kind": "custom",
-      "refersTo": "card-panel",
-      "description": "One row of the split-flap departures board: mono throughout, status as a chip.",
-      "html": "<div class=\"ds-dep-row\"><span class=\"ds-dep-time\">09:05</span><span class=\"ds-dep-flight\">PK213</span><span class=\"ds-dep-dest\">DUBAI</span><span class=\"ds-dep-gate\">B1</span><span class=\"ds-dep-status\"><span class=\"ds-chip ds-chip-boarding\">BOARDING</span></span></div>",
-      "css": ".ds-dep-row { display: grid; grid-template-columns: 5rem 5rem 1fr 4rem 7rem; align-items: center; gap: 12px; padding: 12px 20px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.05); } .ds-dep-time { color: #fff; } .ds-dep-flight { color: #75dc86; } .ds-dep-dest { color: rgba(255,255,255,0.85); letter-spacing: 0.05em; } .ds-dep-gate { color: rgba(255,255,255,0.5); } .ds-dep-status { text-align: right; } .ds-chip { display: inline-block; font-size: 11px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 9999px; border: 1px solid currentColor; white-space: nowrap; } .ds-chip-boarding { color: #cdd500; background: rgba(205,213,0,0.2); border-color: rgba(205,213,0,0.4); }"
-    }
+  "typographyMeta": {
+   "display": {
+    "displayName": "Display",
+    "purpose": "Page hero title, one per page, echoed as a 7rem ghost word at 10% ivory on desktop."
+   },
+   "headline": {
+    "displayName": "Section Headline",
+    "purpose": "The single title of a full-viewport section, always over a 24px gold inlay rule."
+   },
+   "step": {
+    "displayName": "Step Title",
+    "purpose": "Sticky-scroll feature titles and the caption on the pinned arched frame."
+   },
+   "title": {
+    "displayName": "Card Title",
+    "purpose": "Card, service and tier headings; drops the display face by design."
+   },
+   "body": {
+    "displayName": "Body",
+    "purpose": "Paragraphs and interface language, measure capped at 46ch lead / 62ch running."
+   },
+   "label": {
+    "displayName": "Label",
+    "purpose": "Footer column headings and category markers, uppercase at 0.16em."
+   },
+   "data": {
+    "displayName": "Ticket Data",
+    "purpose": "Codes, times, fares, flight numbers, gates, dates, seats, PNRs and counted figures."
+   },
+   "code": {
+    "displayName": "Sector Code",
+    "purpose": "The 2rem airport codes either side of a boarding-pass card's dashed rule."
+   },
+   "urdu": {
+    "displayName": "Urdu Name",
+    "purpose": "A Pakistani or regional port's own Nastaliq name beside the Latin one."
+   },
+   "ghost": {
+    "displayName": "Ghost Word",
+    "purpose": "The oversized engraved echo behind a page-hero title and on a photo-less scenic frame."
+   }
+  },
+  "shadows": [
+   {
+    "name": "plate-contact",
+    "value": "inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.28), 0 2px 10px -4px rgba(29,42,35,0.22)",
+    "purpose": "Resting elevation on every plate: the engraved double rule plus a short contact shadow."
+   },
+   {
+    "name": "plate-mounted",
+    "value": "inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.28), 0 24px 48px -18px rgba(6,18,12,0.6)",
+    "purpose": "A plate mounted over a photograph or the takeoff film."
+   },
+   {
+    "name": "plate-lifted",
+    "value": "inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.45), 0 10px 24px -10px rgba(29,42,35,0.30)",
+    "purpose": "Hover, paired with a 2px rise and the border going full gold."
+   },
+   {
+    "name": "tablet",
+    "value": "inset 0 0 0 3px #0d3b26, inset 0 0 0 4px rgba(164,141,41,0.55), 0 8px 24px -10px rgba(13,59,38,0.55)",
+    "purpose": "Under an emerald region, tinted with its own green."
+   },
+   {
+    "name": "well-press",
+    "value": "inset 0 1px 3px 0 rgba(29,42,35,0.10)",
+    "purpose": "Inputs and controls cut into the plate holding them."
+   },
+   {
+    "name": "lintel",
+    "value": "0 6px 18px -14px rgba(29,42,35,0.4)",
+    "purpose": "Under the fixed header, so the page passes beneath it."
+   },
+   {
+    "name": "action",
+    "value": "inset 0 0 0 1px rgba(243,238,227,0.25), 0 2px 8px -2px rgba(0,105,55,0.5)",
+    "purpose": "Under a filled green button: ivory inner rule plus a green-tinted shadow."
+   }
   ],
-  "narrative": {
-    "northStar": "The Lit Cabin Window",
-    "overview": "The page is a dark aircraft at night and the interface is the glass you read through. Nothing in the chrome is an opaque plate: every panel is a low-alpha white fill over a backdrop blur, so the photograph, the route map or the takeoff film behind it stays partly visible. Depth is therefore not a stack of grey boxes but a single sheet of material catching light from above, and the whole system is legible only because the ground underneath is close to black.\n\nColour is rationed on purpose. The surfaces carry none of it. What colour exists arrives from three places: the photographs, the brand ramp used as a hairline rule or a stripe, and three accents that each own one job. The result reads institutional rather than promotional, which is what an airline booking path needs; a passenger looking for a fare should meet numbers and dates, not a colour scheme competing with them.\n\nDensity is generous vertically and tight horizontally. Sections run a full viewport, top-aligned rather than centred, so the eye starts at the headline and travels down through the content instead of hunting for it in the middle of empty space. Type does the hierarchy work: a heavy, tightly tracked display face for headlines, a newsroom grotesk for everything a person reads, and a monospace face reserved strictly for the things printed on a boarding pass.",
-    "keyCharacteristics": [
-      "Near-black ground (#0a0e17) with a five-step surface stack behind the glass",
-      "Translucent panels: blurred, gradient-filled, top-edge lit, never flat",
-      "Three fonts with three non-overlapping jobs",
-      "Green for filled actions only; mint for accent type and focus; lime for small labels and live status",
-      "Full-viewport, top-aligned sections with the floating header's height reserved",
-      "Motion is entry and state only: reveal, draw, hover lift, all reduced-motion aware"
-    ],
-    "rules": [
-      { "name": "The One Green Rule", "body": "#007d34 fills buttons and nothing else. If a green needs to be read as type, it is mint; if it needs to be read as a small label, it is lime.", "section": "colors" },
-      { "name": "The Borrowed Colour Rule", "body": "Surfaces contribute no hue. Any colour on screen must come from a photograph, the brand ramp, or one of the three accents doing its assigned job.", "section": "colors" },
-      { "name": "The Ramp Is A Rule Rule", "body": "The five-stop brand gradient appears only as a line or a stripe: the footer rule, the boarding-pass edge, the app-mock underline, and the deterministic wash behind a photo-less scenic frame. It is never a button, a panel or a text fill on a body paragraph.", "section": "colors" },
-      { "name": "The Boarding Pass Rule", "body": "JetBrains Mono is reserved for what would be printed on a ticket: fares, times, flight numbers, airport codes, dates, seats, gates. It is never used for navigation, button text, headings or generic interface labels.", "section": "typography" },
-      { "name": "The Two-Level Display Rule", "body": "Chivo appears at exactly two levels, the page hero and the section title. A third level in the display face flattens the hierarchy the whole page depends on.", "section": "typography" },
-      { "name": "The No Eyebrow Rule", "body": "Nothing sits above a headline. No category kicker, no 'Introducing', no decorative label. A heading begins its own block.", "section": "typography" },
-      { "name": "The Reserved Header Rule", "body": "The header is fixed and translucent, so every scroll target must clear it. Any new snapped section carries the same top padding and scroll margin as Section.", "section": "layout" },
-      { "name": "The Top-Aligned Rule", "body": "A full-height section starts its content at the top. Vertical centring at this height leaves the headline floating and the fold empty.", "section": "layout" },
-      { "name": "The No Flat Fill Rule", "body": "A raised surface is never a solid colour. If a backdrop blur is unavailable, the fallback is the same gradient at higher alpha, not an opaque grey plate.", "section": "elevation" },
-      { "name": "The Light From Above Rule", "body": "The top border of a panel is always brighter than its other three. Any new surface that omits this reads as a sticker.", "section": "elevation" },
-      { "name": "The Fallback-Only Ornament Rule", "body": "Contour lines and the oversized airport code belong to the gradient fallback alone. Over a photograph they read as scratches across the subject and as a collision with it.", "section": "components" }
-    ],
-    "dos": [
-      "Do build every raised surface from the glass recipe: gradient fill, backdrop blur, hairline border with a brighter top edge, inset highlight, panel-lift shadow, 22px radius.",
-      "Do reserve JetBrains Mono for ticket data and give it tabular figures.",
-      "Do use brand green for filled actions, mint for accent type and focus, lime for small labels and live status.",
-      "Do start full-height sections at the top and reserve the floating header's height in both padding and scroll position.",
-      "Do guard every animation with prefers-reduced-motion, as the reveal, drift, route draw, split-flap and hover lift already do.",
-      "Do let photography carry the colour and keep the interface around it grey."
-    ],
-    "donts": [
-      "Don't put an opaque flat fill on a raised surface; if blur is unsupported, raise the gradient's alpha instead.",
-      "Don't set navigation, buttons, headings or generic labels in the mono face.",
-      "Don't use brand green as text or as a standalone border colour; mint is the readable green on this ground.",
-      "Don't place a kicker, eyebrow or category label above a heading.",
-      "Don't apply the brand ramp as a fill on a panel, a button or body text; it exists as a line, a stripe or the photo fallback.",
-      "Don't put the contour lines or the oversized airport code over a photograph.",
-      "Don't introduce a third display level in Chivo, or a fourth typeface."
-    ]
+  "materials": [
+   {
+    "name": "plate",
+    "value": "background: #faf6ec; border: 1px solid rgba(164,141,41,0.45); border-radius: 10px; box-shadow: inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.28), 0 2px 10px -4px rgba(29,42,35,0.22);",
+    "purpose": "The default raised surface. Opaque stone, never glass."
+   },
+   {
+    "name": "tablet",
+    "value": "background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.14)), #0d3b26; border: 1px solid rgba(164,141,41,0.45); border-radius: 10px; color: #f3eee3;",
+    "purpose": "The emerald region: departures board, footer, phone mock."
+   },
+   {
+    "name": "well",
+    "value": "background: #fffdf6; border: 1px solid rgba(29,42,35,0.22); border-radius: 6px; box-shadow: inset 0 1px 3px 0 rgba(29,42,35,0.10);",
+    "purpose": "Form fields, read as recessed carving."
+   },
+   {
+    "name": "hairline",
+    "value": "border: 1px solid rgba(164,141,41,0.28);",
+    "purpose": "A divider or a soft edge where a full plate would be too much."
+   },
+   {
+    "name": "inlay-thread",
+    "value": "background-image: linear-gradient(90deg, rgba(164,141,41,0.15), #a48d29 30%, #a48d29 70%, rgba(164,141,41,0.15));",
+    "purpose": "The gold thread under a section title and along a highlighted edge. A line, never a fill."
+   },
+   {
+    "name": "jali",
+    "value": "background-image: url(56px pierced-screen lattice, gold stroke, in src/index.css); background-size: 56px 56px;",
+    "purpose": "Lattice field at 6% down each page edge, 20% as the footer frieze."
+   }
+  ],
+  "motion": [
+   {
+    "name": "ease-out-quint",
+    "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "purpose": "Scroll reveal (0.8s) and plate hover lift (0.5s)."
+   },
+   {
+    "name": "reveal",
+    "value": "opacity 0 to 1, translateY(14px) to 0 over 0.8s",
+    "purpose": "First-entry reveal driven by IntersectionObserver at a 0.15 threshold; stone settles, it does not fly."
+   },
+   {
+    "name": "route-draw",
+    "value": "stroke-dashoffset 1 to 0 over 1.6s ease",
+    "purpose": "Route arcs drawing in on load, pathLength normalised to 1 \u2014 the inlay thread being laid."
+   },
+   {
+    "name": "marquee",
+    "value": "offset-distance 0 to 100% over 30s, rAF-driven CSS custom property",
+    "purpose": "Ports riding the departure arc; holds on hover and focus, does not start under reduced motion."
+   },
+   {
+    "name": "split-flap",
+    "value": "45ms tick, locks left to right, deterministic",
+    "purpose": "Departures board cells on mount; skipped entirely under reduced motion."
+   },
+   {
+    "name": "reduced-motion",
+    "value": "every animation above is disabled under prefers-reduced-motion: reduce",
+    "purpose": "Non-negotiable."
+   }
+  ],
+  "breakpoints": [
+   {
+    "name": "sm",
+    "value": "640px"
+   },
+   {
+    "name": "md",
+    "value": "768px"
+   },
+   {
+    "name": "lg",
+    "value": "1024px"
+   }
+  ],
+  "containers": [
+   {
+    "name": "content",
+    "value": "72rem"
+   },
+   {
+    "name": "widget",
+    "value": "64rem"
+   },
+   {
+    "name": "header",
+    "value": "80rem"
+   }
+  ],
+  "vendored": [
+   {
+    "path": "src/vendor/admit-one-ticket.jsx",
+    "source": "21st.dev \u2014 larsen66 / admit-one-ticket, component id 22433",
+    "modified": false,
+    "note": "Third-party, vendored unmodified. Not house code and not part of this system's material rules. Themed entirely through props at its single call site in src/Home.jsx: texture (colorBack #0d3b26, colorFront #a48d29, colorHighlight #006937), gradient (colorLight #cbb35e, colorMid #006937, colorDark #0d3b26) and layout (watermarkColor #cbb35e, inkColor #f3eee3). Restyle via props; do not edit the file."
+   }
+  ],
+  "techniques": [
+   {
+    "name": "Marquee Along SVG Path",
+    "file": "src/RouteMarquee.jsx",
+    "source": "21st.dev \u2014 danielpetho / fancycomponents.dev",
+    "note": "Items placed with CSS offset-path and moved by animating offset-distance. Two deliberate departures from the published build: (1) a requestAnimationFrame loop writes one CSS custom property per item instead of using framer-motion values, because framer-motion 12 unmounts the tree on React 19.2 when it animates DOM nodes; (2) it renders into a fixed 900x260 stage scaled to its container, because offset-path: path() resolves in CSS pixels while a viewBox SVG scales, so the drawn curve and the travelling items would otherwise drift apart at every width but one."
+   }
+  ]
+ },
+ "components": [
+  {
+   "name": "Primary Button",
+   "kind": "button",
+   "refersTo": "button-primary",
+   "description": "Filled brand green, used for the one committing action on a surface.",
+   "html": "<button class=\"ds-btn-primary\">Search flights</button>",
+   "css": ".ds-btn-primary { font-family: 'Albert Sans', ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #f3eee3; background: #006937; border: none; border-radius: 6px; padding: 14px 32px; box-shadow: inset 0 0 0 1px rgba(243,238,227,0.25), 0 2px 8px -2px rgba(0,105,55,0.5); transition: filter 0.2s; } .ds-btn-primary:hover { filter: brightness(1.1); } .ds-btn-primary:focus-visible { outline: 2px solid #006937; outline-offset: 3px; border-radius: 4px; }"
+  },
+  {
+   "name": "Quiet Button",
+   "kind": "button",
+   "refersTo": "button-quiet",
+   "description": "Secondary actions on a retrieved booking: ink on a gold hairline.",
+   "html": "<button class=\"ds-btn-quiet\">Change date</button>",
+   "css": ".ds-btn-quiet { font-family: 'Albert Sans', ui-sans-serif, system-ui, sans-serif; font-size: 12px; color: rgba(29,42,35,0.8); background: transparent; border: 1px solid rgba(164,141,41,0.45); border-radius: 6px; padding: 8px 16px; transition: background 0.2s; } .ds-btn-quiet:hover { background: #faf6ec; } .ds-btn-quiet:focus-visible { outline: 2px solid #006937; outline-offset: 3px; }"
+  },
+  {
+   "name": "Stone Plate",
+   "kind": "card",
+   "refersTo": "card-plate",
+   "description": "The single raised-surface recipe: plate fill, gold hairline, engraved second rule, short contact shadow.",
+   "html": "<div class=\"ds-plate\"><h3 class=\"ds-plate-title\">Special assistance</h3><p class=\"ds-plate-body\">Wheelchair support and medical clearance, arranged at booking.</p></div>",
+   "css": ".ds-plate { position: relative; background: #faf6ec; border: 1px solid rgba(164,141,41,0.45); border-radius: 10px; box-shadow: inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.28), 0 2px 10px -4px rgba(29,42,35,0.22); padding: 24px; transition: border-color 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1); } .ds-plate:hover { transform: translateY(-2px); border-color: #a48d29; box-shadow: inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.45), 0 10px 24px -10px rgba(29,42,35,0.30); } @media (prefers-reduced-motion: reduce) { .ds-plate:hover { transform: none; } } .ds-plate-title { font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 18px; font-weight: 600; color: #1d2a23; margin: 0; } .ds-plate-body { font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 14px; line-height: 1.625; color: rgba(29,42,35,0.7); margin: 12px 0 0; }"
+  },
+  {
+   "name": "Field Well",
+   "kind": "input",
+   "refersTo": "field-well",
+   "description": "Booking-widget field: label always visible above a value in the data face, cut into the plate.",
+   "html": "<label class=\"ds-well\"><span class=\"ds-well-label\">From</span><input class=\"ds-well-input\" value=\"KHI\" /></label>",
+   "css": ".ds-well { display: block; background: #fffdf6; border: 1px solid rgba(29,42,35,0.22); border-radius: 6px; box-shadow: inset 0 1px 3px 0 rgba(29,42,35,0.10); padding: 10px 14px; transition: border-color 0.2s, box-shadow 0.2s; } .ds-well:focus-within { border-color: #006937; box-shadow: inset 0 1px 3px 0 rgba(29,42,35,0.08), 0 0 0 1px #006937; } .ds-well-label { display: block; font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: rgba(29,42,35,0.6); } .ds-well:focus-within .ds-well-label { color: #006937; } .ds-well-input { display: block; width: 100%; margin-top: 4px; background: transparent; border: none; outline: none; font-family: 'Spline Sans Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 14px; color: #1d2a23; }"
+  },
+  {
+   "name": "Status Chip",
+   "kind": "chip",
+   "refersTo": "chip-status",
+   "description": "Flight status on the emerald tablet. Boarding is the only filled variant, so the eye lands on the flight actually leaving.",
+   "html": "<div style=\"background:#0d3b26;padding:16px;border-radius:10px\"><span class=\"ds-chip ds-chip-boarding\">BOARDING</span> <span class=\"ds-chip ds-chip-ontime\">ON TIME</span> <span class=\"ds-chip ds-chip-delayed\">DELAYED</span></div>",
+   "css": ".ds-chip { display: inline-block; font-family: 'Spline Sans Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; } .ds-chip-boarding { color: #d9bc55; background: rgba(217,188,85,0.15); border-color: rgba(217,188,85,0.5); } .ds-chip-ontime { color: #75dc86; } .ds-chip-delayed { color: #f5a524; }"
+  },
+  {
+   "name": "Header Lintel",
+   "kind": "nav",
+   "refersTo": "nav-link",
+   "description": "Solid ivory lintel ruled underneath in gold; the active link takes a gold underline. It never goes translucent.",
+   "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-nav-link-active\" href=\"#\">Book</a><a class=\"ds-nav-link\" href=\"#\">Manage</a><a class=\"ds-nav-link\" href=\"#\">Destinations</a><button class=\"ds-nav-action\">Award +Plus</button></nav>",
+   "css": ".ds-nav { display: flex; gap: 32px; align-items: center; background: #f3eee3; border-bottom: 1px solid rgba(164,141,41,0.45); box-shadow: 0 6px 18px -14px rgba(29,42,35,0.4); padding: 12px 20px; } .ds-nav-link { font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.01em; text-decoration: none; color: rgba(29,42,35,0.6); border-bottom: 2px solid transparent; padding-bottom: 4px; transition: color 0.2s; } .ds-nav-link:hover { color: #1d2a23; } .ds-nav-link-active { color: #1d2a23; border-bottom-color: #a48d29; } .ds-nav-link:focus-visible { outline: 2px solid #006937; outline-offset: 3px; border-radius: 4px; } .ds-nav-action { margin-left: auto; font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 14px; font-weight: 600; color: #f3eee3; background: #006937; border: none; border-radius: 6px; padding: 10px 20px; box-shadow: inset 0 0 0 1px rgba(243,238,227,0.25), 0 2px 8px -2px rgba(0,105,55,0.5); }"
+  },
+  {
+   "name": "Fare Ticket",
+   "kind": "custom",
+   "refersTo": "card-plate",
+   "description": "Boarding-pass plate: two 2rem sector codes either side of a dashed gold rule, fare on its own baseline.",
+   "html": "<a class=\"ds-ticket\" href=\"#\"><span class=\"ds-ticket-route\"><span class=\"ds-ticket-port\"><span class=\"ds-ticket-code\">KHI</span><span class=\"ds-ticket-city\">Karachi</span></span><span class=\"ds-ticket-rule\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M21 16v-2l-8-2.5V6.5a1.5 1.5 0 0 0-3 0v5L2 14v2l8-1.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-4.5L21 16Z\"/></svg></span><span class=\"ds-ticket-port ds-ticket-port-end\"><span class=\"ds-ticket-code\">DXB</span><span class=\"ds-ticket-city\">Dubai</span></span></span><span class=\"ds-ticket-fare\"><span class=\"ds-ticket-from\">From</span><span class=\"ds-ticket-amount\">PKR 62,000</span></span></a>",
+   "css": ".ds-ticket { display: block; text-decoration: none; padding: 24px; background: #faf6ec; border: 1px solid rgba(164,141,41,0.45); border-radius: 10px; box-shadow: inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.28), 0 2px 10px -4px rgba(29,42,35,0.22); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s, border-color 0.5s; } .ds-ticket:hover { transform: translateY(-2px); border-color: #a48d29; box-shadow: inset 0 0 0 3px #faf6ec, inset 0 0 0 4px rgba(164,141,41,0.45), 0 10px 24px -10px rgba(29,42,35,0.30); } @media (prefers-reduced-motion: reduce) { .ds-ticket:hover { transform: none; } } .ds-ticket-route { display: flex; align-items: center; gap: 16px; } .ds-ticket-port { flex: 1; min-width: 0; } .ds-ticket-port-end { text-align: right; } .ds-ticket-code { display: block; font-family: 'Spline Sans Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 32px; line-height: 1; color: #1d2a23; } .ds-ticket-city { display: block; margin-top: 8px; font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 11px; color: rgba(29,42,35,0.65); } .ds-ticket-rule { position: relative; flex: 1; margin-bottom: 24px; border-top: 1px dashed rgba(164,141,41,0.5); display: flex; justify-content: center; color: #a48d29; } .ds-ticket-rule svg { position: absolute; top: -9px; } .ds-ticket-fare { display: flex; align-items: baseline; justify-content: space-between; margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(164,141,41,0.3); } .ds-ticket-from { font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 14px; color: rgba(29,42,35,0.65); } .ds-ticket-amount { font-family: 'Spline Sans Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 18px; color: #1d2a23; }"
+  },
+  {
+   "name": "Departures Row",
+   "kind": "custom",
+   "refersTo": "tablet",
+   "description": "One row of the emerald departures tablet: mono throughout, lit gold flight numbers, status as a chip.",
+   "html": "<div class=\"ds-tablet\"><div class=\"ds-dep-row\"><span class=\"ds-dep-time\">09:05</span><span class=\"ds-dep-flight\">PK213</span><span class=\"ds-dep-dest\">DUBAI</span><span class=\"ds-dep-gate\">B1</span><span class=\"ds-dep-status\"><span class=\"ds-chip ds-chip-boarding\">BOARDING</span></span></div></div>",
+   "css": ".ds-tablet { background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(0,0,0,0.14)), #0d3b26; border: 1px solid rgba(164,141,41,0.45); border-radius: 10px; box-shadow: inset 0 0 0 3px #0d3b26, inset 0 0 0 4px rgba(164,141,41,0.55), 0 8px 24px -10px rgba(13,59,38,0.55); overflow: hidden; } .ds-dep-row { display: grid; grid-template-columns: 5rem 5rem 1fr 4rem 7rem; align-items: center; gap: 12px; padding: 12px 20px; font-family: 'Spline Sans Mono', ui-monospace, monospace; font-feature-settings: 'tnum' 1; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.10); } .ds-dep-time { color: #f3eee3; } .ds-dep-flight { color: #d9bc55; } .ds-dep-dest { color: rgba(243,238,227,0.85); letter-spacing: 0.05em; } .ds-dep-gate { color: rgba(243,238,227,0.6); } .ds-dep-status { text-align: right; } .ds-chip { display: inline-block; font-size: 11px; letter-spacing: 0.1em; padding: 3px 10px; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; } .ds-chip-boarding { color: #d9bc55; background: rgba(217,188,85,0.15); border-color: rgba(217,188,85,0.5); }"
+  },
+  {
+   "name": "Route Marquee Port",
+   "kind": "custom",
+   "refersTo": "card-plate",
+   "description": "A port riding the departure arc: a plate pill on a dashed gold curve. The only place a full pill radius is used on a surface.",
+   "html": "<div class=\"ds-arc\"><svg width=\"320\" height=\"90\" viewBox=\"0 0 320 90\" aria-hidden=\"true\"><defs><linearGradient id=\"dsRouteFade\" x1=\"0\" x2=\"1\"><stop offset=\"0\" stop-color=\"#a48d29\" stop-opacity=\"0\"/><stop offset=\"0.5\" stop-color=\"#a48d29\" stop-opacity=\"0.7\"/><stop offset=\"1\" stop-color=\"#a48d29\" stop-opacity=\"0\"/></linearGradient></defs><path d=\"M -20 72 C 70 10, 250 10, 340 72\" fill=\"none\" stroke=\"url(#dsRouteFade)\" stroke-width=\"1\" stroke-dasharray=\"4 8\"/></svg><a class=\"ds-port\" href=\"#\"><span class=\"ds-port-code\">DXB</span><span class=\"ds-port-city\">Dubai</span></a></div>",
+   "css": ".ds-arc { position: relative; } .ds-port { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap; text-decoration: none; background: #faf6ec; border: 1px solid rgba(164,141,41,0.45); border-radius: 9999px; padding: 6px 14px; box-shadow: 0 2px 10px -4px rgba(29,42,35,0.22); transition: border-color 0.2s; } .ds-port:hover { border-color: rgba(0,105,55,0.6); } .ds-port-code { font-family: 'Spline Sans Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.12em; color: #7d6a1d; } .ds-port-city { font-family: 'Albert Sans', ui-sans-serif, sans-serif; font-size: 14px; color: rgba(29,42,35,0.8); } .ds-port:hover .ds-port-city { color: #1d2a23; }"
+  },
+  {
+   "name": "Section Title",
+   "kind": "custom",
+   "refersTo": "card-plate",
+   "description": "Inscriptional Marcellus over a 24px gold inlay thread. The opening of every section.",
+   "html": "<div class=\"ds-section-head\"><h2 class=\"ds-section-title\">Fares out of Pakistan</h2><div class=\"ds-section-rule\"></div></div>",
+   "css": ".ds-section-head { max-width: 48rem; } .ds-section-title { font-family: 'Marcellus', 'Times New Roman', serif; font-weight: 400; font-size: 3.25rem; line-height: 1.08; letter-spacing: 0.005em; color: #1d2a23; margin: 0; } .ds-section-rule { height: 1px; width: 96px; margin-top: 20px; background-image: linear-gradient(90deg, rgba(164,141,41,0.15), #a48d29 30%, #a48d29 70%, rgba(164,141,41,0.15)); }"
   }
+ ],
+ "narrative": {
+  "northStar": "The Mughal Jali World",
+  "overview": "The page is a marble court. The ground is warm ivory stone, the text is a deep green ink cut into it, and the structure comes from inlaid plates ruled twice in gold \u2014 the pietra dura double rule \u2014 rather than from boxes, cards or panels of translucent glass. Where the world needs weight it commits a whole region to carved emerald: the advisory strip, the departures tablet, the footer, the wash behind a hero photograph. Where it needs an edge it draws a gold hairline. Gold is never a fill; it is the engraved line.\n\nDepth is stone depth. A raised surface is lighter than the ground it sits on, is bordered by a gold hairline with a second rule engraved three pixels inside it, and casts a short offset shadow that reads as contact rather than float. Nothing blurs and nothing is translucent, because stone is neither. The one blurred edge in the world is a photograph's own dark wash, applied so ivory type stays legible over it.\n\nType carries the register. Marcellus is inscriptional and ships at a single weight, so hierarchy is made by size and never by boldness; Albert Sans does all the reading; Spline Sans Mono with tabular figures does everything that would be printed on a ticket; and Noto Nastaliq Urdu carries the Pakistani ports' own names beside the Latin ones. Motion is short and damped \u2014 arcs draw in, sections settle up fourteen pixels, plates lift two \u2014 and every piece of it is switched off under prefers-reduced-motion.",
+  "keyCharacteristics": [
+   "Ivory marble ground (#f3eee3) with plates one step lighter (#faf6ec)",
+   "Emerald commits at region scale; brand green fills actions only",
+   "Gold is line, rule and inlay thread, never a surface fill",
+   "Opaque stone materials: hairline, double rule, shallow offset shadow, no blur",
+   "Four typefaces with four non-overlapping jobs, display at one weight",
+   "Small radii (3\u201310px); pills reserved for objects that travel"
+  ],
+  "rules": [
+   {
+    "name": "The Gold Never Fills Rule",
+    "body": "Gold is a line: a border, a rule, a thread, a lattice stroke or small engraved text. The single fill in the whole build is the BOARDING chip's 15% wash, and only because it sits on emerald where a hairline alone would not catch the eye.",
+    "section": "colors"
+   },
+   {
+    "name": "The Three Golds Rule",
+    "body": "One gold, three jobs by ground. #a48d29 draws lines on any ground; #7d6a1d is the only gold allowed to carry small text on ivory; #d9bc55 is the only gold that reads on emerald. Using the line gold as text on ivory fails contrast, and using the text gold on emerald disappears.",
+    "section": "colors"
+   },
+   {
+    "name": "The Region Scale Rule",
+    "body": "Emerald arrives as a whole region \u2014 a bar, a tablet, a footer, a wash \u2014 or not at all. Brand green arrives as a filled control. Neither is used as a tint, a border colour or a body-text colour on ivory.",
+    "section": "colors"
+   },
+   {
+    "name": "The Ticket Data Rule",
+    "body": "Spline Sans Mono is what would be printed on a ticket: codes, times, fares, flight numbers, gates, dates, seats, PNRs and counted figures. It is never used for navigation, headings or running text.",
+    "section": "typography"
+   },
+   {
+    "name": "The One Weight Rule",
+    "body": "Marcellus ships at 400 and only 400. A display line that needs more presence gets more size, more space or a rule beneath it \u2014 never a heavier weight and never a synthetic bold.",
+    "section": "typography"
+   },
+   {
+    "name": "The Own Name Rule",
+    "body": "A Pakistani or regional port carries its Nastaliq name alongside the Latin one wherever there is room, at its own line height and direction. It is content, not decoration, and is never faked with a transformed Latin face.",
+    "section": "typography"
+   },
+   {
+    "name": "The Reserved Lintel Rule",
+    "body": "The header is fixed, opaque and can carry a dismissible advisory strip above it. Every scroll target clears it: 144px of scroll margin on each section and 128px of scroll-padding-top on the root. Both move with the header or a snapped section lands underneath it.",
+    "section": "layout"
+   },
+   {
+    "name": "The Top-Aligned Rule",
+    "body": "A full-height section starts its content at the top. Centring at this height leaves the title floating and the first fold empty.",
+    "section": "layout"
+   },
+   {
+    "name": "The Stone Depth Rule",
+    "body": "A raised surface is opaque, lighter than its ground, edged with a hairline and settled by a short offset shadow. No backdrop-filter, no alpha fill, no glass.",
+    "section": "elevation"
+   },
+   {
+    "name": "The Double Rule Rule",
+    "body": "Every plate and tablet carries the second rule engraved 3px inside its border. A surface with a single border reads as a sticker in this world.",
+    "section": "elevation"
+   },
+   {
+    "name": "The Fallback-Only Ornament Rule",
+    "body": "Contour lines and the oversized ghost code belong to the gradient fallback alone. Over a photograph they read as scratches across the subject.",
+    "section": "components"
+   },
+   {
+    "name": "The Held Marquee Rule",
+    "body": "Anything that moves along a path stops on hover and on focus. A moving target that cannot be clicked is worse than no motion.",
+    "section": "components"
+   }
+  ],
+  "dos": [
+   "Do build every raised surface as an opaque plate: plate fill, 1px gold hairline, the 3px engraved second rule, a short offset contact shadow, 10px radius.",
+   "Do let emerald take a whole region \u2014 a bar, a tablet, a footer, a wash \u2014 and let brand green fill the one committing control.",
+   "Do pick the gold by its ground: #a48d29 for lines, #7d6a1d for small text on ivory, #d9bc55 for anything on emerald.",
+   "Do set ticket data in Spline Sans Mono with tabular figures, and give a Pakistani port its Nastaliq name beside the Latin one.",
+   "Do start full-height sections at the top and reserve the fixed lintel's height in both padding and scroll margin.",
+   "Do guard every animation with prefers-reduced-motion, as the reveal, route draw, split-flap, marquee and plate lift already do.",
+   "Do keep radii small: 10px plates, 6px controls, 3px chips; pills only for things that travel or toggle."
+  ],
+  "donts": [
+   "Don't put a backdrop-filter, a translucent white fill or a soft glow on a raised surface. Depth here is a line and a short shadow.",
+   "Don't fill anything with gold. It is a border, a rule, a thread or small engraved text.",
+   "Don't set the line gold (#a48d29) as small text on ivory, or mint or lit gold as anything on ivory; none of them clear 4.5:1 there.",
+   "Don't give Marcellus a second weight or a synthetic bold, and don't set body copy, navigation or interface labels in it.",
+   "Don't set navigation, buttons, headings or running text in the mono face.",
+   "Don't put the contour lines or the ghost code over a photograph.",
+   "Don't edit src/vendor/admit-one-ticket.jsx; theme it through its texture, gradient and layout props."
+  ]
+ }
 }

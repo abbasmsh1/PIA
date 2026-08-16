@@ -153,7 +153,10 @@ export default function Home() {
               dates="Earn on every sector"
               stubText="Member"
               watermark="A+"
-              width={520}
+              // The card renders at a fixed pixel width, so cap it to the
+              // viewport on phones. ponytail: sized once at mount, no resize
+              // listener — add one if rotation ever matters.
+              width={Math.min(520, (typeof window === 'undefined' ? 520 : window.innerWidth) - 48)}
               texture={CARD_TEXTURE}
               gradient={CARD_GRADIENT}
               layout={CARD_LAYOUT}
