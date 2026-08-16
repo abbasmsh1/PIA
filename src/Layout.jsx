@@ -4,22 +4,19 @@ import { useReveal } from './BookingElements.jsx'
 import Scenic from './Scenic.jsx'
 import { NAV, CONTACT } from './data.js'
 
-// Fixed backdrop. Near-black ground with two slow drifting glows off the brand
-// ramp — the photography and the takeoff canvas are what carry colour now, so
-// the page behind them stays quiet.
+// Fixed backdrop: the marble ground. A whisper of jali lattice down each edge,
+// masked out toward the centre so text columns sit on clean stone.
 function Backdrop() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-s1">
+    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-ivory">
       <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(180deg,#060912 0%,#0a0e17 45%,#0d1420 100%)' }}
+        className="jali absolute inset-y-0 left-0 w-64 opacity-[0.06]"
+        style={{ maskImage: 'linear-gradient(90deg, black, transparent)', WebkitMaskImage: 'linear-gradient(90deg, black, transparent)' }}
       />
       <div
-        className="absolute -top-[10%] right-[-6%] h-[70vh] w-[70vh] rounded-full blur-3xl"
-        style={{ background: 'radial-gradient(circle, rgba(0,125,52,0.16), rgba(0,0,0,0) 65%)' }}
+        className="jali absolute inset-y-0 right-0 w-64 opacity-[0.06]"
+        style={{ maskImage: 'linear-gradient(270deg, black, transparent)', WebkitMaskImage: 'linear-gradient(270deg, black, transparent)' }}
       />
-      <div className="cloud" style={{ top: '28%', width: '46vw', height: '30vh', opacity: 0.9, animation: 'ps-drift 140s linear infinite', animationDelay: '-30s' }} />
-      <div className="cloud" style={{ top: '68%', width: '38vw', height: '26vh', opacity: 0.7, animation: 'ps-drift 190s linear infinite', animationDelay: '-110s' }} />
     </div>
   )
 }
@@ -54,16 +51,16 @@ function AdvisoryBar() {
 
   if (!open) return null
   return (
-    <div className="pointer-events-auto flex w-full items-center justify-center gap-3 border-b border-white/8 bg-black/35 px-4 py-2 text-center text-xs text-white/70 backdrop-blur-xl">
-      <span className="data hidden shrink-0 text-[11px] tracking-[0.2em] text-mint sm:inline">NOTICE</span>
+    <div className="pointer-events-auto flex w-full items-center justify-center gap-3 bg-emerald px-4 py-2 text-center text-xs text-ivory/90">
+      <span className="data hidden shrink-0 text-[11px] tracking-[0.2em] text-[#d9bc55] sm:inline">NOTICE</span>
       <span className="truncate">{ADVISORIES[i]}</span>
-      <a href="#help" className="hidden shrink-0 font-semibold text-lime underline-offset-2 hover:underline sm:inline">
+      <a href="#help" className="hidden shrink-0 font-semibold text-[#d9bc55] underline-offset-2 hover:underline sm:inline">
         Read more
       </a>
       <button
         onClick={() => setOpen(false)}
         aria-label="Dismiss announcement"
-        className="shrink-0 rounded-full p-1 text-white/60 hover:bg-white/10 hover:text-white"
+        className="shrink-0 rounded-full p-1 text-ivory/70 hover:bg-white/10 hover:text-ivory"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
           <path d="M6 6l12 12M6 18L18 6" />
@@ -73,6 +70,8 @@ function AdvisoryBar() {
   )
 }
 
+// The header is a marble lintel: solid ivory ruled underneath by a gold
+// hairline. It never goes translucent — stone does not.
 export function Header() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
@@ -114,49 +113,51 @@ export function Header() {
   return (
     <header className="pointer-events-none fixed top-0 left-0 z-40 w-full">
       <AdvisoryBar />
-      <div className="mx-auto mt-3 flex w-[calc(100%-1.5rem)] max-w-7xl items-center justify-between rounded-full px-5 py-3 md:px-7 panel panel-thick">
-        <Link to="/" className="pointer-events-auto">
-          <img
-            src="/pia-logo-reversed.svg"
-            alt="PIA — Pakistan International Airlines"
-            className="h-8 w-auto md:h-10"
-          />
-        </Link>
+      <div className="pointer-events-auto border-b border-[color:var(--gold-line)] bg-ivory shadow-[0_6px_18px_-14px_rgba(29,42,35,0.4)]">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-3 md:px-8">
+          <Link to="/">
+            <img
+              src="/pia-logo.svg"
+              alt="PIA — Pakistan International Airlines"
+              className="h-9 w-auto md:h-11"
+            />
+          </Link>
 
-        <nav className="pointer-events-auto hidden gap-7 lg:flex">
-          {NAV.map(([label, to]) => (
-            <NavLink
-              key={to}
-              to={to}
-              className={({ isActive }) =>
-                `border-b-2 pb-1 text-sm font-medium tracking-[0.01em] transition ${
-                  isActive
-                    ? 'border-mint text-white'
-                    : 'border-transparent text-white/60 hover:text-white'
-                }`
-              }
+          <nav className="hidden gap-8 lg:flex">
+            {NAV.map(([label, to]) => (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) =>
+                  `border-b-2 pb-1 text-sm font-medium tracking-[0.01em] transition ${
+                    isActive
+                      ? 'border-[color:var(--pia-gold)] text-ink'
+                      : 'border-transparent text-ink/60 hover:text-ink'
+                  }`
+                }
+              >
+                {label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <button className="hidden rounded-md bg-brand px-5 py-2.5 text-sm font-semibold text-ivory shadow-[inset_0_0_0_1px_rgba(243,238,227,0.25),0_2px_8px_-2px_rgba(0,105,55,0.5)] transition hover:brightness-110 md:block">
+              Award +Plus
+            </button>
+            <button
+              ref={toggleRef}
+              onClick={() => setOpen((o) => !o)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              className="flex h-9 w-9 items-center justify-center rounded-md border border-[color:var(--gold-line)] bg-plate text-ink lg:hidden"
             >
-              {label}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="pointer-events-auto flex items-center gap-3">
-          <button className="hidden rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-black/40 transition hover:brightness-115 md:block">
-            Award +Plus
-          </button>
-          <button
-            ref={toggleRef}
-            onClick={() => setOpen((o) => !o)}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            aria-expanded={open}
-            aria-controls="site-menu"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white backdrop-blur lg:hidden"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              {open ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
-            </svg>
-          </button>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                {open ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -167,7 +168,7 @@ export function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-black/55 px-6 pt-28 backdrop-blur-2xl lg:hidden"
+          className="pointer-events-auto fixed inset-0 top-0 z-40 flex flex-col bg-ivory px-6 pt-28 lg:hidden"
         >
           <nav className="flex flex-col gap-2">
             {NAV.map(([label, to]) => (
@@ -175,8 +176,8 @@ export function Header() {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `border-b border-white/8 py-4 text-lg font-medium ${
-                    isActive ? 'text-mint' : 'text-white/80'
+                  `border-b border-[color:var(--gold-line-soft)] py-4 text-lg font-medium ${
+                    isActive ? 'text-brand' : 'text-ink/80'
                   }`
                 }
               >
@@ -184,7 +185,7 @@ export function Header() {
               </NavLink>
             ))}
           </nav>
-          <button className="mt-8 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white">
+          <button className="mt-8 rounded-md bg-brand px-6 py-3 text-sm font-semibold text-ivory">
             Award +Plus
           </button>
         </div>
@@ -193,19 +194,21 @@ export function Header() {
   )
 }
 
+// Section title: inscriptional Marcellus over a short gold inlay rule.
 export function Section({ id, title, children }) {
   const ref = useReveal()
   return (
     <section
       id={id}
-      className="snap-start snap-always scroll-mt-40 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-start px-6 pb-28 pt-44 md:px-10"
+      className="snap-start snap-always scroll-mt-36 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-start px-6 pb-24 pt-40 md:px-10"
     >
       <div ref={ref} className="reveal">
-        <h2 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] text-white md:text-[3.25rem] md:leading-[1.05]">
+        <h2 className="max-w-3xl text-4xl text-ink md:text-[3.25rem] md:leading-[1.08]">
           {title}
         </h2>
+        <div className="ramp mt-5 h-px w-24" />
       </div>
-      <div className="mt-14">{children}</div>
+      <div className="mt-12">{children}</div>
     </section>
   )
 }
@@ -278,10 +281,12 @@ const PLANE_ICON = (
   <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />
 )
 
+// Services read as a ledger of entries divided by engraved rules, not a grid
+// of identical tiles: glyph, entry title, body along one rail.
 export function ServiceCard({ title, body }) {
   return (
-    <div className="panel panel-hover p-6">
-      <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.05] text-mint">
+    <div className="flex gap-5 border-b border-[color:var(--gold-line-soft)] py-6 transition-colors last:border-b-0 hover:bg-plate">
+      <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-[color:var(--gold-line)] text-brand">
         <svg
           width="20"
           height="20"
@@ -296,32 +301,37 @@ export function ServiceCard({ title, body }) {
           {SERVICE_ICONS[title] ?? PLANE_ICON}
         </svg>
       </span>
-      <h3 className="mt-4 text-lg font-medium tracking-tight text-white/90">{title}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-white/70">{body}</p>
+      <div>
+        <h3 className="text-lg font-semibold tracking-tight text-ink">{title}</h3>
+        <p className="mt-2 max-w-[62ch] text-sm leading-relaxed text-ink/70">{body}</p>
+      </div>
     </div>
   )
 }
 
 // Destination card. Clicking it prefills the booking widget with this route.
+// The photograph is mounted inside the plate's double rule like an inlay panel.
 export function DestCard({ city, code, ur, fare, from = 'KHI' }) {
   return (
     <Link
       to={`/?from=${from}&to=${code}`}
-      className="panel panel-hover group relative block aspect-[4/3] overflow-hidden p-0"
+      className="panel panel-hover group relative block overflow-hidden p-[7px]"
     >
-      <Scenic seed={code} label={code} className="absolute inset-0 h-full w-full transition duration-500 group-hover:scale-105" />
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 border-t border-white/10 bg-black/25 p-4 backdrop-blur-xl">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[5px]">
+        <Scenic seed={code} label={code} className="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-105" />
+      </div>
+      <div className="flex items-end justify-between gap-3 px-3 pb-2.5 pt-3.5">
         <div className="min-w-0">
           <div className="flex items-baseline gap-2">
-            <span className="truncate text-lg font-semibold text-ivory">{city}</span>
-            {ur && <span className="urdu shrink-0 text-xs text-white/55">{ur}</span>}
+            <span className="truncate font-display text-xl text-ink">{city}</span>
+            {ur && <span className="urdu shrink-0 text-xs text-ink/55">{ur}</span>}
           </div>
           <div className="data mt-0.5 text-[11px] tracking-[0.12em] text-gold">
             {from} — {code}
           </div>
         </div>
         {fare && (
-          <div className="data shrink-0 rounded-full bg-brand/85 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
+          <div className="data shrink-0 rounded-[3px] bg-brand px-3 py-1 text-[11px] font-medium text-ivory">
             {new Intl.NumberFormat('en-PK').format(fare)}
           </div>
         )}
@@ -332,17 +342,17 @@ export function DestCard({ city, code, ur, fare, from = 'KHI' }) {
 
 export function PageHero({ title, subtitle, seed }) {
   return (
-    <section className="snap-start snap-always relative flex min-h-screen flex-col justify-center overflow-hidden border-b border-white/10 px-6 pb-16 pt-40 md:px-10">
+    <section className="snap-start snap-always relative flex min-h-[92vh] flex-col justify-center overflow-hidden px-6 pb-16 pt-40 md:px-10">
       {/* Scenic sets `relative` on itself, and Tailwind emits `.relative` after
           `.absolute`, so the frame is positioned by a wrapper rather than by a
           class handed to it — otherwise it collapses to zero height. */}
       <div className="pointer-events-none absolute inset-0">
         <Scenic seed={seed || title} sizes="100vw" eager className="h-full w-full" />
       </div>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#060912] via-[#060912]/70 to-transparent" />
-      {/* The header is transparent over the hero, so keep the top of the frame
-          dark enough for the nav to stay readable against a bright sky. */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#060912]/85 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0d3b26]/85 via-[#0d3b26]/45 to-transparent" />
+      {/* The gold inlay frame, inset from the edge: the page's pictures hang
+          inside ruled stone. Sits below the fixed header's reach. */}
+      <div className="pointer-events-none absolute inset-x-4 bottom-4 top-32 border border-[rgba(217,188,85,0.5)] md:inset-x-6 md:bottom-6" />
       <div className="relative mx-auto w-full max-w-6xl">
         {/* The title again, oversized and almost invisible behind itself. */}
         <span
@@ -351,10 +361,11 @@ export function PageHero({ title, subtitle, seed }) {
         >
           {title}
         </span>
-        <h1 className="relative max-w-3xl text-5xl font-semibold tracking-[-0.035em] text-white md:text-[4.5rem] md:leading-[1.02]">
+        <h1 className="relative max-w-3xl text-5xl text-ivory md:text-[4.25rem] md:leading-[1.05]">
           {title}
         </h1>
-        {subtitle && <p className="relative mt-6 max-w-[46ch] text-lg leading-relaxed text-white/70">{subtitle}</p>}
+        <div className="ramp relative mt-6 h-px w-24" />
+        {subtitle && <p className="relative mt-6 max-w-[46ch] text-lg leading-relaxed text-ivory/85">{subtitle}</p>}
       </div>
     </section>
   )
@@ -363,16 +374,16 @@ export function PageHero({ title, subtitle, seed }) {
 function FooterCol({ title, items }) {
   return (
     <div>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">{title}</p>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#d9bc55]">{title}</p>
       <ul className="mt-4 flex flex-col gap-2">
         {items.map(([label, to]) => (
           <li key={label}>
             {to.startsWith('/') ? (
-              <Link to={to} className="text-sm text-white/65 transition hover:text-white">
+              <Link to={to} className="text-sm text-ivory/70 transition hover:text-ivory">
                 {label}
               </Link>
             ) : (
-              <a href={to} className="text-sm text-white/65 transition hover:text-white">
+              <a href={to} className="text-sm text-ivory/70 transition hover:text-ivory">
                 {label}
               </a>
             )}
@@ -383,15 +394,19 @@ function FooterCol({ title, items }) {
   )
 }
 
+// The footer is the court's emerald region: deep green stone, gold engraving,
+// a jali frieze along its top edge.
 export function Footer() {
   return (
-    <footer id="help" className="border-t border-white/8 bg-black/25 backdrop-blur-xl">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 py-16 md:grid-cols-4 md:px-10">
+    <footer id="help" className="relative bg-emerald text-ivory">
+      <div className="ramp h-px w-full opacity-80" aria-hidden />
+      <div className="jali h-12 w-full opacity-20" aria-hidden />
+      <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 pb-16 pt-8 md:grid-cols-4 md:px-10">
         <div>
           <img src="/pia-logo-reversed.svg" alt="PIA" className="h-12 w-auto" />
-          <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-white/60">{CONTACT.address}</p>
-          <p className="data mt-3 text-sm text-white/70">{CONTACT.phone}</p>
-          <p className="data text-sm text-white/70">{CONTACT.email}</p>
+          <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-ivory/70">{CONTACT.address}</p>
+          <p className="data mt-3 text-sm text-ivory/85">{CONTACT.phone}</p>
+          <p className="data text-sm text-ivory/85">{CONTACT.email}</p>
         </div>
         <FooterCol
           title="About Us"
@@ -424,8 +439,7 @@ export function Footer() {
           ]}
         />
       </div>
-      <div className="ramp h-0.5 w-full opacity-70" />
-      <div className="py-6 text-center text-xs text-white/70">
+      <div className="border-t border-[rgba(217,188,85,0.25)] py-6 text-center text-xs text-ivory/70">
         Fan concept, not affiliated with Pakistan International Airlines · content adapted from piac.com.pk
       </div>
     </footer>
@@ -434,7 +448,7 @@ export function Footer() {
 
 export default function Layout() {
   return (
-    <div className="relative min-h-screen w-full text-white">
+    <div className="relative min-h-screen w-full text-ink">
       <Backdrop />
       <ScrollToTop />
       <Header />

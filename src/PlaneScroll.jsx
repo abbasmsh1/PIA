@@ -177,28 +177,29 @@ export default function PlaneScroll() {
     ctx.globalCompositeOperation = 'source-over'
     ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh)
 
-    // Brand wash off the PIA ramp, gentle enough to leave the livery readable.
+    // Emerald-and-gold wash off the logo's own two colours, gentle enough to
+    // leave the livery readable.
     ctx.globalCompositeOperation = 'overlay'
     const wash = ctx.createLinearGradient(0, ch, cw, 0)
-    wash.addColorStop(0, 'rgba(13,87,45,0.30)')
-    wash.addColorStop(0.6, 'rgba(0,125,52,0.14)')
-    wash.addColorStop(1, 'rgba(255,229,36,0.10)')
+    wash.addColorStop(0, 'rgba(13,59,38,0.32)')
+    wash.addColorStop(0.6, 'rgba(0,105,55,0.14)')
+    wash.addColorStop(1, 'rgba(164,141,41,0.12)')
     ctx.fillStyle = wash
     ctx.fillRect(0, 0, cw, ch)
 
     // Vignettes top and bottom: the story beats sit in one or the other, and a
-    // scrim across the whole frame holds white type without drawing a box
-    // behind it.
+    // scrim across the whole frame holds ivory type without drawing a box
+    // behind it. The dark is the court's own green-black, not neutral grey.
     ctx.globalCompositeOperation = 'source-over'
     const bottom = ctx.createLinearGradient(0, ch, 0, ch * 0.42)
-    bottom.addColorStop(0, 'rgba(6,9,18,0.80)')
-    bottom.addColorStop(1, 'rgba(6,9,18,0)')
+    bottom.addColorStop(0, 'rgba(7,26,17,0.82)')
+    bottom.addColorStop(1, 'rgba(7,26,17,0)')
     ctx.fillStyle = bottom
     ctx.fillRect(0, 0, cw, ch)
 
     const top = ctx.createLinearGradient(0, 0, 0, ch * 0.52)
-    top.addColorStop(0, 'rgba(6,9,18,0.72)')
-    top.addColorStop(1, 'rgba(6,9,18,0)')
+    top.addColorStop(0, 'rgba(7,26,17,0.74)')
+    top.addColorStop(1, 'rgba(7,26,17,0)')
     ctx.fillStyle = top
     ctx.fillRect(0, 0, cw, ch)
   }
@@ -249,6 +250,13 @@ export default function PlaneScroll() {
         />
         <canvas ref={canvasRef} className="relative h-full w-full" />
 
+        {/* The gold inlay frame: the film hangs inside ruled stone, the same
+            frame every PageHero carries. It starts below the fixed header. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-4 bottom-4 top-32 z-10 border border-[rgba(217,188,85,0.45)] md:inset-x-6 md:bottom-6"
+        />
+
         {/* Booking widget sits in the hero so a fare is reachable without
             scrolling. It fades out as the takeoff scrub begins. */}
         {(() => {
@@ -276,14 +284,15 @@ export default function PlaneScroll() {
               className={`absolute inset-0 flex flex-col gap-4 px-8 md:px-20 ${s.pos}`}
             >
               <div className="flex max-w-xl flex-col gap-3 px-6 py-5 [text-shadow:_0_2px_18px_rgba(0,0,0,0.7)]">
-                <h2 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white/90 md:text-6xl">
+                <h2 className="text-4xl leading-[1.08] text-ivory md:text-6xl">
                   {s.title}
                 </h2>
-                <p className="max-w-[46ch] text-base leading-relaxed text-white/75 md:text-lg">{s.body}</p>
+                <div className="ramp h-px w-20" />
+                <p className="max-w-[46ch] text-base leading-relaxed text-ivory/85 md:text-lg">{s.body}</p>
                 {s.at === 0.9 && (
                   <a
                     href="#offers"
-                    className="mt-3 w-fit rounded-full bg-[#007d34] px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#007d34]/25 transition hover:brightness-115"
+                    className="mt-3 w-fit rounded-md bg-brand px-7 py-3.5 text-sm font-semibold text-ivory shadow-[inset_0_0_0_1px_rgba(243,238,227,0.25),0_2px_8px_-2px_rgba(0,105,55,0.5)] transition hover:brightness-110 [text-shadow:none]"
                   >
                     See fares
                   </a>
@@ -295,14 +304,14 @@ export default function PlaneScroll() {
       </div>
 
       {!ready && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-[#060912]">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-5 bg-emerald">
           <img
             src={photoUrl('HERO', 2560)}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-40"
+            className="absolute inset-0 h-full w-full object-cover opacity-30"
           />
           <div className="ps-spinner relative" />
-          <span className="relative text-sm tracking-wide text-white/60">
+          <span className="relative text-sm tracking-wide text-ivory/80">
             Preparing for departure… {Math.min(100, Math.round((loaded / 24) * 100))}%
           </span>
         </div>

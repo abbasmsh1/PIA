@@ -39,17 +39,19 @@ function SplitFlap({ text, className = '' }) {
 // Status as a bordered pill, the way the design calls it: boarding is the only
 // filled one, so the eye lands on the flight that is actually leaving.
 const STATUS = {
-  BOARDING: 'border-gold/40 bg-gold/20 text-gold',
+  BOARDING: 'border-[#d9bc55]/50 bg-[#d9bc55]/15 text-[#d9bc55]',
   'ON TIME': 'text-mint',
   DELAYED: 'text-[#f5a524]',
-  'GATE OPEN': 'text-[#44a5d8]',
+  'GATE OPEN': 'text-[#8fc7e8]',
 }
 
+// The board is the page's one full-width emerald tablet: carved green stone,
+// gold engraving, ivory figures.
 export default function DeparturesBoard() {
   return (
-    <div className="panel overflow-hidden">
-      <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-5 py-3">
-        <span className="data text-[11px] uppercase tracking-[0.2em] text-white/65">
+    <div className="tablet overflow-hidden">
+      <div className="flex items-center justify-between border-b border-[rgba(217,188,85,0.35)] px-5 py-3">
+        <span className="data text-[11px] uppercase tracking-[0.2em] text-[#d9bc55]">
           Karachi (KHI) · departures
         </span>
         <span className="data flex items-center gap-2 text-[11px] tracking-[0.15em] text-mint">
@@ -57,7 +59,7 @@ export default function DeparturesBoard() {
         </span>
       </div>
 
-      <div className="grid grid-cols-[4.5rem_1fr_4rem_6rem] gap-3 px-5 py-2 text-[11px] uppercase tracking-[0.15em] text-white/55 sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]">
+      <div className="grid grid-cols-[4.5rem_1fr_4rem_6rem] gap-3 px-5 py-2 text-[11px] uppercase tracking-[0.15em] text-ivory/60 sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]">
         <span>Time</span>
         <span className="hidden sm:block">Flight</span>
         <span>Destination</span>
@@ -65,18 +67,18 @@ export default function DeparturesBoard() {
         <span className="text-right">Status</span>
       </div>
 
-      <div className="divide-y divide-white/5">
+      <div className="divide-y divide-white/10">
         {DEPARTURES.map((d) => (
           <div
             key={d.flight}
             className="grid grid-cols-[4.5rem_1fr_4rem_6rem] items-center gap-3 px-5 py-3 text-sm sm:grid-cols-[5rem_5rem_1fr_4rem_7rem]"
           >
-            <SplitFlap text={d.time} className="text-white" />
-            <SplitFlap text={d.flight} className="hidden text-gold sm:block" />
-            <SplitFlap text={d.dest} className="tracking-wider text-white/85" />
-            <SplitFlap text={d.gate} className="text-white/50" />
+            <SplitFlap text={d.time} className="text-ivory" />
+            <SplitFlap text={d.flight} className="hidden text-[#d9bc55] sm:block" />
+            <SplitFlap text={d.dest} className="tracking-wider text-ivory/85" />
+            <SplitFlap text={d.gate} className="text-ivory/60" />
             <span className="text-right">
-              <span className={`chip ${STATUS[d.status] || 'text-white/60'}`}>{d.status}</span>
+              <span className={`chip ${STATUS[d.status] || 'text-ivory/70'}`}>{d.status}</span>
             </span>
           </div>
         ))}

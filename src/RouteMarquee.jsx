@@ -100,9 +100,9 @@ export default function RouteMarquee({ items = [], seconds = 30 }) {
         >
           <defs>
             <linearGradient id="routeFade" x1="0" x2="1">
-              <stop offset="0" stopColor="#d9bc55" stopOpacity="0" />
-              <stop offset="0.5" stopColor="#d9bc55" stopOpacity="0.5" />
-              <stop offset="1" stopColor="#d9bc55" stopOpacity="0" />
+              <stop offset="0" stopColor="#a48d29" stopOpacity="0" />
+              <stop offset="0.5" stopColor="#a48d29" stopOpacity="0.7" />
+              <stop offset="1" stopColor="#a48d29" stopOpacity="0" />
             </linearGradient>
           </defs>
           <path d={PATH} fill="none" stroke="url(#routeFade)" strokeWidth="1" strokeDasharray="4 8" />
@@ -119,10 +119,10 @@ export default function RouteMarquee({ items = [], seconds = 30 }) {
               offsetDistance: 'var(--d)',
               '--d': `${(i / items.length) * 100}%`,
             }}
-            className="group absolute left-0 top-0 flex -translate-x-1/2 -translate-y-1/2 items-baseline gap-2 whitespace-nowrap rounded-full border border-white/10 bg-black/45 px-3.5 py-1.5 backdrop-blur-md transition-colors hover:border-gold/60"
+            className="group absolute left-0 top-0 flex -translate-x-1/2 -translate-y-1/2 items-baseline gap-2 whitespace-nowrap rounded-full border border-goldline/45 bg-plate px-3.5 py-1.5 shadow-[0_2px_10px_-4px_rgba(29,42,35,0.22)] transition-colors hover:border-brand/60"
           >
             <span className="data text-xs tracking-[0.12em] text-gold">{d.code}</span>
-            <span className="text-sm text-white/75 transition-colors group-hover:text-white">
+            <span className="text-sm text-ink/80 transition-colors group-hover:text-ink">
               {d.city}
             </span>
           </a>

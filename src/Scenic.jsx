@@ -81,7 +81,9 @@ export function photoUrl(seed, w = 3840) {
   return id ? `${CDN}${id}?auto=format&fit=crop&q=80&w=${w}` : null
 }
 
-const RAMP = ['#ffe524', '#cdd500', '#71af2e', '#007d34', '#0d572d', '#005779', '#1e1246']
+// The fallback's stone palette: emeralds and golds off the logo's own two
+// colours, so a photo-less frame reads as inlaid green stone, not a rainbow.
+const RAMP = ['#0d3b26', '#0f4a2e', '#006937', '#1d5c3c', '#7d6a1d', '#a48d29']
 
 // Cheap stable hash so a given code always picks the same pair of stops.
 function hash(str) {
@@ -125,21 +127,21 @@ export default function Scenic({
           className="absolute inset-0 h-full w-full object-cover"
         />
       )}
-      {/* The brand wash belongs to the fallback. Over a photograph it turned
+      {/* The stone wash belongs to the fallback. Over a photograph it turned
           skylines green and cost the picture its own colour. */}
       {!photo && (
         <div
           className="absolute inset-0"
-          style={{ background: `linear-gradient(${angle}deg, ${a}, ${b})`, opacity: 0.55 }}
+          style={{ background: `linear-gradient(${angle}deg, ${a}, ${b})` }}
         />
       )}
-      {/* Dark wash so white type stays legible. A photograph needs far less of
+      {/* Dark wash so ivory type stays legible. A photograph needs far less of
           it than a full-strength gradient does, or it turns to mud. */}
       <div
         className={`absolute inset-0 bg-gradient-to-t ${
           photo
-            ? 'from-[#060912] via-[#060912]/35 to-transparent'
-            : 'from-[#060912] via-[#060912]/55 to-[#060912]/20'
+            ? 'from-[#0d3b26]/90 via-[#0d3b26]/25 to-transparent'
+            : 'from-[#0d3b26]/80 via-transparent to-transparent'
         }`}
       />
       {/* Faint contour lines, a nod to a route chart. Only over a gradient — on

@@ -2,68 +2,62 @@
    without waiting for this file to parse. */
 @import "tailwindcss";
 
-/* Brand colours.
-   --pia-official-* are the two fills in PIA's real logo (public/pia-logo.svg,
-   taken off piac.com.pk): a deep green wordmark and a gold calligraphic mark.
-   No gradient — an earlier note in this file claimed the mark was a yellow to
-   indigo ramp, which the actual asset disproves. The wider ramp below is this
-   site's own extension of those two, used for accents and rules; the surfaces
-   are a near-black stack so depth comes from elevation, not colour. */
+/* The Mughal Jali world.
+
+   The page is a marble court: an ivory stone ground, deep green ink, and the
+   two colours PIA already owns — the emerald of the wordmark and the gold of
+   the calligraphic mark (both read off public/pia-logo.svg). Emerald commits
+   at region scale: the departures tablet, the footer, the filled action. Gold
+   never fills anything; it is the engraved line — double-rule cartouche
+   borders, hairline rules, the inlay threads on the route map. Depth is stone
+   depth, crisp lines over a shallow offset shadow, never blur or glass. */
 :root {
-  --pia-official-green: #006937;
-  --pia-official-gold: #a48d29;
-  --bg: #0a0e17;
-  --pia-yellow: #ffe524;
-  --pia-lime: #cdd500;
-  --pia-leaf: #71af2e;
-  --pia-green: #007d34; /* filled actions */
-  --pia-mint: #75dc86; /* interactive: focus, links, live state */
-  --pia-gold: #d9bc55; /* the logo's gold, lifted to read on near-black */
-  --pia-ivory: #f2ece0; /* headline ink — warmer than white, closer to print */
-  --pia-forest: #0d572d;
-  --pia-teal: #005779; /* wordmark */
-  --pia-sky: #44a5d8;
-  --pia-indigo: #1e1246;
-  color-scheme: dark;
+  --pia-green: #006937; /* the wordmark's green: filled actions, region fills */
+  --pia-gold: #a48d29; /* the mark's gold: engraved lines and inlay */
+  --gold-text: #7d6a1d; /* gold darkened until small text clears 4.5:1 on ivory */
+  --ivory: #f3eee3;
+  --ink: #1d2a23;
+  --emerald-deep: #0d3b26; /* the green stone regions */
+  --gold-line: rgba(164, 141, 41, 0.45);
+  --gold-line-soft: rgba(164, 141, 41, 0.28);
+  color-scheme: light;
 }
 
-/* Surface stack + accents as Tailwind colours, so components say `bg-s2` and
-   `text-mint` rather than repeating hex values or stacking white overlays. */
+/* Palette as Tailwind colours, so components say `bg-plate` and `text-ink`
+   rather than repeating hex values. */
 @theme {
-  --color-s0: #060912;
-  --color-s1: #0a0e17;
-  --color-s2: #10131d;
-  --color-s3: #181b25;
-  --color-s4: #22262f;
+  --color-ivory: #f3eee3;
+  --color-plate: #faf6ec;
+  --color-ink: #1d2a23;
+  --color-brand: #006937;
+  --color-gold: #7d6a1d;
+  --color-goldline: #a48d29;
+  --color-emerald: #0d3b26;
+  /* Accents that read on the emerald tablets, not on ivory. */
   --color-mint: #75dc86;
-  --color-gold: #d9bc55;
-  --color-ivory: #f2ece0;
-  --color-brand: #007d34;
   --color-lime: #cdd500;
-  --font-display: "Chivo", ui-sans-serif, system-ui, sans-serif;
-  --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "Marcellus", "Times New Roman", serif;
+  --font-data: "Spline Sans Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --font-urdu: "Noto Nastaliq Urdu", serif;
 }
 
 @layer base {
 body {
   margin: 0;
-  background: var(--bg);
-  color: #fff;
-  /* Schibsted Grotesk rather than the Inter/Geist/Instrument default every
-     generated UI converges on. It was drawn for newsrooms, so it holds up at
-     11px in a fare label and its numerals sit level with the mono face. */
-  font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system,
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: "Albert Sans", ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headlines are the display face, tight and heavy. */
-h1, h2, h3 {
-  font-family: "Chivo", ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.02em;
-  color: var(--pia-ivory);
+/* The two display levels are inscriptional: Marcellus, one weight, carved
+   rather than bolded. Everything below the section title stays in the sans. */
+h1, h2 {
+  font-family: "Marcellus", "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: 0.005em;
 }
 
 /* Urdu sits on its own baseline and needs the line height Nastaliq wants. */
@@ -77,145 +71,151 @@ h1, h2, h3 {
 
 @layer components {
 
-/* Boarding-pass data face: airport codes, fares, flight numbers, times. */
+/* Ticket data face: airport codes, fares, flight numbers, times. */
 .data {
-  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-family: "Spline Sans Mono", ui-monospace, "SF Mono", Menlo, monospace;
   font-feature-settings: "tnum" 1;
   letter-spacing: 0;
 }
 
-/* --- Materials ------------------------------------------------------------
-   Surfaces are translucent glass over whatever sits behind them, the way a
-   dark-mode Apple material behaves: a low-alpha white fill, a backdrop blur so
-   the scene below shows through, a hairline that is brighter along the top edge
-   than the bottom, and a soft inner highlight just inside that top edge. Nothing
-   is a flat opaque fill — the photography and the takeoff film stay visible
-   through the chrome. */
+/* --- Stone materials --------------------------------------------------------
+   A raised surface is an inlaid plate: warm ivory a step lighter than the
+   ground, a gold hairline border, and a second rule engraved 3px inside it —
+   the pietra dura double rule. The shadow is a shallow contact shadow with a
+   real offset. Nothing blurs, nothing is translucent. */
 .hairline {
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  border: 1px solid var(--gold-line-soft);
 }
 .panel {
   position: relative;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.085) 0%,
-    rgba(255, 255, 255, 0.035) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-top-color: rgba(255, 255, 255, 0.18);
-  border-radius: 22px;
-  /* inner top highlight + the drop shadow that lifts glass off the ground */
+  background: var(--color-plate);
+  border: 1px solid var(--gold-line);
+  border-radius: 10px;
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.09),
-    0 18px 40px -20px rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+    inset 0 0 0 3px var(--color-plate),
+    inset 0 0 0 4px var(--gold-line-soft),
+    0 2px 10px -4px rgba(29, 42, 35, 0.22);
 }
-/* Deeper material for the pieces that float over a photograph or the film. */
+/* The plate set over the takeoff film or a photograph: same stone, a deeper
+   thrown shadow so it reads as mounted in the frame. */
 .panel-thick {
-  background: linear-gradient(
-    180deg,
-    rgba(18, 22, 32, 0.72) 0%,
-    rgba(10, 14, 23, 0.62) 100%
-  );
-  backdrop-filter: blur(40px) saturate(160%);
-  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  box-shadow:
+    inset 0 0 0 3px var(--color-plate),
+    inset 0 0 0 4px var(--gold-line-soft),
+    0 24px 48px -18px rgba(6, 18, 12, 0.6);
 }
-/* Inset well: the form fields sitting inside a panel read as pressed into it. */
+/* Inset well: form fields read as recessed carving, not floating chrome. */
 .well {
-  background: rgba(0, 0, 0, 0.28);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  box-shadow: inset 0 1px 2px 0 rgba(0, 0, 0, 0.45);
+  background: #fffdf6;
+  border: 1px solid rgba(29, 42, 35, 0.22);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px 0 rgba(29, 42, 35, 0.10);
 }
 .well:focus-within {
-  border-color: rgba(117, 220, 134, 0.45);
-  background: rgba(0, 0, 0, 0.34);
+  border-color: var(--pia-green);
+  box-shadow: inset 0 1px 3px 0 rgba(29, 42, 35, 0.08), 0 0 0 1px var(--pia-green);
 }
 .panel-hover {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s,
-    background-color 0.4s, border-color 0.4s;
+  transition: border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .panel-hover:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.18);
-  border-top-color: rgba(255, 255, 255, 0.28);
+  border-color: var(--pia-gold);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
-    0 26px 50px -22px rgba(0, 0, 0, 0.8);
+    inset 0 0 0 3px var(--color-plate),
+    inset 0 0 0 4px var(--gold-line),
+    0 10px 24px -10px rgba(29, 42, 35, 0.30);
 }
 @media (prefers-reduced-motion: reduce) {
   .panel-hover:hover { transform: none; }
 }
 
+/* The green stone tablet: the few surfaces that stay dark — the departures
+   board, the footer, the hero's own chrome — are carved emerald with gold
+   engraving, ivory text. */
+.tablet {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.14)),
+    var(--emerald-deep);
+  border: 1px solid var(--gold-line);
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 0 3px var(--emerald-deep),
+    inset 0 0 0 4px rgba(164, 141, 41, 0.55),
+    0 8px 24px -10px rgba(13, 59, 38, 0.55);
+  color: #f3eee3;
+}
 
 /* Status pill: BOARDING / ON TIME / DELAYED and the fare chips. */
 .chip {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "Spline Sans Mono", ui-monospace, monospace;
   font-size: 11px;
   letter-spacing: 0.1em;
   padding: 3px 10px;
-  border-radius: 9999px;
+  border-radius: 3px;
   border: 1px solid currentColor;
   white-space: nowrap;
 }
 
-/* Oversized word set behind a page headline, barely there. */
+/* Oversized word engraved behind a page-hero headline, barely there. Page
+   heroes sit over photography, so the engraving is pale. */
 .ghost-word {
-  font-family: "Chivo", sans-serif;
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  color: rgba(255, 255, 255, 0.045);
+  font-family: "Marcellus", serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(243, 238, 227, 0.10);
   text-transform: uppercase;
   line-height: 0.8;
   pointer-events: none;
   user-select: none;
 }
 
-/* The brand ramp, reused for rules, stripes and text fills. */
+/* The inlay rule: where the old brand ramp drew a stripe, this world lays a
+   gold thread. Still a line, never a fill. */
 .ramp {
   background-image: linear-gradient(
     90deg,
-    var(--pia-yellow),
-    var(--pia-lime),
-    var(--pia-leaf),
-    var(--pia-green),
-    var(--pia-teal)
+    rgba(164, 141, 41, 0.15),
+    var(--pia-gold) 30%,
+    var(--pia-gold) 70%,
+    rgba(164, 141, 41, 0.15)
   );
 }
 .ramp-text {
-  background-image: linear-gradient(
-    90deg,
-    var(--pia-lime),
-    var(--pia-leaf),
-    var(--pia-green)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold-text);
+}
+
+/* The jali field: a pierced-screen lattice drawn once, used at whisper
+   contrast on ivory grounds and as fretwork on emerald. */
+.jali {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23a48d29' stroke-width='1'%3E%3Cpath d='M28 2 L49 13 L49 43 L28 54 L7 43 L7 13 Z'/%3E%3Cpath d='M28 16 L38 22 L38 34 L28 40 L18 34 L18 22 Z'/%3E%3Cpath d='M28 2 L28 16 M49 13 L38 22 M49 43 L38 34 M28 54 L28 40 M7 43 L18 34 M7 13 L18 22'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 56px 56px;
 }
 
 }
 
 @layer base {
 :focus-visible {
-  outline: 2px solid var(--pia-mint);
+  outline: 2px solid var(--pia-green);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
-/* Surfaces the browser owns by default, themed off the palette. */
+/* Surfaces the browser owns by default, themed off the court's palette. */
 ::selection {
-  background: color-mix(in srgb, var(--pia-mint) 32%, transparent);
-  color: #fff;
+  background: rgba(164, 141, 41, 0.30);
+  color: var(--ink);
 }
 input,
 select,
 textarea {
-  caret-color: var(--pia-mint);
+  caret-color: var(--pia-green);
 }
 html {
-  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+  scrollbar-color: rgba(125, 106, 29, 0.45) transparent;
   scrollbar-width: thin;
 }
 ::-webkit-scrollbar {
@@ -223,40 +223,23 @@ html {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-s0);
+  background: var(--ivory);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(125, 106, 29, 0.40);
   border-radius: 9999px;
-  border: 2px solid var(--color-s0);
+  border: 2px solid var(--ivory);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(125, 106, 29, 0.60);
 }
 
 #root {
   width: 100%;
 }
 
-/* Drifting haze for the backdrop. Near-black ground, so these read as faint
-   light rather than the white cloud puffs the sky-blue build used. */
-.cloud {
-  position: absolute;
-  background:
-    radial-gradient(closest-side, rgba(117, 220, 134, 0.10), transparent) 20% 50%/48% 70% no-repeat,
-    radial-gradient(closest-side, rgba(68, 165, 216, 0.10), transparent) 60% 40%/52% 90% no-repeat;
-  filter: blur(30px);
-  will-change: transform;
-}
-@keyframes ps-drift {
-  from { transform: translateX(-40vw); }
-  to { transform: translateX(140vw); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cloud { animation: none !important; transform: none !important; }
-}
-
-/* Route-map arcs draw in on load (pathLength normalised to 1). */
+/* Route-map arcs draw in on load (pathLength normalised to 1) — the inlay
+   thread being laid. The same draw is the page's one entrance grammar. */
 .route-line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
@@ -269,12 +252,13 @@ html {
   .route-line { stroke-dashoffset: 0; animation: none; }
 }
 
-/* Scroll-reveal (IntersectionObserver toggles .reveal-in). */
+/* Scroll-reveal (IntersectionObserver toggles .reveal-in). Damped and short:
+   stone settles, it does not fly. */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(14px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 .reveal-in {
@@ -291,7 +275,7 @@ html {
 html {
   scroll-snap-type: y proximity;
   /* The header floats over the page, so a snapped section must stop below it. */
-  scroll-padding-top: 9rem;
+  scroll-padding-top: 8rem;
 }
 
 @keyframes ps-spin {
@@ -301,8 +285,8 @@ html {
   width: 40px;
   height: 40px;
   border-radius: 9999px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  border-top-color: var(--pia-leaf);
+  border: 2px solid rgba(164, 141, 41, 0.35);
+  border-top-color: var(--pia-gold);
   animation: ps-spin 0.8s linear infinite;
 }
 }
