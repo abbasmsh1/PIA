@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { PageHero, Section, DestCard, ServiceCard } from './Layout.jsx'
+import { PageHero, Section, DestCard, ServiceCard, Check } from './Layout.jsx'
 import { FlightSearch, LookupPanel } from './BookingElements.jsx'
 import RouteMap from './RouteMap.jsx'
 import Scenic from './Scenic.jsx'
@@ -109,7 +109,14 @@ export function ServicesPage() {
               <ul className="mt-4 flex flex-1 flex-col gap-2 text-sm">
                 {c.feats.map(([label, on]) => (
                   <li key={label} className={`flex items-center gap-2 ${on ? 'text-ink/80' : 'text-ink/50'}`}>
-                    <span className={on ? 'text-brand' : 'text-ink/40'}>{on ? '✓' : '—'}</span> {label}
+                    {on ? (
+                      <Check />
+                    ) : (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true" className="shrink-0 text-ink/40">
+                        <path d="M5 12h14" />
+                      </svg>
+                    )}
+                    {label}
                   </li>
                 ))}
               </ul>

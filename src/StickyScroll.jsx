@@ -45,20 +45,10 @@ export default function StickyScroll() {
 
   return (
     <section className="snap-start snap-always scroll-mt-36 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-start px-6 pb-24 pt-40 md:px-10">
-      {/* The cusped Mughal arch that frames the pinned photograph. Normalised
-          coordinates so one path clips any size. */}
-      <svg width="0" height="0" aria-hidden className="absolute">
-        <defs>
-          <clipPath id="jali-arch" clipPathUnits="objectBoundingBox">
-            <path d="M 0,1 L 0,0.34 C 0,0.16 0.10,0.085 0.27,0.055 C 0.40,0.032 0.465,0.028 0.5,0 C 0.535,0.028 0.60,0.032 0.73,0.055 C 0.90,0.085 1,0.16 1,0.34 L 1,1 Z" />
-          </clipPath>
-        </defs>
-      </svg>
-
       <h2 className="text-4xl text-ink md:text-[3.25rem] md:leading-[1.08]">
         Great people to fly with
       </h2>
-      <div className="ramp mt-5 h-px w-24" />
+      <div aria-hidden className="mt-5 h-[5px] w-24 border-y border-[color:var(--gold-line)]" />
 
       <div className="mt-12 grid gap-12 md:grid-cols-2">
         <div className="hidden md:block">
@@ -101,7 +91,7 @@ export default function StickyScroll() {
                 refs.current[i] = el
               }}
               className={`flex min-h-[70vh] flex-col justify-center transition-opacity duration-300 md:min-h-[80vh] ${
-                active === i ? 'opacity-100' : 'md:opacity-35'
+                active === i ? 'opacity-100' : 'md:opacity-60'
               }`}
             >
               <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-lg md:hidden" style={{ clipPath: 'url(#jali-arch)' }}>
@@ -113,7 +103,7 @@ export default function StickyScroll() {
               <h3 className="mt-2 font-display text-3xl text-ink md:mt-0 md:text-[2.5rem]">
                 {s.title}
               </h3>
-              <div className="ramp mt-4 h-px w-16" />
+              <div aria-hidden className="mt-4 h-[5px] w-16 border-y border-[color:var(--gold-line)]" />
               <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-ink/75">{s.body}</p>
             </div>
           ))}

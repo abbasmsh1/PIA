@@ -13,9 +13,16 @@ import { photoUrl } from './Scenic.jsx'
 
 // 192 frames of a PIA 777 rotating off the runway, 1280x720 each. The source
 // renders in `Assets/` are PNG (121 MB, git-ignored); `public/takeoff` holds
-// them re-encoded as progressive JPEG at q72 — 8.9 MB for the set, and
-// indistinguishable from the PNGs at 1:1. Only a 24-frame subset gates the
-// reveal (see the loader below); the rest arrives behind a usable hero.
+// them as progressive JPEG at q72 — 8.9 MB for the set. Only a 24-frame subset
+// gates the reveal (see the loader below); the rest arrives behind a usable
+// hero.
+//
+// On sharpness: 720p is the ceiling, and the canvas draws these at roughly 1.5x
+// on a 1x display. Measured against the PNGs, q72 already keeps all the detail
+// the source has, so quality was never the lever — the frames instead carry a
+// mild unsharp mask baked in at encode time (see the README), which is acutance
+// the upscale preserves. A higher-resolution export of the sequence is the only
+// thing that would add real detail.
 const FRAME_COUNT = 192
 const frameUrl = (i) => `/takeoff/frame_${String(i + 1).padStart(4, '0')}.jpg`
 
@@ -161,7 +168,7 @@ export default function PlaneScroll() {
     const img = nearestLoaded(index)
     if (!canvas || !img || !img.width) return
     const ctx = canvas.getContext('2d')
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
     const cw = canvas.clientWidth
     const ch = canvas.clientHeight
     if (canvas.width !== Math.round(cw * dpr) || canvas.height !== Math.round(ch * dpr)) {
@@ -169,6 +176,10 @@ export default function PlaneScroll() {
       canvas.height = Math.round(ch * dpr)
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    // Chrome and Firefox only use their better resampling filter when asked,
+    // and every frame here is drawn above 1:1.
+    ctx.imageSmoothingEnabled = true
+    ctx.imageSmoothingQuality = 'high'
     ctx.clearRect(0, 0, cw, ch)
 
     const scale = Math.max(cw / img.width, ch / img.height) * ZOOM

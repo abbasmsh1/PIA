@@ -54,8 +54,10 @@ export default function DeparturesBoard() {
         <span className="data text-[11px] uppercase tracking-[0.2em] text-[#d9bc55]">
           Karachi (KHI) · departures
         </span>
-        <span className="data flex items-center gap-2 text-[11px] tracking-[0.15em] text-mint">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-mint" /> LIVE
+        {/* An honest label: the rows are illustrative, so nothing here may
+            claim to be live operational data. */}
+        <span className="data text-[11px] tracking-[0.15em] text-ivory/60">
+          ILLUSTRATIVE SCHEDULE
         </span>
       </div>
 

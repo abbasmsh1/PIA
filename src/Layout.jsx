@@ -194,7 +194,34 @@ export function Header() {
   )
 }
 
-// Section title: inscriptional Marcellus over a short gold inlay rule.
+// The engraved double rule: two gold hairlines a stone's width apart, the same
+// motif the panels carry. It is the heading's underline and nothing else's.
+export function DoubleRule({ className = '' }) {
+  return <div aria-hidden className={`h-[5px] border-y border-[color:var(--gold-line)] ${className}`} />
+}
+
+// The check glyph, drawn in the page's own stroke system rather than a
+// unicode stand-in.
+export function Check({ className = 'text-brand' }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      className={`shrink-0 ${className}`}
+    >
+      <path d="M4 12.5 9.5 18 20 6.5" />
+    </svg>
+  )
+}
+
+// Section title: inscriptional Marcellus over the engraved double rule.
 export function Section({ id, title, children }) {
   const ref = useReveal()
   return (
@@ -206,7 +233,7 @@ export function Section({ id, title, children }) {
         <h2 className="max-w-3xl text-4xl text-ink md:text-[3.25rem] md:leading-[1.08]">
           {title}
         </h2>
-        <div className="ramp mt-5 h-px w-24" />
+        <DoubleRule className="mt-5 w-24" />
       </div>
       <div className="mt-12">{children}</div>
     </section>
@@ -310,14 +337,15 @@ export function ServiceCard({ title, body }) {
 }
 
 // Destination card. Clicking it prefills the booking widget with this route.
-// The photograph is mounted inside the plate's double rule like an inlay panel.
+// The photograph hangs inside the plate under the cusped arch — the same clip
+// the sticky visual uses, so the arch reads as the site's frame grammar.
 export function DestCard({ city, code, ur, fare, from = 'KHI' }) {
   return (
     <Link
       to={`/?from=${from}&to=${code}`}
       className="panel panel-hover group relative block overflow-hidden p-[7px]"
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-[5px]">
+      <div className="relative aspect-[4/3] overflow-hidden" style={{ clipPath: 'url(#jali-arch)' }}>
         <Scenic seed={code} label={code} className="absolute inset-0 h-full w-full transition duration-700 group-hover:scale-105" />
       </div>
       <div className="flex items-end justify-between gap-3 px-3 pb-2.5 pt-3.5">
@@ -364,7 +392,7 @@ export function PageHero({ title, subtitle, seed }) {
         <h1 className="relative max-w-3xl text-5xl text-ivory md:text-[4.25rem] md:leading-[1.05]">
           {title}
         </h1>
-        <div className="ramp relative mt-6 h-px w-24" />
+        <div aria-hidden className="relative mt-6 h-[5px] w-24 border-y border-[rgba(217,188,85,0.55)]" />
         {subtitle && <p className="relative mt-6 max-w-[46ch] text-lg leading-relaxed text-ivory/85">{subtitle}</p>}
       </div>
     </section>
@@ -449,6 +477,15 @@ export function Footer() {
 export default function Layout() {
   return (
     <div className="relative min-h-screen w-full text-ink">
+      {/* The cusped Mughal arch every photo frame clips to. Normalised
+          coordinates, defined once here so any page can reference it. */}
+      <svg width="0" height="0" aria-hidden className="absolute">
+        <defs>
+          <clipPath id="jali-arch" clipPathUnits="objectBoundingBox">
+            <path d="M 0,1 L 0,0.34 C 0,0.16 0.10,0.085 0.27,0.055 C 0.40,0.032 0.465,0.028 0.5,0 C 0.535,0.028 0.60,0.032 0.73,0.055 C 0.90,0.085 1,0.16 1,0.34 L 1,1 Z" />
+          </clipPath>
+        </defs>
+      </svg>
       <Backdrop />
       <ScrollToTop />
       <Header />

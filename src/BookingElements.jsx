@@ -316,7 +316,7 @@ export function FlightSearch() {
   return (
     <div
       ref={ref}
-      className="reveal panel panel-thick mx-auto w-full max-w-5xl p-6 md:p-8"
+      className="reveal panel panel-thick mx-auto w-full max-w-5xl p-4 sm:p-6 md:p-8"
     >
       <div className="flex flex-wrap gap-6 border-b border-[color:var(--gold-line)] sm:gap-8">
         {TABS.map(([k, lbl]) => (
@@ -394,7 +394,26 @@ export function FlightSearch() {
             <DateField round={trip === 'round'} />
           </div>
 
-          <div className="mt-3 flex flex-col gap-3 md:flex-row">
+          {/* Passengers, cabin and currency all carry booking-sensible
+              defaults, so on a phone they fold behind a disclosure and the
+              takeoff film keeps the upper viewport. */}
+          <details className="mt-3 sm:hidden">
+            <summary className="well data flex cursor-pointer list-none items-center justify-between px-3.5 py-2.5 text-sm text-ink/80 [&::-webkit-details-marker]:hidden">
+              1 Adult · {cabin === 'ALL' ? 'All cabins' : cabin} · {currency}
+              <span className="text-xs font-sans font-medium text-brand">Change</span>
+            </summary>
+            <div className="mt-3 flex flex-col gap-3">
+              <Field label="Passengers (1 Adult)" placeholder="Passengers (1 Adult)" />
+              <Field label="Cabin class" value={cabin} onChange={setCabin} options={CABINS} />
+              <Field
+                label="Currency"
+                value={currency}
+                onChange={setCurrency}
+                options={CURRENCIES.map((c) => [c, c])}
+              />
+            </div>
+          </details>
+          <div className="mt-3 hidden gap-3 sm:flex sm:flex-row">
             <Field label="Passengers (1 Adult)" placeholder="Passengers (1 Adult)" />
             <Field label="Cabin class" value={cabin} onChange={setCabin} options={CABINS} />
             <Field
@@ -478,11 +497,7 @@ function Ticket({ offer, index }) {
       to={`/?from=${offer.from}&to=${offer.code}`}
       className="reveal panel panel-hover group relative block overflow-hidden p-6"
     >
-      <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-gold">
-        {offer.real ? 'Published fare' : 'Economy'}
-      </span>
-
-      <div className="mt-5 flex items-center gap-4">
+      <div className="flex items-center gap-4">
         <span className="min-w-0 flex-1">
           <span className="data block truncate text-[2rem] leading-none text-ink">{offer.from}</span>
           <span className="mt-2 block truncate text-[11px] tracking-[0.02em] text-ink/65">
@@ -510,8 +525,10 @@ function Ticket({ offer, index }) {
         </span>
       </div>
 
+      {/* Sourcing folded into the fare line: five fares are quoted verbatim
+          from the archived BEST OFFERS rail, the rest are illustrative. */}
       <div className="mt-6 flex items-baseline justify-between border-t border-goldline/30 pt-4">
-        <span className="text-sm text-ink/65">From</span>
+        <span className="text-sm text-ink/65">{offer.real ? 'Published fare from' : 'Economy from'}</span>
         <span className="data text-lg text-ink">
           PKR {new Intl.NumberFormat('en-PK').format(offer.fare)}
         </span>

@@ -38,17 +38,26 @@ The PNG renders live in a git-ignored `Assets/` folder. To re-encode after
 changing them:
 
 ```bash
-python3 - <<'PY'
+python3 - <<'ENCODE'
 import glob, os
-from PIL import Image
+from PIL import Image, ImageFilter
 for p in sorted(glob.glob('Assets/frame_*.png')):
     n = os.path.basename(p).replace('.png', '.jpg')
-    Image.open(p).convert('RGB').save(
-        'public/takeoff/' + n, 'JPEG', quality=72, optimize=True, progressive=True)
-PY
+    im = Image.open(p).convert('RGB')
+    # Acutance is baked in here because the canvas draws these above 1:1.
+    # Measured against the PNGs, q72 already keeps all the detail a 720p source
+    # has, so quality is not the lever; 45% is the point just before halos.
+    im = im.filter(ImageFilter.UnsharpMask(radius=1.1, percent=45, threshold=3))
+    im.save('public/takeoff/' + n, 'JPEG', quality=72, optimize=True, progressive=True)
+ENCODE
 ```
 
 Then set `FRAME_COUNT` in `src/PlaneScroll.jsx` to the new frame count.
+
+The sequence is 1280x720, so the hero is drawn at roughly 1.5x on a 1x display.
+If a higher-resolution export of the same footage exists, dropping it into
+`Assets/` and re-running the command above is the only change that adds real
+detail — everything else in the pipeline is acutance, not resolution.
 
 The logo is PIA's own `images/assets/pia-logo.svg`, retrieved from the Internet
 Archive capture of 4 Jun 2024 because the live host 403s any non-browser request.

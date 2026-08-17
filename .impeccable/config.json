@@ -20,6 +20,30 @@
         "value": "spline sans mono",
         "createdAt": "2026-08-16T13:33:32.121Z",
         "reason": "user locked Mughal Jali world replacement"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "7rem",
+        "createdAt": "2026-08-16T14:09:32.349Z",
+        "reason": "ghost-word engraving, shipped system value the sidecar ramp missed"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2rem",
+        "createdAt": "2026-08-16T14:09:32.378Z",
+        "reason": "fare-ticket airport codes, shipped data-face display size"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "9999px",
+        "createdAt": "2026-08-16T14:09:32.410Z",
+        "reason": "pill radius: scrollbar thumb, spinner, toggle - shipped round controls"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "2.5rem",
+        "createdAt": "2026-08-16T14:09:51.623Z",
+        "reason": "sticky-scroll chapter heading at md, shipped step between title and h2"
       }
     ]
   }

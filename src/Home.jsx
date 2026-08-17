@@ -6,7 +6,7 @@ import StickyScroll from './StickyScroll.jsx'
 import Scenic from './Scenic.jsx'
 import RouteMarquee from './RouteMarquee.jsx'
 import AdmitOneTicket, { TICKET_LAYOUT } from './vendor/admit-one-ticket.jsx'
-import { Section, DestCard, ServiceCard } from './Layout.jsx'
+import { Section, DestCard, ServiceCard, Check } from './Layout.jsx'
 import { SERVICES, NEWS, DESTINATIONS, LOYALTY_PERKS, LOYALTY_TIERS, ABOUT_STATS } from './data.js'
 
 const POPULAR = ['DXB', 'JED', 'KDU', 'LHR', 'KUL', 'YYZ']
@@ -123,14 +123,16 @@ export default function Home() {
                 />
               </div>
               <div className="flex flex-1 flex-col border-t border-[color:var(--gold-line-soft)] p-6">
-                <div className="flex items-center gap-2 text-xs text-ink/70">
-                  <span className="font-semibold uppercase tracking-[0.12em] text-gold">{n.cat}</span>
+                {/* The heading opens its own block; category and date follow
+                    it as attribution, never as an eyebrow above it. */}
+                <h3 className="flex-1 text-lg font-medium leading-snug tracking-tight text-ink">
+                  {n.title}
+                </h3>
+                <div className="mt-2 flex items-center gap-2 text-xs text-ink/70">
+                  <span className="font-semibold text-gold">{n.cat}</span>
                   <span>·</span>
                   <span className="data">{n.date}</span>
                 </div>
-                <h3 className="mt-3 flex-1 text-lg font-medium leading-snug tracking-tight text-ink">
-                  {n.title}
-                </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink/75">{n.body}</p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand transition group-hover:gap-2">
                   Learn more →
@@ -167,7 +169,7 @@ export default function Home() {
             <ul className="grid gap-3 sm:grid-cols-2">
               {LOYALTY_PERKS.map((f) => (
                 <li key={f} className="flex items-center gap-3 text-ink/80">
-                  <span className="text-gold">✓</span> {f}
+                  <Check className="text-gold" /> {f}
                 </li>
               ))}
             </ul>
@@ -207,7 +209,7 @@ export default function Home() {
                 'Award +Plus balance and redemptions',
               ].map((f) => (
                 <li key={f} className="flex items-center gap-3 text-ink/80">
-                  <span className="text-brand">✓</span> {f}
+                  <Check /> {f}
                 </li>
               ))}
             </ul>
